@@ -69,36 +69,5 @@ const rootReducer = combineReducers({
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)))
 
-// const Component = () => {
-//   const [value, setValue] = useState('')
-
-//   const dispatch = useDispatch()
-
-//   const {items, title } = useSelector((state) => state.user)
-
-//   const handleInput = (e) => {
-//     const { value } = e.target
-//     setValue(value)
-//   }
-
-//   const handleAddUser = () => {
-//     dispatch(addUser(value))
-//   }
-
-//   const renderUsers =items.map((user) => {
-//     return <div>{user}</div>
-//   })
-
-//   return (
-//     <Container>
-//       <h1>{title}</h1>
-//       <input value={value} type="text" onChange={handleInput} />
-//       <button onClick={handleAddUser}>Add User</button>
-//       {renderUsers}
-//     </Container>
-//   )
-// }
-
-// export default Component
-export { store }
 export { setActiveItem, addItem, setFavItem }
+export default store

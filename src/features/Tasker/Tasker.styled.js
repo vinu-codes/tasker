@@ -1,115 +1,166 @@
 import styled, { css } from 'styled-components'
-import beach from './assets/beach.png'
 
 const AppContainer = styled.div`
-  width: 390px;
-  height: 844px;
-  margin-top: 64px;
+  width: 362px;
+  height: 780px;
+  background: rgb(254 254 254);
+  /* border: 1px solid black; */
+  margin-top: 10px;
   margin-left: auto;
   margin-right: auto;
   box-sizing: border-box;
-  padding: 10px;
-  border-radius: 30px;
+  border-radius: 24px;
   position: relative;
   overflow: hidden;
-  background: pink;
-  z-index: 1;
-  /* &:before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0.6;
-    z-index: -1;
-
-    background-size: cover;
-    background-image: url(${beach});
-    background-repeat: no-repeat;
-  } */
+  padding-top: 32px;
+  z-index: 2;
 `
 
-const Box = styled.div`
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  top: 0;
-  left: 0;
-  div {
-    padding: 20px;
-    text-align: center;
-    color: white;
-    font-weight: 600;
-    border: 2px solid white;
-    &:nth-child(1) {
-      width: 100%;
-    }
-  }
-
-  ${(props) =>
-    props.color &&
-    css`
-      background: ${props.color};
-    `}
-  ${(props) =>
-    props.zIndex &&
-    css`
-      z-index: ${props.zIndex};
-    `}
+const Content = styled.div`
+  padding: 24px;
+  height: 160px;
+  margin-top: 32px;
+  display: block;
 `
-
+// rgb(166 150 200) - change to lilac when selected
 const List = styled.li`
   list-style: none;
   margin: 0;
   padding: 0;
-  border: 1px solid grey;
+  border: 3px solid rgb(246 246 246);
+  border-radius: 8px;
   margin-bottom: 8px;
-  padding: 10px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  span {
+    margin-left: 16px;
+    font-weight: 300;
+    ${(props) =>
+      props.isActive &&
+      css`
+        color: rgb(166 150 200);
+      `}
+  }
 `
 
+const TickContainer = styled.div`
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  ${(props) =>
+    props.isActive &&
+    css`
+      background: rgb(166 150 200);
+    `}
+`
+
+const StarContainer = styled.div`
+  width: 22px;
+  height: 22px;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  svg path {
+    ${(props) =>
+      props.isFav &&
+      css`
+        fill: rgb(166 150 200);
+      `}
+  }
+`
 const Group = styled.ul`
   list-style: none;
   margin: 0;
   padding: 0;
   margin-top: 10px;
+  height: calc(844px - 250px);
+  overflow-y: auto;
+  padding-bottom: 50px;
+  padding-left: 24px;
+  padding-right: 24px;
 `
+//56px - 28.5px - 24px - 20px - 32px
 
 const InputContainer = styled.div`
   input {
+    border: none;
     width: 100%;
-    padding: 10px;
+    padding: 20px;
+    border-radius: 8px;
+    background: rgb(245 245 245);
   }
 `
+// ask about margin-left: how to fix this?
 
-const HeaderContainer = styled.div`
-  height: 32px;
-  padding-top: 24px;
+const Header = styled.div`
   display: flex;
-  align-items: center;
-  h1 {
+  width: 100%;
+  position: relative;
+  svg {
+    margin-left: auto;
+    /* padding: 20px; */
+    margin-right: 20px;
+    min-width: 20px;
+    min-height: 20px;
+  }
+  h2 {
+    color: rgb(217 217 217);
+    font-size: 20px;
     padding: 0;
     margin: 0;
-    width: 100%;
     text-align: center;
-    font-size: 18px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
   }
 `
 
 const TitleContainer = styled.div`
-  margin-top: 48px;
+  margin-top: 32px;
+  h2 {
+    font-weight: 500;
+  }
+`
+const BackgroundTriangle = styled.div`
+  width: calc(100% * 2);
+  height: 80%;
+  background: pink;
+  position: absolute;
+  left: calc(-50% - 100px);
+  top: calc(50% + 250px);
+  z-index: 1;
+  transform: rotate(30deg);
+  box-shadow: 0px -100px 0px 0px pink;
+  filter: blur(2px);
+`
+
+const Wrapper = styled.div`
+  position: relative;
+  max-width: 600px;
+  min-width: 600px;
+  max-height: 850px;
+  min-height: 850px;
+  width: 100%;
+  height: 100%;
+  border: 5px solid white;
+  overflow: hidden;
+  background: #f2f0f9;
 `
 
 export {
   AppContainer,
-  Box,
+  Content,
   List,
+  TickContainer,
+  StarContainer,
   Group,
   InputContainer,
-  HeaderContainer,
+  Header,
   TitleContainer,
+  BackgroundTriangle,
+  Wrapper,
 }

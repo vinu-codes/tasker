@@ -1,23 +1,24 @@
 import React, { useState } from 'react'
-import { Container, Button, Overflow } from './NavBar.styled'
+import { MenuContainer, Button, Overlay } from './NavBar.styled'
 
 const NavBar = () => {
-  const [isActive, setIsActive] = useState(false)
+  const [isExpanded, setIsExpanded] = useState(false)
+
+  const handleClose = () => {
+    setIsExpanded(false)
+  }
 
   return (
     <>
-      <Button onClick={() => setIsActive(!isActive)}></Button>
-      <Container isActive={isActive}>
+      <Button onClick={() => setIsExpanded(!isExpanded)}></Button>
+      <MenuContainer isActive={isExpanded}>
         <ul>
-          <li>
-            <span>home</span>
-          </li>
-          <li>
-            <span>task manager</span>
-          </li>
+          <li>HOME</li>
+          <li>ABOUT</li>
+          <li>CONTACT</li>
         </ul>
-      </Container>
-      <Overflow isActive={isActive} />
+      </MenuContainer>
+      <Overlay onClick={handleClose} isActive={isExpanded} />
     </>
   )
 }
