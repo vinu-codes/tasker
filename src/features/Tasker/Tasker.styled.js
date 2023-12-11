@@ -12,9 +12,9 @@ const AppContainer = styled.div`
   border-radius: 30px;
   position: relative;
   overflow: hidden;
-  background: white;
+  background: pink;
   z-index: 1;
-  &:before {
+  /* &:before {
     content: '';
     position: absolute;
     left: 0;
@@ -27,7 +27,7 @@ const AppContainer = styled.div`
     background-size: cover;
     background-image: url(${beach});
     background-repeat: no-repeat;
-  }
+  } */
 `
 
 const Box = styled.div`
