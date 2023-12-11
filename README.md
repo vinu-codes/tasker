@@ -8,7 +8,8 @@
 
 
 
-
+## Nodes 
+- `git remote -v` 
 
 
 
