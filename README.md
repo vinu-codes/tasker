@@ -8,8 +8,8 @@
 
 
 
-## Nodes 
-- `git remote -v` 
+## Notes
+- `git remote -v` (in order to find if local repository is connected to github)
 
 
 
