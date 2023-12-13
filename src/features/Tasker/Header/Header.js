@@ -8,7 +8,6 @@ const HeaderContainer = styled.div`
   position: relative;
   svg {
     margin-left: auto;
-    /* padding: 20px; */
     margin-right: 20px;
     min-width: 20px;
     min-height: 20px;
