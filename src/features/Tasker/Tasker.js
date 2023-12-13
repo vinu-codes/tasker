@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { NavBar } from './NavBar'
+import { Title } from './Title'
+import { Header } from './Header'
 import { useDispatch, useSelector } from 'react-redux'
 import { setActiveItem, addItem, setFavItem } from '../../store'
 import { updatedList, updatedFavouriteList, generateRandom } from './utils'
@@ -12,28 +14,9 @@ import {
   StarContainer,
   Group,
   InputContainer,
-  Header,
-  TitleContainer,
   BackgroundTriangle,
   Wrapper,
 } from './Tasker.styled'
-
-const Title = () => {
-  return (
-    <TitleContainer>
-      <h2>My Tasks</h2>
-    </TitleContainer>
-  )
-}
-
-const HeaderContainer = () => {
-  return (
-    <Header className="header">
-      <h2>To Do List</h2>
-      <Icon name="STAR" />
-    </Header>
-  )
-}
 
 const Tasker = () => {
   const dispatch = useDispatch()
@@ -92,7 +75,7 @@ const Tasker = () => {
     <Wrapper>
       <AppContainer className="app">
         <NavBar />
-        <HeaderContainer className="header" />
+        <Header className="header" />
         <Content className="content">
           <Title />
           <InputContainer>

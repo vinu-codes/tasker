@@ -2,6 +2,7 @@ const Star = (props) => {
   const { fill = 'none', stroke = '#adabbc' } = props
   return (
     <svg viewBox="0 0 14.234 13.64" width="16px" height="16px">
+      <title>star</title>
       <path
         fill={fill}
         stroke={stroke}

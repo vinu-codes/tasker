@@ -96,35 +96,6 @@ const InputContainer = styled.div`
 `
 // ask about margin-left: how to fix this?
 
-const Header = styled.div`
-  display: flex;
-  width: 100%;
-  position: relative;
-  svg {
-    margin-left: auto;
-    /* padding: 20px; */
-    margin-right: 20px;
-    min-width: 20px;
-    min-height: 20px;
-  }
-  h2 {
-    color: rgb(217 217 217);
-    font-size: 20px;
-    padding: 0;
-    margin: 0;
-    text-align: center;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-`
-
-const TitleContainer = styled.div`
-  margin-top: 32px;
-  h2 {
-    font-weight: 500;
-  }
-`
 const BackgroundTriangle = styled.div`
   width: calc(100% * 2);
   height: 80%;
@@ -159,8 +130,6 @@ export {
   StarContainer,
   Group,
   InputContainer,
-  Header,
-  TitleContainer,
   BackgroundTriangle,
   Wrapper,
 }
