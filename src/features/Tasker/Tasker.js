@@ -21,7 +21,7 @@ import {
 const Title = () => {
   return (
     <TitleContainer>
-      <h2>Groceries</h2>
+      <h2>My Tasks</h2>
     </TitleContainer>
   )
 }
