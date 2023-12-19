@@ -1,8 +1,8 @@
 import styled, { css } from 'styled-components'
 
 const AppContainer = styled.div`
-  width: 500px;
-  height: 900px;
+  width: 1300px;
+  height: 1000px;
   background: rgb(254 254 254);
   /* border: 1px solid black; */
   margin-top: 10px;
