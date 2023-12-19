@@ -1,8 +1,8 @@
 import styled, { css } from 'styled-components'
 
 const AppContainer = styled.div`
-  width: 362px;
-  height: 780px;
+  width: 1300px;
+  height: 1000px;
   background: rgb(254 254 254);
   /* border: 1px solid black; */
   margin-top: 10px;
@@ -11,6 +11,8 @@ const AppContainer = styled.div`
   box-sizing: border-box;
   border-radius: 24px;
   position: relative;
+  top: 50%;
+  transform: translateY(-50%);
   overflow: hidden;
   padding-top: 32px;
   z-index: 2;
@@ -111,12 +113,14 @@ const BackgroundTriangle = styled.div`
 
 const Wrapper = styled.div`
   position: relative;
-  max-width: 600px;
+  /* max-width: 600px;
   min-width: 600px;
   max-height: 850px;
-  min-height: 850px;
+  min-height: 850px; */
   width: 100%;
   height: 100%;
+  width: 100vw;
+  height: 100vh;
   border: 5px solid white;
   overflow: hidden;
   background: #f2f0f9;
