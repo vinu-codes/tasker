@@ -5,7 +5,12 @@ import { Title } from './Title'
 import { Header } from './Header'
 import { useDispatch, useSelector } from 'react-redux'
 import { setActiveItem, addItem, setFavItem, deleteItem } from '../../store'
-import { updatedList, updatedFavouriteList, generateRandom } from './utils'
+import {
+  updatedList,
+  updatedFavouriteList,
+  generateRandom,
+  deleteSelectedItem,
+} from './utils'
 import Icon from '@common/Icon'
 import { Chip } from '@common/Chip'
 import {
@@ -43,13 +48,6 @@ const DeleteContainer = styled.div`
     fill: rgb(173, 171, 188);
   }
 `
-
-const deleteSelectedItem = (options, itemId) => {
-  const result = options.filter((item) => {
-    return item.id !== itemId
-  })
-  return result
-}
 
 const Tasker = () => {
   const dispatch = useDispatch()
