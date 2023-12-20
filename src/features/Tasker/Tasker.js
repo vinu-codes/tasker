@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { setActiveItem, addItem, setFavItem } from '../../store'
 import { updatedList, updatedFavouriteList, generateRandom } from './utils'
 import Icon from '@common/Icon'
+import { Chip } from '@common/Chip'
 import {
   AppContainer,
   Content,

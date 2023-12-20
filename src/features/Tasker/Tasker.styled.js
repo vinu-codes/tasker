@@ -1,10 +1,9 @@
 import styled, { css } from 'styled-components'
 
 const AppContainer = styled.div`
-  width: 1300px;
-  height: 1000px;
+  width: 1000px;
+  height: 800px;
   background: rgb(254 254 254);
-  /* border: 1px solid black; */
   margin-top: 10px;
   margin-left: auto;
   margin-right: auto;
@@ -63,6 +62,7 @@ const TickContainer = styled.div`
 const StarContainer = styled.div`
   width: 22px;
   height: 22px;
+  display: flex;
   align-items: center;
   justify-content: center;
   margin-left: auto;
@@ -113,15 +113,10 @@ const BackgroundTriangle = styled.div`
 
 const Wrapper = styled.div`
   position: relative;
-  /* max-width: 600px;
-  min-width: 600px;
-  max-height: 850px;
-  min-height: 850px; */
   width: 100%;
   height: 100%;
   width: 100vw;
   height: 100vh;
-  border: 5px solid white;
   overflow: hidden;
   background: #f2f0f9;
 `
