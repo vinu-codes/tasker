@@ -9,11 +9,6 @@ const itemTypes = {
   SET_FAV: 'SET_FAV',
 }
 
-// [
-// { label: 'Chocolate', id: 1, active: false, favorite: false },
-// { label: 'Peanut Butter', id: 2, active: false, favorite: false },
-// ]
-
 const initialState = {
   items: [],
 }

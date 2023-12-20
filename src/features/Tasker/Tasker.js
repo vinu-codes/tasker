@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import styled from 'styled-components'
 import { NavBar } from './NavBar'
 import { Title } from './Title'
 import { Header } from './Header'
@@ -18,6 +19,22 @@ import {
   BackgroundTriangle,
   Wrapper,
 } from './Tasker.styled'
+
+const DeleteContainer = styled.div`
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  cursor: pointer;
+  margin-left: auto;
+  svg {
+    width: 18px;
+    height: 18px;
+    fill: rgb(173, 171, 188);
+  }
+`
 
 const Tasker = () => {
   const dispatch = useDispatch()
@@ -49,6 +66,8 @@ const Tasker = () => {
     setValue('')
   }
 
+  const handleDelete = (item) => {}
+
   const renderList = () => {
     const result = options.map((item) => {
       return (
@@ -60,6 +79,9 @@ const Tasker = () => {
             <Icon name="CHECKTICK" />
           </TickContainer>
           <span>{item.label}</span>
+          <DeleteContainer onClick={() => handleDelete(item)}>
+            <Icon name="DELETE" />
+          </DeleteContainer>
           <StarContainer
             isFav={item.favorite}
             onClick={() => handleFavourite(item)}

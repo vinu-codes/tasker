@@ -6,6 +6,7 @@ import CHECKTICK from './CheckTick'
 import STAR from './Star'
 import SEARCH from './Search'
 import CART from './Cart'
+import DELETE from './Delete'
 export {
   UPCHEVRON,
   DOWNCHEVRON,
@@ -15,4 +16,5 @@ export {
   STAR,
   SEARCH,
   CART,
+  DELETE,
 }

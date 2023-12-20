@@ -52,6 +52,7 @@ const TickContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
   ${(props) =>
     props.isActive &&
     css`
@@ -66,6 +67,7 @@ const StarContainer = styled.div`
   align-items: center;
   justify-content: center;
   margin-left: auto;
+  cursor: pointer;
   svg path {
     ${(props) =>
       props.isFav &&
