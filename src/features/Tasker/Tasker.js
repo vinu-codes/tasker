@@ -4,7 +4,7 @@ import { NavBar } from './NavBar'
 import { Title } from './Title'
 import { Header } from './Header'
 import { useDispatch, useSelector } from 'react-redux'
-import { setActiveItem, addItem, setFavItem } from '../../store'
+import { setActiveItem, addItem, setFavItem, deleteItem } from '../../store'
 import { updatedList, updatedFavouriteList, generateRandom } from './utils'
 import Icon from '@common/Icon'
 import { Chip } from '@common/Chip'
@@ -20,21 +20,36 @@ import {
   Wrapper,
 } from './Tasker.styled'
 
+const IconContainer = styled.div`
+  margin-left: auto;
+  display: flex;
+`
+
 const DeleteContainer = styled.div`
   width: 22px;
   height: 22px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-left: auto;
   cursor: pointer;
-  margin-left: auto;
+  &:hover {
+    svg {
+      fill: black;
+    }
+  }
   svg {
     width: 18px;
     height: 18px;
     fill: rgb(173, 171, 188);
   }
 `
+
+const deleteSelectedItem = (options, itemId) => {
+  const result = options.filter((item) => {
+    return item.id !== itemId
+  })
+  return result
+}
 
 const Tasker = () => {
   const dispatch = useDispatch()
@@ -66,7 +81,11 @@ const Tasker = () => {
     setValue('')
   }
 
-  const handleDelete = (item) => {}
+  const handleDelete = (item) => {
+    console.log(item)
+    const payload = deleteSelectedItem(options, item.id)
+    dispatch(deleteItem(payload))
+  }
 
   const renderList = () => {
     const result = options.map((item) => {
@@ -79,15 +98,20 @@ const Tasker = () => {
             <Icon name="CHECKTICK" />
           </TickContainer>
           <span>{item.label}</span>
-          <DeleteContainer onClick={() => handleDelete(item)}>
-            <Icon name="DELETE" />
-          </DeleteContainer>
-          <StarContainer
-            isFav={item.favorite}
-            onClick={() => handleFavourite(item)}
-          >
-            <Icon name="STAR" />
-          </StarContainer>
+          <IconContainer>
+            <DeleteContainer
+              isActive={item.active}
+              onClick={() => handleDelete(item)}
+            >
+              <Icon name="DELETE" />
+            </DeleteContainer>
+            <StarContainer
+              isFav={item.favorite}
+              onClick={() => handleFavourite(item)}
+            >
+              <Icon name="STAR" />
+            </StarContainer>
+          </IconContainer>
         </List>
       )
     })

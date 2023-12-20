@@ -5,6 +5,7 @@ import thunk from 'redux-thunk'
 // action types: user
 const itemTypes = {
   ADD_ITEM: 'ADD_ITEM',
+  DELETE_ITEM: 'DELETE_ITEM',
   SELECT_ACTIVE: 'SELECT_ACTIVE',
   SET_FAV: 'SET_FAV',
 }
@@ -16,6 +17,13 @@ const initialState = {
 const addItem = (data) => {
   return {
     type: itemTypes.ADD_ITEM,
+    payload: data,
+  }
+}
+
+const deleteItem = (data) => {
+  return {
+    type: itemTypes.DELETE_ITEM,
     payload: data,
   }
 }
@@ -37,7 +45,13 @@ const setFavItem = (data) => {
 const itemReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case itemTypes.ADD_ITEM:
-      console.log(payload)
+      console.log({ payload })
+      return {
+        ...state,
+        items: payload,
+      }
+    case itemTypes.DELETE_ITEM:
+      console.log({ payload })
       return {
         ...state,
         items: payload,
@@ -64,5 +78,5 @@ const rootReducer = combineReducers({
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)))
 
-export { setActiveItem, addItem, setFavItem }
+export { setActiveItem, addItem, setFavItem, deleteItem }
 export default store

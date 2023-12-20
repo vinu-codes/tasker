@@ -66,8 +66,13 @@ const StarContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-left: auto;
   cursor: pointer;
+  margin-left: 8px;
+  &:hover {
+    svg path {
+      stroke: rgb(166 150 200);
+    }
+  }
   svg path {
     ${(props) =>
       props.isFav &&
@@ -91,11 +96,21 @@ const Group = styled.ul`
 
 const InputContainer = styled.div`
   input {
-    border: none;
     width: 100%;
     padding: 20px;
     border-radius: 8px;
     background: rgb(245 245 245);
+    outline: none;
+    border: none;
+    transition: border 0.3s ease-in;
+    &:hover {
+      border: 2px solid pink;
+      outline: none;
+    }
+    &:focus {
+      border: 2px solid pink;
+      outline: none;
+    }
   }
 `
 // ask about margin-left: how to fix this?
