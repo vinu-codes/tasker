@@ -1,10 +1,15 @@
 import React, { useState } from 'react'
+import styled from 'styled-components'
 import { NavBar } from './NavBar'
 import { Title } from './Title'
 import { Header } from './Header'
 import { useDispatch, useSelector } from 'react-redux'
-import { setActiveItem, addItem, setFavItem } from '../../store'
-import { updatedList, updatedFavouriteList, generateRandom } from './utils'
+import {
+  updatedList,
+  updatedFavouriteList,
+  generateRandom,
+  deleteSelectedItem,
+} from './utils'
 import Icon from '@common/Icon'
 import {
   AppContainer,
@@ -16,13 +21,20 @@ import {
   InputContainer,
   BackgroundTriangle,
   Wrapper,
+  IconContainer,
+  DeleteContainer,
 } from './Tasker.styled'
+import {
+  addItem,
+  authSelector,
+  setFavItem,
+  setActiveItem,
+  deleteItem,
+} from '@state/auth'
 
 const Tasker = () => {
   const dispatch = useDispatch()
-  const { items: options } = useSelector((state) => {
-    return state.item
-  })
+  const options = useSelector(authSelector.items)
 
   const [value, setValue] = useState('')
 
@@ -48,6 +60,12 @@ const Tasker = () => {
     setValue('')
   }
 
+  const handleDelete = (item) => {
+    console.log(item)
+    const payload = deleteSelectedItem(options, item.id)
+    dispatch(deleteItem(payload))
+  }
+
   const renderList = () => {
     const result = options.map((item) => {
       return (
@@ -59,12 +77,20 @@ const Tasker = () => {
             <Icon name="CHECKTICK" />
           </TickContainer>
           <span>{item.label}</span>
-          <StarContainer
-            isFav={item.favorite}
-            onClick={() => handleFavourite(item)}
-          >
-            <Icon name="STAR" />
-          </StarContainer>
+          <IconContainer>
+            <DeleteContainer
+              isActive={item.active}
+              onClick={() => handleDelete(item)}
+            >
+              <Icon name="DELETE" />
+            </DeleteContainer>
+            <StarContainer
+              isFav={item.favorite}
+              onClick={() => handleFavourite(item)}
+            >
+              <Icon name="STAR" />
+            </StarContainer>
+          </IconContainer>
         </List>
       )
     })

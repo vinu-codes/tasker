@@ -1,10 +1,9 @@
 import styled, { css } from 'styled-components'
 
 const AppContainer = styled.div`
-  width: 1300px;
-  height: 1000px;
+  width: 1000px;
+  height: 800px;
   background: rgb(254 254 254);
-  /* border: 1px solid black; */
   margin-top: 10px;
   margin-left: auto;
   margin-right: auto;
@@ -53,6 +52,7 @@ const TickContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
   ${(props) =>
     props.isActive &&
     css`
@@ -63,9 +63,16 @@ const TickContainer = styled.div`
 const StarContainer = styled.div`
   width: 22px;
   height: 22px;
+  display: flex;
   align-items: center;
   justify-content: center;
-  margin-left: auto;
+  cursor: pointer;
+  margin-left: 8px;
+  &:hover {
+    svg path {
+      stroke: rgb(166 150 200);
+    }
+  }
   svg path {
     ${(props) =>
       props.isFav &&
@@ -89,11 +96,21 @@ const Group = styled.ul`
 
 const InputContainer = styled.div`
   input {
-    border: none;
     width: 100%;
     padding: 20px;
     border-radius: 8px;
     background: rgb(245 245 245);
+    outline: none;
+    border: none;
+    transition: border 0.3s ease-in;
+    &:hover {
+      border: 2px solid pink;
+      outline: none;
+    }
+    &:focus {
+      border: 2px solid pink;
+      outline: none;
+    }
   }
 `
 // ask about margin-left: how to fix this?
@@ -113,17 +130,36 @@ const BackgroundTriangle = styled.div`
 
 const Wrapper = styled.div`
   position: relative;
-  /* max-width: 600px;
-  min-width: 600px;
-  max-height: 850px;
-  min-height: 850px; */
   width: 100%;
   height: 100%;
   width: 100vw;
   height: 100vh;
-  border: 5px solid white;
   overflow: hidden;
   background: #f2f0f9;
+`
+
+const IconContainer = styled.div`
+  margin-left: auto;
+  display: flex;
+`
+
+const DeleteContainer = styled.div`
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  &:hover {
+    svg {
+      fill: black;
+    }
+  }
+  svg {
+    width: 18px;
+    height: 18px;
+    fill: rgb(173, 171, 188);
+  }
 `
 
 export {
@@ -136,4 +172,6 @@ export {
   InputContainer,
   BackgroundTriangle,
   Wrapper,
+  IconContainer,
+  DeleteContainer,
 }

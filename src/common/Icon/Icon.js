@@ -7,6 +7,7 @@ import {
   CHECKTICK,
   STAR,
   CART,
+  DELETE,
 } from './icons'
 import styled from 'styled-components'
 
@@ -23,6 +24,7 @@ const matchingIcons = {
   CHECKTICK,
   STAR,
   CART,
+  DELETE,
 }
 
 const Icon = ({ name }) => {

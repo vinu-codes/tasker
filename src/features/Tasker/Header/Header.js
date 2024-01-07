@@ -27,7 +27,6 @@ const HeaderContainer = styled.div`
 const Header = () => (
   <HeaderContainer className="header">
     <h2>Tasker</h2>
-    <Icon name="STAR" />
   </HeaderContainer>
 )
 
