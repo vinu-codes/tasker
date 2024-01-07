@@ -138,6 +138,30 @@ const Wrapper = styled.div`
   background: #f2f0f9;
 `
 
+const IconContainer = styled.div`
+  margin-left: auto;
+  display: flex;
+`
+
+const DeleteContainer = styled.div`
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  &:hover {
+    svg {
+      fill: black;
+    }
+  }
+  svg {
+    width: 18px;
+    height: 18px;
+    fill: rgb(173, 171, 188);
+  }
+`
+
 export {
   AppContainer,
   Content,
@@ -148,4 +172,6 @@ export {
   InputContainer,
   BackgroundTriangle,
   Wrapper,
+  IconContainer,
+  DeleteContainer,
 }

@@ -4,7 +4,6 @@ import { NavBar } from './NavBar'
 import { Title } from './Title'
 import { Header } from './Header'
 import { useDispatch, useSelector } from 'react-redux'
-import { setActiveItem, addItem, setFavItem, deleteItem } from '../../store'
 import {
   updatedList,
   updatedFavouriteList,
@@ -12,7 +11,6 @@ import {
   deleteSelectedItem,
 } from './utils'
 import Icon from '@common/Icon'
-import { Chip } from '@common/Chip'
 import {
   AppContainer,
   Content,
@@ -23,37 +21,20 @@ import {
   InputContainer,
   BackgroundTriangle,
   Wrapper,
+  IconContainer,
+  DeleteContainer,
 } from './Tasker.styled'
-
-const IconContainer = styled.div`
-  margin-left: auto;
-  display: flex;
-`
-
-const DeleteContainer = styled.div`
-  width: 22px;
-  height: 22px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  &:hover {
-    svg {
-      fill: black;
-    }
-  }
-  svg {
-    width: 18px;
-    height: 18px;
-    fill: rgb(173, 171, 188);
-  }
-`
+import {
+  addItem,
+  authSelector,
+  setFavItem,
+  setActiveItem,
+  deleteItem,
+} from '@state/auth'
 
 const Tasker = () => {
   const dispatch = useDispatch()
-  const { items: options } = useSelector((state) => {
-    return state.item
-  })
+  const options = useSelector(authSelector.items)
 
   const [value, setValue] = useState('')
 

@@ -1,10 +1,9 @@
 import React from 'react'
 import { createRoot } from 'react-dom/client'
-import Tasker from '@features/Tasker'
 import { Provider } from 'react-redux'
-import store from './store'
+import Tasker from '@features/Tasker'
+import { store } from '@state/store'
 import './styles.css'
-// import { Christmas } from '@features/Christmas'
 
 const root = createRoot(document.getElementById('root'))
 root.render(
