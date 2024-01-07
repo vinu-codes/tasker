@@ -29,4 +29,11 @@ function generateRandom(maxLimit = 999) {
   return rand
 }
 
-export { updatedList, updatedFavouriteList, generateRandom }
+const deleteSelectedItem = (options, itemId) => {
+  const result = options.filter((item) => {
+    return item.id !== itemId
+  })
+  return result
+}
+
+export { updatedList, updatedFavouriteList, generateRandom, deleteSelectedItem }
