@@ -1,16 +1,31 @@
 import React from 'react'
 import { createRoot } from 'react-dom/client'
-// import { Provider } from 'react-redux'
-// import Tasker from '@features/Tasker'
-import { Layout } from '@pages/Layout'
-import { store } from '@state/store'
-import { Form } from '@components/Form'
+import { Layout } from '@features/Layout'
+import { Provider } from '@components/Route'
+import { Route } from '@components/Route'
+import { Create } from '@pages/Create/'
+import { Login } from '@pages/Login/'
+import { Settings } from '@pages/Settings/'
+import { Home } from '@pages/Home/'
 
 import './styles.css'
 
 const root = createRoot(document.getElementById('root'))
 root.render(
-  <Layout>
-    <Form />
-  </Layout>
+  <Provider>
+    <Layout className="layout">
+      <Route path="/">
+        <Home />
+      </Route>
+      <Route path="/login">
+        <Login />
+      </Route>
+      <Route path="/settings">
+        <Settings />
+      </Route>
+      <Route path="/create">
+        <Create />
+      </Route>
+    </Layout>
+  </Provider>
 )

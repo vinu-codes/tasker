@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components'
 import { Button } from '@common/Button'
+import { NavigationContext } from '@components/Route'
+import { Input } from '@common/Input'
 
 const FormWrapper = styled.div`
   width: 100%;
@@ -8,6 +10,7 @@ const FormWrapper = styled.div`
   height: 100%;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 `
 const FormContainer = styled.form`
   display: flex;
@@ -16,22 +19,43 @@ const FormContainer = styled.form`
   max-width: 300px;
   background: red;
   padding: 20px;
-`
-
-const Input = styled.input`
-  outline: none;
-  padding: 0;
-  margin: 0;
-  border: 1px solid grey;
+  h3 {
+    padding: 0;
+    margin: 0;
+    padding-bottom: 8px;
+  }
+  input {
+    padding: 4px;
+    margin-top: 2px;
+  }
+  button {
+    margin-top: 8px;
+  }
 `
 
 const Form = () => {
+  const [currentPath, navigate] = useContext(NavigationContext)
+
+  const handleSubmit = () => {
+    navigate('/')
+  }
   return (
     <FormWrapper>
       <FormContainer>
+        <h3>Sign Up</h3>
         <Input />
         <Input />
-        <Button className="submit">Submit</Button>
+        <Button onClick={handleSubmit} className="submit">
+          Sign Up
+        </Button>
+      </FormContainer>
+      <FormContainer>
+        <h3>Sign In</h3>
+        <Input />
+        <Input />
+        <Button onClick={handleSubmit} className="submit">
+          Sign In
+        </Button>
       </FormContainer>
     </FormWrapper>
   )
