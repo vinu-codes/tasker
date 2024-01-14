@@ -4,7 +4,9 @@
     "paths": {
       "@features/*": ["./src/features/*"],
       "@common/*": ["./src/common/*"],
-      "@state/*": ["./src/state/*"]
+      "@components/*": ["./src/components/*"],
+      "@state/*": ["./src/state/*"],
+      "@pages/*": ["./src/pages/*"]
     }
   }
 }
