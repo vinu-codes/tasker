@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { Search } from '@components/Search'
 import { useSelector } from 'react-redux'
 import { tasksSelector } from '@state/tasks/selectors'
+import { categorySelector } from '@state/category/selectors'
 
 const HomeWrapper = styled.div`
   width: 100%;
@@ -35,14 +36,47 @@ const List = styled.li`
   margin-top: 8px;
 `
 
+const createDataStructure = (categories, items) => {
+  const result = categories.reduce((prev, curr) => {
+    console.log({ curr })
+    return {
+      ...prev,
+      [curr.value]: {
+        label: curr.value,
+        items: items.filter((k) => {
+          return k.category === curr.value
+        }),
+      },
+    }
+  }, {})
+  return result
+}
+
 const Home = () => {
   const items = useSelector(tasksSelector.items)
+  const categories = useSelector(categorySelector.categories)
+  const [filteredItems, setFilteredItems] = useState(items)
 
-  const handleCallback = (filteredItems) => {
-    console.log(filteredItems)
+  const data = createDataStructure(categories, items)
+  console.log(data)
+
+  const handleCallback = ({ value }) => {
+    console.log(value)
+    setFilteredItems(value)
   }
 
-  const renderTasks = () => {
+  const renderCategory = (data) => {
+    const result = Object.values(data)
+    return result.map((item) => (
+      <div>
+        <span>{item.label}</span>
+        {renderTasks(item.items)}
+      </div>
+    ))
+  }
+
+  const renderTasks = (items) => {
+    if (!items || !items.length) return null
     const result = items.map((item) => {
       return (
         <List>
@@ -58,11 +92,13 @@ const Home = () => {
   return (
     <HomeWrapper>
       <HomeContainer>
-        <Search onSearch={handleCallback} items={items} />
-        <Group>{renderTasks()}</Group>
+        <Search callback={handleCallback} items={items} name="search" />
+        {renderCategory(data)}
       </HomeContainer>
     </HomeWrapper>
   )
 }
 
 export { Home }
+
+//  <Group>{renderTasks(filteredItems)}</Group>

@@ -16,6 +16,12 @@ const tasksSlice = createSlice({
         details: 'Call gardener',
         category: 'personal',
       },
+      {
+        label: 'Desk work',
+        date: '2024-01-05',
+        details: 'coding',
+        category: 'work',
+      },
     ],
   },
   reducers: {

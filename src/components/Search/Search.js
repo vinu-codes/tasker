@@ -13,7 +13,7 @@ const SearchInput = styled.input`
   border: 1px solid black;
 `
 
-const Search = ({ onSearch, items }) => {
+const Search = ({ callback, items, name }) => {
   const [value, setValue] = useState('')
 
   const handleChange = (e) => {
@@ -22,10 +22,9 @@ const Search = ({ onSearch, items }) => {
 
     const filteredItems = items.filter((item) => {
       if (!items || !items.length) return
-      item.label.toLowerCase().includes(value.toLowerCase())
+      return item.label.toLowerCase().includes(value.toLowerCase())
     })
-    onSearch(filteredItems)
-    setValue('')
+    callback({ name, value: filteredItems })
   }
 
   return (
