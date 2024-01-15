@@ -76,6 +76,7 @@ const Dropdown = ({ options, callback, name, isMulti, ...props }) => {
     if (!isMulti) {
       const payload = updateSingleSelect(selectedOption, options)
       callback({ name, value: payload })
+      setIsOpen(false)
       return
     }
     const payload = updatedArray(selectedOption, options)

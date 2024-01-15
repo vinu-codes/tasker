@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import styled from 'styled-components'
 import { Button } from '@common/Button'
 import { NavigationContext } from '@components/Route'
@@ -17,7 +17,7 @@ const FormContainer = styled.form`
   flex-direction: column;
   width: 100%;
   max-width: 300px;
-  background: red;
+  border: 1px solid black;
   padding: 20px;
   h3 {
     padding: 0;
@@ -33,30 +33,107 @@ const FormContainer = styled.form`
   }
 `
 
-const Form = () => {
+const SignIn = () => {
+  const [state, setState] = useState({
+    email: '',
+    password: '',
+  })
+  const [currentPath, navigate] = useContext(NavigationContext)
+  const handleSubmit = () => {
+    if (
+      !state.email ||
+      !state.password ||
+      !state.email.length ||
+      !state.password.length
+    ) {
+      return
+    }
+    navigate('/')
+  }
+
+  const handleChange = (e) => {
+    const { name, value } = e.target
+    setState((state) => ({ ...state, [name]: value }))
+  }
+
+  return (
+    <FormContainer>
+      <h3>Sign In</h3>
+      <Input
+        name="email"
+        placeholder="email"
+        className="email"
+        onChange={handleChange}
+        value={state.email}
+      />
+      <Input
+        name="password"
+        type="password"
+        placeholder="password"
+        className="password"
+        onChange={handleChange}
+        value={state.password}
+      />
+      <Button onClick={handleSubmit} className="submit">
+        Sign In
+      </Button>
+    </FormContainer>
+  )
+}
+
+const SignUp = () => {
+  const [state, setState] = useState({
+    email: '',
+    password: '',
+  })
   const [currentPath, navigate] = useContext(NavigationContext)
 
   const handleSubmit = () => {
+    if (
+      !state.email ||
+      !state.password ||
+      !state.email.length ||
+      !state.password.length
+    ) {
+      return
+    }
     navigate('/')
   }
+
+  const handleChange = (e) => {
+    const { name, value } = e.target
+    setState((state) => ({ ...state, [name]: value }))
+  }
+  return (
+    <FormContainer>
+      <h3>Sign Up</h3>
+      <Input
+        name="email"
+        placeholder="email"
+        className="email"
+        onChange={handleChange}
+        value={state.email}
+      />
+      <Input
+        name="password"
+        type="password"
+        placeholder="password"
+        className="password"
+        onChange={handleChange}
+        value={state.password}
+      />
+      <Button onClick={handleSubmit} className="submit">
+        Sign Up
+      </Button>
+    </FormContainer>
+  )
+}
+
+const Form = () => {
   return (
     <FormWrapper>
-      <FormContainer>
-        <h3>Sign Up</h3>
-        <Input />
-        <Input />
-        <Button onClick={handleSubmit} className="submit">
-          Sign Up
-        </Button>
-      </FormContainer>
-      <FormContainer>
-        <h3>Sign In</h3>
-        <Input />
-        <Input />
-        <Button onClick={handleSubmit} className="submit">
-          Sign In
-        </Button>
-      </FormContainer>
+      <SignUp />
+      <SignIn />
     </FormWrapper>
   )
 }

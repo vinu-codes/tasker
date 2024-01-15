@@ -16,7 +16,9 @@ const NavBar = () => {
   }
   return (
     <NavWrapper className="nav-wrapper">
-      <div>Tasker</div>
+      <div className="tasker-button">
+        <button onClick={() => navigate('/')}>Tasker</button>
+      </div>
       <ButtonsContainer className="button-container">
         <Button onClick={handleSettings} className="settings-button">
           settings

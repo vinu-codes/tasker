@@ -12,7 +12,7 @@ const LayoutContainer = styled.div`
 
 const Layout = ({ children, ...props }) => {
   const [_, navigate] = useContext(NavigationContext)
-  const isAuth = false
+  const isAuth = true
 
   useEffect(() => {
     if (!isAuth) {

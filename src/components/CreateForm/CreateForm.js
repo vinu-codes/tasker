@@ -37,10 +37,10 @@ const FormContainer = styled.form`
 `
 
 const filterActiveCategory = (category) => {
-  const result = category.filter((x) => {
+  const result = category.find((x) => {
     return x.active !== false
   })
-  return result
+  return result ? result.value : ''
 }
 
 const CreateForm = ({ callback }) => {
@@ -77,9 +77,9 @@ const CreateForm = ({ callback }) => {
 
     // we only want to send back to the redux store the catergory that has the active: true
 
-    filterActiveCategory(state.category)
+    const resultOfCategory = filterActiveCategory(state.category)
 
-    callback(state)
+    callback({ ...state, category: resultOfCategory })
     clearForm()
   }
 
