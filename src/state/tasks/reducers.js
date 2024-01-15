@@ -3,7 +3,20 @@ import { createSlice } from '@reduxjs/toolkit'
 const tasksSlice = createSlice({
   name: 'tasks',
   initialState: {
-    items: [],
+    items: [
+      {
+        label: 'Clean house',
+        date: '2024-01-05',
+        details: 'Try to do today',
+        category: 'personal',
+      },
+      {
+        label: 'Gardening',
+        date: '2024-01-05',
+        details: 'Call gardener',
+        category: 'personal',
+      },
+    ],
   },
   reducers: {
     // setFavItem: (state, action) => {
