@@ -57,6 +57,7 @@ const SettingsForm = ({ categories, onAdd, onDelete }) => {
   return (
     <SettingsContainer>
       <h3>Settings</h3>
+      <h4>Categories</h4>
       <Group>{renderCategory()}</Group>
       <Form onSubmit={onSubmit}>
         <Input

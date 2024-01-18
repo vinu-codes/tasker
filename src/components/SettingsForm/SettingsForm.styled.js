@@ -7,6 +7,16 @@ const SettingsContainer = styled.div`
   width: 100%;
   border: 1px solid black;
   padding: 20px;
+  h3 {
+    padding: 0;
+    margin: 0;
+  }
+
+  h4 {
+    padding: 0;
+    margin: 0;
+    padding: 12px 0 12px 0;
+  }
 `
 
 const Group = styled.ul`

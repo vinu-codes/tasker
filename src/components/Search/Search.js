@@ -12,19 +12,22 @@ const SearchInput = styled.input`
   border-radius: 8px;
   border: 1px solid black;
 `
+const filteredItems = (value, items) => {
+  if (!items || !items.length) return
+  const result = items.filter((item) => {
+    return item.label.toLowerCase().includes(value.toLowerCase())
+  })
+  return result
+}
 
-const Search = ({ callback, items, name }) => {
+const Search = ({ items, callback }) => {
   const [value, setValue] = useState('')
 
   const handleChange = (e) => {
     const { value } = e.target
     setValue(value)
 
-    const filteredItems = items.filter((item) => {
-      if (!items || !items.length) return
-      return item.label.toLowerCase().includes(value.toLowerCase())
-    })
-    callback({ name, value: filteredItems })
+    callback({ value: filteredItems(value, items) })
   }
 
   return (

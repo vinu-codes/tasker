@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import { Search } from '@components/Search'
+import { Controller } from '@features/Controller'
 import { useSelector } from 'react-redux'
 import { tasksSelector } from '@state/tasks/selectors'
 import { categorySelector } from '@state/category/selectors'
+import { Icon } from '@common/Icon'
 
 const HomeWrapper = styled.div`
   width: 100%;
@@ -34,21 +36,27 @@ const List = styled.li`
   border: 1px solid black;
   padding: 8px;
   margin-top: 8px;
+  display: flex;
+  align-items: center;
+  span.circle {
+    display: inline-block;
+    background: red;
+    min-width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 8px;
+  }
 `
 
-const createDataStructure = (categories, items) => {
-  const result = categories.reduce((prev, curr) => {
-    console.log({ curr })
-    return {
-      ...prev,
-      [curr.value]: {
-        label: curr.value,
-        items: items.filter((k) => {
-          return k.category === curr.value
-        }),
-      },
-    }
-  }, {})
+const IconContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: auto;
+`
+
+const createDataStructure = (items, categories) => {
+  const result = {}
   return result
 }
 
@@ -57,22 +65,10 @@ const Home = () => {
   const categories = useSelector(categorySelector.categories)
   const [filteredItems, setFilteredItems] = useState(items)
 
-  const data = createDataStructure(categories, items)
-  console.log(data)
+  const data = createDataStructure(items, categories)
 
   const handleCallback = ({ value }) => {
-    console.log(value)
     setFilteredItems(value)
-  }
-
-  const renderCategory = (data) => {
-    const result = Object.values(data)
-    return result.map((item) => (
-      <div>
-        <span>{item.label}</span>
-        {renderTasks(item.items)}
-      </div>
-    ))
   }
 
   const renderTasks = (items) => {
@@ -80,25 +76,30 @@ const Home = () => {
     const result = items.map((item) => {
       return (
         <List>
+          <span className="circle"></span>
           <span>{item.label}</span>
           <span>{item.details}</span>
           <span>{item.date}</span>
           <span>{item.category}</span>
+          <IconContainer>
+            <Icon name="EXPAND" />
+          </IconContainer>
         </List>
       )
     })
     return result
   }
   return (
-    <HomeWrapper>
-      <HomeContainer>
-        <Search callback={handleCallback} items={items} name="search" />
-        {renderCategory(data)}
-      </HomeContainer>
-    </HomeWrapper>
+    <>
+      <HomeWrapper>
+        <HomeContainer>
+          <Search name="search" items={items} callback={handleCallback} />
+          {renderTasks(filteredItems)}
+        </HomeContainer>
+      </HomeWrapper>
+      <Controller />
+    </>
   )
 }
 
 export { Home }
-
-//  <Group>{renderTasks(filteredItems)}</Group>

@@ -15,6 +15,7 @@ import DOWNLOAD from './Download'
 import MOON from './Moon'
 import SUN from './Sun'
 import THUMB from './Thumb'
+import EXPAND from './Expand'
 
 export {
   SAD,
@@ -34,4 +35,5 @@ export {
   LINKED_IN,
   MOON,
   SUN,
+  EXPAND,
 }

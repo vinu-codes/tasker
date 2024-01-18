@@ -81,6 +81,7 @@ const CreateForm = ({ callback }) => {
 
     callback({ ...state, category: resultOfCategory })
     clearForm()
+    navigate('/')
   }
 
   const handleCancel = (e) => {
