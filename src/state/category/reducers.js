@@ -4,8 +4,8 @@ const categorySlice = createSlice({
   name: 'category',
   initialState: {
     categories: [
-      { label: 'Personal', value: 'personal' },
-      { label: 'Work', value: 'work' },
+      { label: 'personal', value: 'personal' },
+      { label: 'work', value: 'work' },
     ],
   },
   reducers: {

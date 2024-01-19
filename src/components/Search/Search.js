@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 
 const SearchContainer = styled.div``
@@ -22,6 +22,10 @@ const filteredItems = (value, items) => {
 
 const Search = ({ items, callback }) => {
   const [value, setValue] = useState('')
+
+  useEffect(() => {
+    callback({ value: filteredItems(value, items) })
+  }, [items])
 
   const handleChange = (e) => {
     const { value } = e.target

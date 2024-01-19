@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { Search } from '@components/Search'
 import { Controller } from '@features/Controller'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { tasksSelector } from '@state/tasks/selectors'
+import { updateItems } from '@state/tasks'
 import { categorySelector } from '@state/category/selectors'
 import { Icon } from '@common/Icon'
 
@@ -29,6 +30,7 @@ const Group = styled.ul`
   padding: 0;
   margin: 0;
 `
+
 const List = styled.li`
   list-style: none;
   padding: 0;
@@ -40,11 +42,14 @@ const List = styled.li`
   align-items: center;
   span.circle {
     display: inline-block;
-    background: red;
-    min-width: 12px;
+    background: grey;
+    width: 12px;
     height: 12px;
     border-radius: 50%;
     margin-right: 8px;
+    &.active {
+      background: red;
+    }
   }
 `
 
@@ -52,11 +57,33 @@ const IconContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-right: auto;
+  margin-left: auto;
 `
 
 const createDataStructure = (items, categories) => {
-  const result = {}
+  if (!categories || !categories.length || !items || !items.length) return []
+  const data = categories.reduce((prev, curr) => {
+    return {
+      ...prev,
+      [curr.value]: {
+        label: curr.label,
+        items: items.filter((item) => {
+          return item.category === curr.value
+        }),
+      },
+    }
+  }, {})
+  const result = Object.values(data)
+  return result
+}
+
+const updatedArray = (selected, options) => {
+  if (!options || !options.length) return []
+  const result = options.map((option) => {
+    if (selected.label === option.label) {
+      return { ...option, ['active']: !option.active }
+    } else return option
+  })
   return result
 }
 
@@ -64,23 +91,60 @@ const Home = () => {
   const items = useSelector(tasksSelector.items)
   const categories = useSelector(categorySelector.categories)
   const [filteredItems, setFilteredItems] = useState(items)
+  const dispatch = useDispatch()
+  const data = createDataStructure(filteredItems, categories)
 
-  const data = createDataStructure(items, categories)
-
+  console.log({ data })
   const handleCallback = ({ value }) => {
     setFilteredItems(value)
   }
+
+  const handleSelect = (item) => {
+    const payload = updatedArray(item, items)
+    console.log({ payload })
+    dispatch(updateItems(payload))
+  }
+
+  function calculateTimeRemaining(eventDate) {
+    // Get the current date and time
+    const currentDate = new Date()
+
+    // Get the future event date
+    const futureEventDate = new Date(eventDate)
+
+    // Calculate the time difference in milliseconds
+    const timeDifference = futureEventDate - currentDate
+
+    // Convert milliseconds to days, hours, and minutes
+    const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24))
+    const hours = Math.floor(
+      (timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+    )
+    const minutes = Math.floor(
+      (timeDifference % (1000 * 60 * 60)) / (1000 * 60)
+    )
+
+    return {
+      days: days,
+      hours: hours,
+      minutes: minutes,
+    }
+  }
+
+  // Example usage:
+  const futureEventDate = '2023-01-31T00:00:00' // Replace with your future event date
+  const remainingTime = calculateTimeRemaining(futureEventDate)
 
   const renderTasks = (items) => {
     if (!items || !items.length) return null
     const result = items.map((item) => {
       return (
-        <List>
-          <span className="circle"></span>
+        <List onClick={() => handleSelect(item)}>
+          <span className={item.active ? 'circle active' : 'circle'}></span>
           <span>{item.label}</span>
-          <span>{item.details}</span>
-          <span>{item.date}</span>
-          <span>{item.category}</span>
+          <span>{calculateTimeRemaining(item.date).days}</span>
+          <span>{calculateTimeRemaining(item.date).hours}</span>
+          <span>{calculateTimeRemaining(item.date).minutes}</span>
           <IconContainer>
             <Icon name="EXPAND" />
           </IconContainer>
@@ -89,12 +153,24 @@ const Home = () => {
     })
     return result
   }
+
+  const renderCategory = (data) => {
+    if (!!data) {
+      return data.map((item) => (
+        <div>
+          {!!item.items.length && <span>{item.label}</span>}
+          {renderTasks(item.items)}
+        </div>
+      ))
+    }
+  }
+
   return (
     <>
       <HomeWrapper>
         <HomeContainer>
           <Search name="search" items={items} callback={handleCallback} />
-          {renderTasks(filteredItems)}
+          {renderCategory(data)}
         </HomeContainer>
       </HomeWrapper>
       <Controller />

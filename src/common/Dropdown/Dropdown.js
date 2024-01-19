@@ -13,6 +13,7 @@ const Dropdown = ({ options, callback, name, isMulti, ...props }) => {
   const iRuffu = useRef([])
   const elementRef = useRef(null)
   const [isOpen, setIsOpen] = useState(false)
+  const [selected, setSelected] = useState('')
 
   const escFunction = useCallback((event) => {
     if (event.key === 'Escape') {
@@ -74,6 +75,7 @@ const Dropdown = ({ options, callback, name, isMulti, ...props }) => {
 
   const handleSelect = (selectedOption) => {
     if (!isMulti) {
+      setSelected(selectedOption.label)
       const payload = updateSingleSelect(selectedOption, options)
       callback({ name, value: payload })
       setIsOpen(false)
@@ -112,8 +114,6 @@ const Dropdown = ({ options, callback, name, isMulti, ...props }) => {
     )
   }
 
-  const total = totalSelected(options)
-
   if (!options || !options.length) return null
   return (
     <Wrapper ref={ref} mt={props.mt} tabIndex={0} onKeyDown={onKeyDown}>
@@ -122,7 +122,7 @@ const Dropdown = ({ options, callback, name, isMulti, ...props }) => {
         isActive={isOpen}
         onClick={() => setIsOpen(!isOpen)}
       >
-        <span>{total > 0 ? `Selected: ${total}` : 'Select'}</span>
+        <span>{!!selected ? selected : 'Select an option'}</span>
         <IconContainer className="IconContainer">
           <Icon name="CHEVRON" size={24} />
         </IconContainer>

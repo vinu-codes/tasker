@@ -1,40 +1,13 @@
 import React, { useState, useContext } from 'react'
-import styled from 'styled-components'
 import { Button } from '@common/Button'
 import { Input } from '@common/Input'
 import { NavigationContext } from '@components/Route'
 import { Dropdown } from '@common/Dropdown'
-
-const CreateWrapper = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-`
-
-const CreateContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  max-width: 480px;
-  width: 100%;
-  border: 1px solid black;
-`
-const FormContainer = styled.form`
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
-  button {
-    margin-top: 8px;
-  }
-  input {
-    padding: 8px;
-    margin-bottom: 8px;
-  }
-  input.detail {
-    padding-bottom: 46px;
-  }
-`
+import {
+  CreateContainer,
+  CreateWrapper,
+  FormContainer,
+} from './CreateForm.styled'
 
 const filterActiveCategory = (category) => {
   const result = category.find((x) => {
@@ -43,15 +16,12 @@ const filterActiveCategory = (category) => {
   return result ? result.value : ''
 }
 
-const CreateForm = ({ callback }) => {
+const CreateForm = ({ callback, categories }) => {
   const [state, setState] = useState({
     label: '',
     date: '',
     details: '',
-    category: [
-      { label: 'Personal', active: true, value: 'personal' },
-      { label: 'Work', active: false, value: 'work' },
-    ],
+    category: categories,
   })
   const [_, navigate] = useContext(NavigationContext)
 
@@ -74,11 +44,7 @@ const CreateForm = ({ callback }) => {
 
   const onSubmit = (e) => {
     e.preventDefault()
-
-    // we only want to send back to the redux store the catergory that has the active: true
-
     const resultOfCategory = filterActiveCategory(state.category)
-
     callback({ ...state, category: resultOfCategory })
     clearForm()
     navigate('/')
@@ -90,7 +56,6 @@ const CreateForm = ({ callback }) => {
   }
 
   const handleDropdown = (payload) => {
-    console.log(payload)
     const { name, value } = payload
     setState((state) => ({ ...state, [name]: value }))
   }
