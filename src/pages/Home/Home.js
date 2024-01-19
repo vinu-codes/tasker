@@ -25,6 +25,23 @@ const HomeContainer = styled.div`
   padding: 20px;
 `
 
+const HeadingContainer = styled.div`
+  display: flex;
+  align-items: center;
+  padding: 8px 0 8px 0;
+  button {
+    cursor: pointer;
+    user-select: none;
+    border: none;
+    background: none;
+    border: 1px solid black;
+    border-radius: 8px;
+    padding: 8px;
+    margin-left: auto;
+    width: 70px;
+  }
+`
+
 const Group = styled.ul`
   list-style: none;
   padding: 0;
@@ -32,6 +49,7 @@ const Group = styled.ul`
 `
 
 const List = styled.li`
+  user-select: none;
   list-style: none;
   padding: 0;
   margin: 0;
@@ -91,10 +109,14 @@ const Home = () => {
   const items = useSelector(tasksSelector.items)
   const categories = useSelector(categorySelector.categories)
   const [filteredItems, setFilteredItems] = useState(items)
+  const [toggleEdit, setToggleEdit] = useState(false)
   const dispatch = useDispatch()
   const data = createDataStructure(filteredItems, categories)
 
-  console.log({ data })
+  const handleToggleEdit = () => {
+    setToggleEdit(!toggleEdit)
+  }
+
   const handleCallback = ({ value }) => {
     setFilteredItems(value)
   }
@@ -103,6 +125,10 @@ const Home = () => {
     const payload = updatedArray(item, items)
     console.log({ payload })
     dispatch(updateItems(payload))
+  }
+
+  const setToggle = (arg) => {
+    setToggleEdit(arg)
   }
 
   const renderTasks = (items) => {
@@ -136,11 +162,20 @@ const Home = () => {
     <>
       <HomeWrapper>
         <HomeContainer>
+          <HeadingContainer className="heading-container">
+            <span className="my-tasks">My tasks</span>
+            <button
+              onClick={handleToggleEdit}
+              className={toggleEdit ? 'toggle cancel' : 'toggle edit'}
+            >
+              {toggleEdit ? 'Cancel' : 'Edit'}
+            </button>
+          </HeadingContainer>
           <Search name="search" items={items} callback={handleCallback} />
           {renderCategory(data)}
         </HomeContainer>
       </HomeWrapper>
-      <Controller />
+      {toggleEdit && <Controller callback={setToggle} />}
     </>
   )
 }

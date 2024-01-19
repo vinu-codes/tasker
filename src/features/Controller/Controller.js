@@ -42,7 +42,7 @@ const changeCategoryOnActiveItems = (items, category) => {
   return result
 }
 
-const Controller = () => {
+const Controller = ({ callback }) => {
   const [showDeleteModal, setDeleteModal] = useState(false)
   const [showEditModal, setEditModal] = useState(false)
   const dispatch = useDispatch()
@@ -62,16 +62,19 @@ const Controller = () => {
   const handleDeleteCallback = ({ value }) => {
     if (value === 'cancel') {
       setDeleteModal(false)
+      callback(false)
     } else if (value === 'delete') {
       const payload = filterOutActiveItems(items)
       dispatch(deleteItem(payload))
       setDeleteModal(false)
+      callback(false)
     }
   }
 
   const handleEditCallback = ({ name, value }) => {
     if (value === 'cancel') {
       setEditModal(false)
+      callback(false)
     }
     if (name === 'change') {
       setEditModal(false)
@@ -79,6 +82,7 @@ const Controller = () => {
       const result = changeCategoryOnActiveItems(payload, value)
 
       dispatch(updateItems(result))
+      callback(false)
     }
   }
 
