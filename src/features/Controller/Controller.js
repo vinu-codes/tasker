@@ -4,29 +4,11 @@ import { Button } from '@common/Button'
 import { useSelector, useDispatch } from 'react-redux'
 import { tasksSelector } from '@state/tasks/selectors'
 import { deleteItem, updateItems } from '@state/tasks'
-import { DeleteModal, EditCategory } from '@components/DeleteModal'
+import { DeleteContents, EditContents } from '@components/ModalActions'
 import { Modal } from '@common/Modal'
 import { categorySelector } from '@state/category/selectors'
-const ControllerWrapper = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  margin-top: 28px;
-`
+import { ControllerContainer, ControllerWrapper } from './Controller.styled'
 
-const ControllerContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  max-width: 480px;
-  width: 100%;
-  border: 1px solid black;
-  padding: 20px;
-  button {
-    margin-top: 8px;
-  }
-`
 const totalSelected = (options) => {
   if (!options || !options.length) return 0
   const result = options.filter((option) => {
@@ -69,15 +51,15 @@ const Controller = () => {
 
   const total = totalSelected(items)
 
-  const handleEdit = () => {
+  const openEdit = () => {
     setEditModal(true)
   }
 
-  const handleDelete = () => {
+  const openDelete = () => {
     setDeleteModal(true)
   }
 
-  const handleCallback = ({ value }) => {
+  const handleDeleteCallback = ({ value }) => {
     if (value === 'cancel') {
       setDeleteModal(false)
     } else if (value === 'delete') {
@@ -86,6 +68,7 @@ const Controller = () => {
       setDeleteModal(false)
     }
   }
+
   const handleEditCallback = ({ name, value }) => {
     if (value === 'cancel') {
       setEditModal(false)
@@ -95,14 +78,12 @@ const Controller = () => {
       const payload = filterByActiveItems(items)
       const result = changeCategoryOnActiveItems(payload, value)
 
-      console.log({ result })
       dispatch(updateItems(result))
-
-      // update items
     }
   }
 
-  const handleModal = ({ value }) => {
+  // RECEIVED FROM MODAL - LETS US KNOW THE MODAL HAS BEEN CLOSED
+  const handleDeleteModal = ({ value = false }) => {
     setDeleteModal(value)
   }
   const handleEditModal = ({ value }) => {
@@ -122,16 +103,16 @@ const Controller = () => {
         <div>
           <span>{renderText()}</span>
         </div>
-        <Button onClick={handleDelete}>delete</Button>
-        <Button onClick={handleEdit}>change category</Button>
+        <Button onClick={openDelete}>delete</Button>
+        <Button onClick={openEdit}>change category</Button>
         {!!showDeleteModal && (
-          <Modal title="Delete Confirmation" callback={handleModal}>
-            <DeleteModal callback={handleCallback} />
+          <Modal title="Delete Confirmation" callback={handleDeleteModal}>
+            <DeleteContents callback={handleDeleteCallback} />
           </Modal>
         )}
         {!!showEditModal && (
           <Modal title="Change category" callback={handleEditModal}>
-            <EditCategory
+            <EditContents
               callback={handleEditCallback}
               categories={categories}
             />

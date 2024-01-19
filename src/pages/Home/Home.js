@@ -105,36 +105,6 @@ const Home = () => {
     dispatch(updateItems(payload))
   }
 
-  function calculateTimeRemaining(eventDate) {
-    // Get the current date and time
-    const currentDate = new Date()
-
-    // Get the future event date
-    const futureEventDate = new Date(eventDate)
-
-    // Calculate the time difference in milliseconds
-    const timeDifference = futureEventDate - currentDate
-
-    // Convert milliseconds to days, hours, and minutes
-    const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24))
-    const hours = Math.floor(
-      (timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-    )
-    const minutes = Math.floor(
-      (timeDifference % (1000 * 60 * 60)) / (1000 * 60)
-    )
-
-    return {
-      days: days,
-      hours: hours,
-      minutes: minutes,
-    }
-  }
-
-  // Example usage:
-  const futureEventDate = '2023-01-31T00:00:00' // Replace with your future event date
-  const remainingTime = calculateTimeRemaining(futureEventDate)
-
   const renderTasks = (items) => {
     if (!items || !items.length) return null
     const result = items.map((item) => {
@@ -142,9 +112,6 @@ const Home = () => {
         <List onClick={() => handleSelect(item)}>
           <span className={item.active ? 'circle active' : 'circle'}></span>
           <span>{item.label}</span>
-          <span>{calculateTimeRemaining(item.date).days}</span>
-          <span>{calculateTimeRemaining(item.date).hours}</span>
-          <span>{calculateTimeRemaining(item.date).minutes}</span>
           <IconContainer>
             <Icon name="EXPAND" />
           </IconContainer>

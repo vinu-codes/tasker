@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-
 import styled from 'styled-components'
 import { Button } from '@common/Button'
 import { Dropdown } from '@common/Dropdown'
@@ -19,9 +18,13 @@ const ButtonContainer = styled.div`
     background: red;
     color: white;
   }
+  button.change {
+    background: orange;
+    color: white;
+  }
 `
 
-const DeleteModal = ({ callback }) => {
+const DeleteContents = ({ callback }) => {
   return (
     <ButtonContainer>
       <h4>Are you sure you want to delete these items?</h4>
@@ -40,8 +43,17 @@ const DeleteModal = ({ callback }) => {
     </ButtonContainer>
   )
 }
-const EditCategory = ({ callback, categories }) => {
+
+const EditContents = ({ callback, categories }) => {
   const [state, setState] = useState(categories)
+
+  const handleSaveCategories = () => {
+    const selectedCategory = state.find((k) => !!k.active)
+    if (!!selectedCategory) {
+      const payload = selectedCategory.value
+      callback({ name: 'change', value: payload })
+    }
+  }
 
   return (
     <ButtonContainer>
@@ -60,19 +72,11 @@ const EditCategory = ({ callback, categories }) => {
       >
         cancel
       </Button>
-      <Button
-        onClick={() => {
-          const result = state.find((k) => !!k.active)
-          if (!!result) {
-            callback({ name: 'change', value: result.value })
-          }
-        }}
-        className="delete"
-      >
+      <Button onClick={handleSaveCategories} className="change">
         Save
       </Button>
     </ButtonContainer>
   )
 }
 
-export { DeleteModal, EditCategory }
+export { DeleteContents, EditContents }
