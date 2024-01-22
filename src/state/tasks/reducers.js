@@ -3,37 +3,47 @@ import { createSlice } from '@reduxjs/toolkit'
 const tasksSlice = createSlice({
   name: 'tasks',
   initialState: {
+    activeId: 'abc',
     items: [
       {
-        label: 'Clean house',
+        label: 'Animate items when selected',
         date: '2024-01-05',
-        details: 'Try to do today',
-        category: 'personal',
+        details: 'Circle should show up when edit button is clicked',
+        category: 'coding',
         active: false,
+        status: 'incomplete',
+        id: 'abc',
       },
       {
-        label: 'Gardening',
+        label: 'Add status prop when creating items ',
         date: '2024-01-05',
-        details: 'Call gardener',
-        category: 'personal',
+        details: '',
+        category: 'coding',
         active: false,
+        status: 'incomplete',
+        id: 'def',
       },
       {
-        label: 'Desk work',
+        label: 'Create fake async thunks',
         date: '2024-01-05',
-        details: 'coding',
-        category: 'work',
+        details: 'include promises',
+        category: 'coding',
         active: false,
+        status: 'incomplete',
+        id: 'ghi',
+      },
+      {
+        label: 'Add in ids for each item being created',
+        date: '2024-01-05',
+        details: '',
+        category: 'coding',
+        active: false,
+        status: 'incomplete',
+        id: 'jkl',
       },
     ],
   },
   reducers: {
-    // setFavItem: (state, action) => {
-    //   state.items = action.payload
-    // },
-    // setActiveItem: (state, action) => {
-    //   state.items = action.payload
-    // },
     addItem: (state, { payload }) => {
       state.items.push(payload)
     },
@@ -46,8 +56,12 @@ const tasksSlice = createSlice({
     updateItems: (state, { payload }) => {
       state.items = payload
     },
+    setActiveId: (state, { payload }) => {
+      state.activeId = payload
+    },
   },
 })
 
-export const { updateItems, addItem, deleteItem } = tasksSlice.actions
+export const { updateItems, addItem, deleteItem, setActiveId } =
+  tasksSlice.actions
 export default tasksSlice.reducer

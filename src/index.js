@@ -7,6 +7,7 @@ import { Create } from '@pages/Create/'
 import { Login } from '@pages/Login/'
 import { Settings } from '@pages/Settings/'
 import { Home } from '@pages/Home/'
+import { Edit } from '@pages/Edit'
 import { store } from '@state/store'
 import { Provider } from 'react-redux'
 
@@ -28,6 +29,9 @@ root.render(
         </Route>
         <Route path="/create">
           <Create />
+        </Route>
+        <Route path="/edit">
+          <Edit />
         </Route>
       </Layout>
     </RouteProvider>

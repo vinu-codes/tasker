@@ -8,12 +8,17 @@ const keyCodes = {
   ENTER: 'Enter',
 }
 
+const getSelectedItem = (options) => {
+  const result = options.find((option) => !!option.active)
+  return !!result ? result.label : ''
+}
+
 const Dropdown = ({ options, callback, name, isMulti, ...props }) => {
   const ref = useRef(null)
   const iRuffu = useRef([])
   const elementRef = useRef(null)
   const [isOpen, setIsOpen] = useState(false)
-  const [selected, setSelected] = useState('')
+  const [selected, setSelected] = useState(getSelectedItem(options))
 
   const escFunction = useCallback((event) => {
     if (event.key === 'Escape') {
@@ -47,9 +52,12 @@ const Dropdown = ({ options, callback, name, isMulti, ...props }) => {
     // eslint-disable-next-line
   }, [])
 
-  iRuffu.current = options.map((option, index) =>
-    iRuffu.current[index] ? iRuffu.current[index] : React.createRef()
-  )
+  iRuffu.current =
+    !!options &&
+    options.length &&
+    options.map((option, index) =>
+      iRuffu.current[index] ? iRuffu.current[index] : React.createRef()
+    )
 
   const onKeyDown = (e) => {
     const key = e.keyCode || e.charCode
@@ -77,6 +85,7 @@ const Dropdown = ({ options, callback, name, isMulti, ...props }) => {
     if (!isMulti) {
       setSelected(selectedOption.label)
       const payload = updateSingleSelect(selectedOption, options)
+      // the value is an array with the active keys representing if it was selected
       callback({ name, value: payload })
       setIsOpen(false)
       return
@@ -132,16 +141,20 @@ const Dropdown = ({ options, callback, name, isMulti, ...props }) => {
   )
 }
 
+Dropdown.defaultProps = {
+  options: [],
+}
+
 Dropdown.propTypes = {
   options: PropTypes.arrayOf(
     PropTypes.shape({
-      label: PropTypes.string,
-      active: PropTypes.bool,
-      value: PropTypes.string,
+      label: PropTypes.string.isRequired,
+      active: PropTypes.bool.isRequired,
+      value: PropTypes.string.isRequired,
     })
   ),
   isMulti: PropTypes.bool,
-  callback: PropTypes.func,
-  name: PropTypes.string,
+  callback: PropTypes.func.isRequired,
+  name: PropTypes.string.isRequired,
 }
 export { Dropdown }

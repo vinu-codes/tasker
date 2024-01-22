@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import styled from 'styled-components'
 import { Search } from '@components/Search'
 import { Controller } from '@features/Controller'
 import { useSelector, useDispatch } from 'react-redux'
 import { tasksSelector } from '@state/tasks/selectors'
-import { updateItems } from '@state/tasks'
+import { updateItems, setActiveId } from '@state/tasks'
 import { categorySelector } from '@state/category/selectors'
 import { Icon } from '@common/Icon'
+import { NavigationContext } from '@components/Route'
 
 const HomeWrapper = styled.div`
   width: 100%;
@@ -76,6 +77,7 @@ const IconContainer = styled.div`
   align-items: center;
   justify-content: center;
   margin-left: auto;
+  cursor: pointer;
 `
 
 const createDataStructure = (items, categories) => {
@@ -99,8 +101,15 @@ const updatedArray = (selected, options) => {
   if (!options || !options.length) return []
   const result = options.map((option) => {
     if (selected.label === option.label) {
-      return { ...option, ['active']: !option.active }
+      return { ...option, active: !option.active }
     } else return option
+  })
+  return result
+}
+
+const resetArray = (items) => {
+  const result = items.map((option) => {
+    return { ...option, active: false }
   })
   return result
 }
@@ -108,12 +117,23 @@ const updatedArray = (selected, options) => {
 const Home = () => {
   const items = useSelector(tasksSelector.items)
   const categories = useSelector(categorySelector.categories)
+  const activeId = useSelector(tasksSelector.activeId)
   const [filteredItems, setFilteredItems] = useState(items)
   const [toggleEdit, setToggleEdit] = useState(false)
   const dispatch = useDispatch()
   const data = createDataStructure(filteredItems, categories)
+  const [_, navigate] = useContext(NavigationContext)
+
+  const handleExpand = (item) => {
+    navigate('/edit')
+    dispatch(setActiveId(item.id))
+  }
 
   const handleToggleEdit = () => {
+    if (toggleEdit) {
+      const payload = resetArray(items)
+      dispatch(updateItems(payload))
+    }
     setToggleEdit(!toggleEdit)
   }
 
@@ -135,10 +155,15 @@ const Home = () => {
     if (!items || !items.length) return null
     const result = items.map((item) => {
       return (
-        <List onClick={() => handleSelect(item)}>
-          <span className={item.active ? 'circle active' : 'circle'}></span>
+        <List>
+          {toggleEdit && (
+            <span
+              onClick={() => handleSelect(item)}
+              className={item.active ? 'circle active' : 'circle'}
+            ></span>
+          )}
           <span>{item.label}</span>
-          <IconContainer>
+          <IconContainer onClick={() => handleExpand(item)}>
             <Icon name="EXPAND" />
           </IconContainer>
         </List>

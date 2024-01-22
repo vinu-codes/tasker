@@ -16,6 +16,7 @@ import MOON from './Moon'
 import SUN from './Sun'
 import THUMB from './Thumb'
 import EXPAND from './Expand'
+import EDIT from './Edit'
 
 export {
   SAD,
@@ -36,4 +37,5 @@ export {
   MOON,
   SUN,
   EXPAND,
+  EDIT,
 }
