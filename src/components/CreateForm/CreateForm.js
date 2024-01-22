@@ -9,11 +9,11 @@ import {
   FormContainer,
 } from './CreateForm.styled'
 
-const filterActiveCategory = (category) => {
-  const result = category.find((x) => {
+const filterActiveItem = (items) => {
+  const result = items.find((x) => {
     return x.active !== false
   })
-  return result ? result.value : ''
+  return !!result ? result.value : ''
 }
 
 const CreateForm = ({ callback, categories }) => {
@@ -22,6 +22,10 @@ const CreateForm = ({ callback, categories }) => {
     date: '',
     details: '',
     category: categories,
+    status: [
+      { label: 'incomplete', value: 'incomplete', active: true },
+      { label: 'completed', value: 'completed', active: false },
+    ],
   })
   const [_, navigate] = useContext(NavigationContext)
 
@@ -35,6 +39,10 @@ const CreateForm = ({ callback, categories }) => {
       label: '',
       date: '',
       details: '',
+      status: [
+        { label: 'incomplete', value: 'incomplete', active: true },
+        { label: 'completed', value: 'completed', active: false },
+      ],
       category: [
         { label: 'Personal', active: false, value: 'personal' },
         { label: 'Work', active: false, value: 'work' },
@@ -44,8 +52,9 @@ const CreateForm = ({ callback, categories }) => {
 
   const onSubmit = (e) => {
     e.preventDefault()
-    const resultOfCategory = filterActiveCategory(state.category)
-    callback({ ...state, category: resultOfCategory })
+    const resultOfCategory = filterActiveItem(state.category)
+    const resultOfStatus = filterActiveItem(state.status)
+    callback({ ...state, category: resultOfCategory, status: resultOfStatus })
     clearForm()
     navigate('/')
   }
@@ -92,6 +101,12 @@ const CreateForm = ({ callback, categories }) => {
             isMulti={false}
             callback={handleDropdown}
             options={state.category}
+          />
+          <Dropdown
+            name="status"
+            isMulti={false}
+            callback={handleDropdown}
+            options={state.status}
           />
           <Button className="save-button">Save</Button>
           <Button className="cancel-button" onClick={handleCancel}>

@@ -53,9 +53,6 @@ const tasksSlice = createSlice({
     deleteItem: (state, action) => {
       state.items = action.payload
     },
-    updateItems: (state, { payload }) => {
-      state.items = payload
-    },
     setActiveId: (state, { payload }) => {
       state.activeId = payload
     },

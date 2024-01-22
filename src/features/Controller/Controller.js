@@ -37,7 +37,9 @@ const filterByActiveItems = (items) => {
 const changeCategoryOnActiveItems = (items, category) => {
   if (!items || !items.length) return []
   const result = items.map((option) => {
-    return { ...option, category: category }
+    if (option.active) {
+      return { ...option, category: category }
+    } else return option
   })
   return result
 }
@@ -78,8 +80,8 @@ const Controller = ({ callback }) => {
     }
     if (name === 'change') {
       setEditModal(false)
-      const payload = filterByActiveItems(items)
-      const result = changeCategoryOnActiveItems(payload, value)
+      // const payload = filterByActiveItems(items)
+      const result = changeCategoryOnActiveItems(items, value)
 
       dispatch(updateItems(result))
       callback(false)
