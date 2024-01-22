@@ -1,4 +1,4 @@
-import { css } from 'styled-components'
+import styled, { css } from 'styled-components'
 
 const sizes = {
   xs: '(min-width: 480px)',
