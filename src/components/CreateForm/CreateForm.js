@@ -16,6 +16,15 @@ const filterActiveItem = (items) => {
   return !!result ? result.value : ''
 }
 
+const uuid = () =>
+  'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
+    const r = (Math.random() * 16) | 0,
+      v = c === 'x' ? r : (r & 0x3) | 0x8
+    return v.toString(16)
+  })
+
+export { uuid }
+
 const CreateForm = ({ callback, categories }) => {
   const [state, setState] = useState({
     label: '',
@@ -54,7 +63,12 @@ const CreateForm = ({ callback, categories }) => {
     e.preventDefault()
     const resultOfCategory = filterActiveItem(state.category)
     const resultOfStatus = filterActiveItem(state.status)
-    callback({ ...state, category: resultOfCategory, status: resultOfStatus })
+    callback({
+      ...state,
+      category: resultOfCategory,
+      status: resultOfStatus,
+      id: uuid(),
+    })
     clearForm()
     navigate('/')
   }
