@@ -80,7 +80,6 @@ const Controller = ({ callback }) => {
     }
     if (name === 'change') {
       setEditModal(false)
-      // const payload = filterByActiveItems(items)
       const result = changeCategoryOnActiveItems(items, value)
 
       dispatch(updateItems(result))

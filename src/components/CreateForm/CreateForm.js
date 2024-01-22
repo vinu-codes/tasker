@@ -23,8 +23,6 @@ const uuid = () =>
     return v.toString(16)
   })
 
-export { uuid }
-
 const CreateForm = ({ callback, categories }) => {
   const [state, setState] = useState({
     label: '',
@@ -36,6 +34,7 @@ const CreateForm = ({ callback, categories }) => {
       { label: 'completed', value: 'completed', active: false },
     ],
   })
+
   const [_, navigate] = useContext(NavigationContext)
 
   const handleChange = (e) => {
