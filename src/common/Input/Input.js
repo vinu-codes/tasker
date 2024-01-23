@@ -10,6 +10,7 @@ const InputContainer = styled.input`
   border-radius: 8px;
   width: 100%;
   height: 48px;
+  padding-left: 8px;
   ${(props) =>
     props.hasIcon &&
     css`
@@ -19,6 +20,7 @@ const InputContainer = styled.input`
 
 const Container = styled.div`
   display: flex;
+  margin-bottom: 16px;
   label {
     display: flex;
     flex-direction: column;

@@ -87,9 +87,25 @@ const Home = () => {
     setToggleEdit(arg)
   }
 
+  const handleUndo = ({ value }) => {
+    dispatch(updateItems(value))
+  }
+
+  const handleComplete = (id) => {
+    const getSelected = items.map((item) => {
+      if (item.id === id) {
+        return { ...item, status: 'completed' }
+      } else {
+        return item
+      }
+    })
+    dispatch(updateItems(getSelected))
+  }
+
   const renderTasks = (items) => {
     if (!items || !items.length) return null
     const result = items.map((item) => {
+      if (item.status === 'completed') return null
       return (
         <List>
           {toggleEdit && (
@@ -99,6 +115,7 @@ const Home = () => {
             ></span>
           )}
           <span>{item.label}</span>
+          <button onClick={() => handleComplete(item.id)}>Completed</button>
           <IconContainer onClick={() => handleExpand(item)}>
             <Icon name="EXPAND" />
           </IconContainer>
@@ -107,6 +124,9 @@ const Home = () => {
     })
     return result
   }
+
+  // const filter =
+  //   item.items.filter((k) => k.status === 'incomplete').length !== 0
 
   const renderCategory = (data) => {
     if (!!data) {
@@ -136,7 +156,7 @@ const Home = () => {
           {renderCategory(data)}
         </HomeContainer>
       </HomeWrapper>
-      <CompletedForm items={items} />
+      <CompletedForm items={items} callback={handleUndo} />
       {toggleEdit && <Controller callback={setToggle} />}
     </>
   )

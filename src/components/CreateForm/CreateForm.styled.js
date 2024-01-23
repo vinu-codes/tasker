@@ -11,7 +11,7 @@ const CreateWrapper = styled.div`
 const CreateContainer = styled.div`
   display: flex;
   flex-direction: column;
-  max-width: 480px;
+  max-width: 100%;
   width: 100%;
   border: 1px solid black;
 `

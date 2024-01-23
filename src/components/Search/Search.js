@@ -1,17 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
+import { Input } from '@common/Input'
 
 const SearchContainer = styled.div``
-const SearchInput = styled.input`
-  width: 100%;
-  outline: none;
-  padding: 0;
-  margin: 0;
-  border: none;
-  padding: 12px 0 12px 0;
-  border-radius: 8px;
-  border: 1px solid black;
-`
+
 const filteredItems = (value, items) => {
   if (!items || !items.length) return
   const result = items.filter((item) => {
@@ -36,7 +28,7 @@ const Search = ({ items, callback }) => {
 
   return (
     <SearchContainer>
-      <SearchInput
+      <Input
         name="search"
         placeholder="Seach for tasks..."
         type="text"

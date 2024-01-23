@@ -4,22 +4,28 @@ import { CompletedContainer, CompletedWrapper } from './CompletedForm.styled'
 import { Accordion } from '@common/Accordion'
 import { Provider as AccordionWrapper } from '@common/Accordion'
 import { Icon } from '@common/Icon'
+import { Button } from '@common/Button'
 
 const List = styled.li`
   list-style: none;
   padding: 0;
   margin: 0;
-  border: 1px solid black;
+  border: 1px solid grey;
   width: 100%;
   padding: 8px;
   margin-bottom: 8px;
   display: flex;
   align-items: center;
+  padding-left: 16px;
+  padding-right: 16px;
   span {
     font-size: 12px;
+    color: grey;
+    text-decoration: line-through;
+    padding-left: 8px;
   }
-  svg {
-    margin-right: 8px;
+  button {
+    margin-left: auto;
   }
 `
 const Group = styled.ul`
@@ -37,8 +43,19 @@ const totalSelected = (items) => {
   return result.length
 }
 
-const CompletedForm = ({ items }) => {
+const CompletedForm = ({ items, callback }) => {
   const total = totalSelected(items)
+
+  const handleUndo = (id) => {
+    const getSelected = items.map((item) => {
+      if (item.id === id) {
+        return { ...item, status: 'incomplete' }
+      } else {
+        return item
+      }
+    })
+    callback({ value: getSelected })
+  }
 
   const renderContent = () => {
     const filterCompletedItems = items.filter(
@@ -46,9 +63,11 @@ const CompletedForm = ({ items }) => {
     )
     return filterCompletedItems.map((item) => (
       <List key={item.id}>
-        <Icon name="CHECKBOX_FILLED" />
+        <Icon name="TICK" size={18} />
         <span>{item.label}</span>
-        <span>{item.date}</span>
+        <Button className="undo" onClick={() => handleUndo(item.id)}>
+          <Icon name="UNDO" stroke="black" />
+        </Button>
       </List>
     ))
   }

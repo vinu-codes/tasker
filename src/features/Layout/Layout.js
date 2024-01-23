@@ -7,7 +7,11 @@ const LayoutContainer = styled.div`
   width: 100%;
   height: 100vh;
   position: relative;
-  margin-top: 60px;
+  margin-top: 72px;
+`
+const Container = styled.div`
+  padding-left: 16px;
+  padding-right: 16px;
 `
 
 const Layout = ({ children, ...props }) => {
@@ -23,7 +27,9 @@ const Layout = ({ children, ...props }) => {
   return (
     <>
       <NavBar />
-      <LayoutContainer {...props}>{children}</LayoutContainer>
+      <Container>
+        <LayoutContainer {...props}>{children}</LayoutContainer>
+      </Container>
     </>
   )
 }
