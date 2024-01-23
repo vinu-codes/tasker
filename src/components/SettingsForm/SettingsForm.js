@@ -50,7 +50,8 @@ const SettingsForm = ({ categories, onAdd, onDelete }) => {
     if (!value || !value.length) {
       return
     }
-    onAdd({ label: value, value: value })
+
+    onAdd({ label: value, value: value, active: false })
     setValue('')
   }
 

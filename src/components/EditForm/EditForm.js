@@ -25,6 +25,10 @@ const EditContainer = styled.div`
   max-width: 480px;
   width: 100%;
   border: 1px solid black;
+  h3 {
+    margin: 0;
+    padding: 20px 20px 0px 20px;
+  }
 `
 
 const FormContainer = styled.form`
@@ -100,8 +104,6 @@ const EditForm = () => {
     getActiveCategory(categories, data.category)
   )
 
-  const randomArray = [{ label: 'coding', value: 'coding' }]
-
   const clearForm = () => {
     setState({
       label: '',
@@ -136,6 +138,7 @@ const EditForm = () => {
   return (
     <EditWrapper className="create-wrapper">
       <EditContainer>
+        <h3>Edit task</h3>
         <FormContainer>
           <Input
             onChange={handleChange}
