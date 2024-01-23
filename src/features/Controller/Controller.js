@@ -9,6 +9,11 @@ import { Modal } from '@common/Modal'
 import { categorySelector } from '@state/category/selectors'
 import { ControllerContainer, ControllerWrapper } from './Controller.styled'
 
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+`
+
 const totalSelected = (options) => {
   if (!options || !options.length) return 0
   const result = options.filter((option) => {
@@ -108,8 +113,10 @@ const Controller = ({ callback }) => {
         <div>
           <span>{renderText()}</span>
         </div>
-        <Button onClick={openDelete}>delete</Button>
-        <Button onClick={openEdit}>change category</Button>
+        <ButtonContainer>
+          <Button onClick={openDelete}>delete</Button>
+          <Button onClick={openEdit}>move to new category</Button>
+        </ButtonContainer>
         {!!showDeleteModal && (
           <Modal title="Delete Confirmation" callback={handleDeleteModal}>
             <DeleteContents callback={handleDeleteCallback} />

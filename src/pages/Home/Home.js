@@ -136,7 +136,7 @@ const Home = () => {
           {renderCategory(data)}
         </HomeContainer>
       </HomeWrapper>
-      <CompletedForm />
+      <CompletedForm items={items} />
       {toggleEdit && <Controller callback={setToggle} />}
     </>
   )
