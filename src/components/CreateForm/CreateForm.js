@@ -8,6 +8,7 @@ import {
   CreateWrapper,
   FormContainer,
 } from './CreateForm.styled'
+import { uuid } from 'src/utils'
 
 const filterActiveItem = (items) => {
   const result = items.find((x) => {
@@ -16,14 +17,13 @@ const filterActiveItem = (items) => {
   return !!result ? result.value : ''
 }
 
-const uuid = () =>
-  'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
-    const r = (Math.random() * 16) | 0,
-      v = c === 'x' ? r : (r & 0x3) | 0x8
-    return v.toString(16)
-  })
+const validateDate = () => {
+  const dateInput = document.getElementById('dateInput')
 
-export { uuid }
+  const today = new Date().toISOString().split('T'[0])
+
+  dateInput.setAttribute('min', today)
+}
 
 const CreateForm = ({ callback, categories }) => {
   const [state, setState] = useState({
@@ -36,10 +36,14 @@ const CreateForm = ({ callback, categories }) => {
       { label: 'completed', value: 'completed', active: false },
     ],
   })
+
   const [_, navigate] = useContext(NavigationContext)
 
   const handleChange = (e) => {
     const { name, value } = e.target
+    if (name === 'date') {
+      validateDate()
+    }
     setState((state) => ({ ...state, [name]: value }))
   }
 
@@ -90,6 +94,7 @@ const CreateForm = ({ callback, categories }) => {
           <h3>Create Task</h3>
           <Input
             name="label"
+            id="dateInput"
             placeholder="task name"
             className="name"
             onChange={handleChange}

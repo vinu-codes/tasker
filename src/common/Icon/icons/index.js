@@ -17,6 +17,8 @@ import SUN from './Sun'
 import THUMB from './Thumb'
 import EXPAND from './Expand'
 import EDIT from './Edit'
+import UNDO from './Undo'
+import TICK from './Tick'
 
 export {
   SAD,
@@ -38,4 +40,6 @@ export {
   SUN,
   EXPAND,
   EDIT,
+  UNDO,
+  TICK,
 }

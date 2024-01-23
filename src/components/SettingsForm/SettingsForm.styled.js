@@ -3,7 +3,6 @@ import styled, { css } from 'styled-components'
 const SettingsContainer = styled.div`
   display: flex;
   flex-direction: column;
-  max-width: 480px;
   width: 100%;
   border: 1px solid black;
   padding: 20px;
@@ -32,13 +31,17 @@ const List = styled.li`
   border: 1px solid black;
   margin-bottom: 8px;
   display: flex;
-`
-
-const Form = styled.form`
-  input {
-    width: 100%;
-    padding: 12px 0px 12px 0px;
-    margin-bottom: 8px;
+  padding: 8px 16px 8px 16px;
+  button {
+    margin-left: auto;
   }
 `
-export { Group, SettingsContainer, List, Form }
+
+const Controls = styled.div`
+  display: flex;
+  justify-content: space-between;
+`
+
+const Form = styled.form``
+
+export { Group, SettingsContainer, List, Form, Controls }

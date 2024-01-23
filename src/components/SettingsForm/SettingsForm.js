@@ -1,5 +1,11 @@
 import React, { useContext, useState } from 'react'
-import { Group, SettingsContainer, List, Form } from './SettingsForm.styled'
+import {
+  Group,
+  SettingsContainer,
+  List,
+  Form,
+  Controls,
+} from './SettingsForm.styled'
 import { Button } from '@common/Button'
 import { Input } from '@common/Input'
 import { NavigationContext } from '@components/Route'
@@ -50,7 +56,8 @@ const SettingsForm = ({ categories, onAdd, onDelete }) => {
     if (!value || !value.length) {
       return
     }
-    onAdd({ label: value, value: value })
+
+    onAdd({ label: value, value: value, active: false })
     setValue('')
   }
 
@@ -66,8 +73,10 @@ const SettingsForm = ({ categories, onAdd, onDelete }) => {
           onChange={handleChange}
           value={value}
         />
-        <Button>Save</Button>
-        <Button onClick={handleNavigate}>Cancel</Button>
+        <Controls>
+          <Button>Save</Button>
+          <Button onClick={handleNavigate}>Cancel</Button>
+        </Controls>
       </Form>
     </SettingsContainer>
   )

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react'
 import { Wrapper, Group, List, IconContainer, Header } from './Dropdown.styled'
 import { Icon } from '@common/Icon'
-import { updatedArray, totalSelected, updateSingleSelect } from './utils'
+import { updatedArray, updateSingleSelect } from './utils'
 import PropTypes from 'prop-types'
 
 const keyCodes = {

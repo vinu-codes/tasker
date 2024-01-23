@@ -1,5 +1,4 @@
 import React, { useContext, useState } from 'react'
-import styled from 'styled-components'
 import { Search } from '@components/Search'
 import { Controller } from '@features/Controller'
 import { useSelector, useDispatch } from 'react-redux'
@@ -8,77 +7,14 @@ import { updateItems, setActiveId } from '@state/tasks'
 import { categorySelector } from '@state/category/selectors'
 import { Icon } from '@common/Icon'
 import { NavigationContext } from '@components/Route'
-
-const HomeWrapper = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-`
-
-const HomeContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  max-width: 480px;
-  width: 100%;
-  border: 1px solid black;
-  padding: 20px;
-`
-
-const HeadingContainer = styled.div`
-  display: flex;
-  align-items: center;
-  padding: 8px 0 8px 0;
-  button {
-    cursor: pointer;
-    user-select: none;
-    border: none;
-    background: none;
-    border: 1px solid black;
-    border-radius: 8px;
-    padding: 8px;
-    margin-left: auto;
-    width: 70px;
-  }
-`
-
-const Group = styled.ul`
-  list-style: none;
-  padding: 0;
-  margin: 0;
-`
-
-const List = styled.li`
-  user-select: none;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  border: 1px solid black;
-  padding: 8px;
-  margin-top: 8px;
-  display: flex;
-  align-items: center;
-  span.circle {
-    display: inline-block;
-    background: grey;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    margin-right: 8px;
-    &.active {
-      background: red;
-    }
-  }
-`
-
-const IconContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-left: auto;
-  cursor: pointer;
-`
+import {
+  HomeWrapper,
+  HomeContainer,
+  HeadingContainer,
+  List,
+  IconContainer,
+} from './Home.styled'
+import { CompletedForm } from '@components/CompletedForm'
 
 const createDataStructure = (items, categories) => {
   if (!categories || !categories.length || !items || !items.length) return []
@@ -151,9 +87,25 @@ const Home = () => {
     setToggleEdit(arg)
   }
 
+  const handleUndo = ({ value }) => {
+    dispatch(updateItems(value))
+  }
+
+  const handleComplete = (id) => {
+    const getSelected = items.map((item) => {
+      if (item.id === id) {
+        return { ...item, status: 'completed' }
+      } else {
+        return item
+      }
+    })
+    dispatch(updateItems(getSelected))
+  }
+
   const renderTasks = (items) => {
     if (!items || !items.length) return null
     const result = items.map((item) => {
+      if (item.status === 'completed') return null
       return (
         <List>
           {toggleEdit && (
@@ -163,6 +115,7 @@ const Home = () => {
             ></span>
           )}
           <span>{item.label}</span>
+          <button onClick={() => handleComplete(item.id)}>Completed</button>
           <IconContainer onClick={() => handleExpand(item)}>
             <Icon name="EXPAND" />
           </IconContainer>
@@ -171,6 +124,9 @@ const Home = () => {
     })
     return result
   }
+
+  // const filter =
+  //   item.items.filter((k) => k.status === 'incomplete').length !== 0
 
   const renderCategory = (data) => {
     if (!!data) {
@@ -200,6 +156,7 @@ const Home = () => {
           {renderCategory(data)}
         </HomeContainer>
       </HomeWrapper>
+      <CompletedForm items={items} callback={handleUndo} />
       {toggleEdit && <Controller callback={setToggle} />}
     </>
   )
