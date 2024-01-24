@@ -109,12 +109,11 @@ const Home = () => {
       return (
         <List>
           {toggleEdit && (
-            <span
-              onClick={() => handleSelect(item)}
-              className={item.active ? 'circle active' : 'circle'}
-            ></span>
+            <span onClick={() => handleSelect(item)}>
+              <Icon name={item.active ? 'CHECKBOX_FILLED' : 'CHECKBOX'} />
+            </span>
           )}
-          <span>{item.label}</span>
+          <span className="label">{item.label}</span>
           <button onClick={() => handleComplete(item.id)}>Completed</button>
           <IconContainer onClick={() => handleExpand(item)}>
             <Icon name="EXPAND" />

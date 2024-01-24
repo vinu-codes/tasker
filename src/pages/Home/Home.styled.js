@@ -50,23 +50,14 @@ const List = styled.li`
   margin-top: 8px;
   display: flex;
   align-items: center;
-  span.circle {
-    display: inline-block;
-    background: grey;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    margin-right: 8px;
-    cursor: pointer;
-    &.active {
-      background: red;
-      transform: scale(1.2);
-    }
+  span.label {
+    margin-left: 8px;
   }
-  &:hover {
-    span.circle {
-      transform: scale(1.2);
-      transition: all 0.3s ease-in-out;
+  span {
+    svg.CHECKBOX {
+      rect {
+        stroke: black;
+      }
     }
   }
 `
