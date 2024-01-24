@@ -132,6 +132,8 @@ const SignUp = () => {
 const Form = () => {
   return (
     <FormWrapper>
+      <h1>Welcome to Tasker</h1>
+      <h2>Get started - it's free.</h2>
       <SignUp />
       <SignIn />
     </FormWrapper>

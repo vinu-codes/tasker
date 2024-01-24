@@ -13,9 +13,8 @@ const updatedFavouriteList = (options, itemSelected) => {
   const result = options.map((option) => {
     if (option.id === itemSelected.id) {
       return { ...option, favorite: !option.favorite }
-    } else {
-      return option
     }
+    return option
   })
   return result
 }

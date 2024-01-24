@@ -13,6 +13,18 @@ const ButtonContainer = styled.button`
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  outline: none;
+  background: white;
+  line-height: 21px;
+  font-size: 14px;
+  &:hover {
+    outline: none;
+    border: 1px solid black;
+  }
+  &:focus {
+    outline: none;
+    border: 1px solid black;
+  }
 `
 
 const Button = ({ children, ...props }) => {

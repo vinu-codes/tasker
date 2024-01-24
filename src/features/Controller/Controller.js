@@ -44,7 +44,8 @@ const changeCategoryOnActiveItems = (items, category) => {
   const result = items.map((option) => {
     if (option.active) {
       return { ...option, category: category, active: false }
-    } else return option
+    }
+    return option
   })
   return result
 }

@@ -17,14 +17,6 @@ const filterActiveItem = (items) => {
   return !!result ? result.value : ''
 }
 
-const validateDate = () => {
-  const dateInput = document.getElementById('dateInput')
-
-  const today = new Date().toISOString().split('T'[0])
-
-  dateInput.setAttribute('min', today)
-}
-
 const CreateForm = ({ callback, categories }) => {
   const [state, setState] = useState({
     label: '',
@@ -41,9 +33,6 @@ const CreateForm = ({ callback, categories }) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target
-    if (name === 'date') {
-      validateDate()
-    }
     setState((state) => ({ ...state, [name]: value }))
   }
 

@@ -16,14 +16,16 @@ const NavWrapper = styled.div`
   z-index: 9999;
   border-bottom: 1px solid black;
   width: 100%;
+  background: black;
   div.tasker-button {
-    button {
+    button.home {
       border: none;
       padding: 0;
       background: none;
       font-size: 20px;
       font-weight: bold;
       cursor: pointer;
+      color: white;
     }
   }
 `

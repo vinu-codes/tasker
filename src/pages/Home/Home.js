@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react'
+import styled from 'styled-components'
 import { Search } from '@components/Search'
 import { Controller } from '@features/Controller'
 import { useSelector, useDispatch } from 'react-redux'
@@ -6,6 +7,8 @@ import { tasksSelector } from '@state/tasks/selectors'
 import { updateItems, setActiveId } from '@state/tasks'
 import { categorySelector } from '@state/category/selectors'
 import { Icon } from '@common/Icon'
+import { Button } from '@common/Button'
+import { Celebrate } from '@components/Celebrate'
 import { NavigationContext } from '@components/Route'
 import {
   HomeWrapper,
@@ -15,6 +18,15 @@ import {
   IconContainer,
 } from './Home.styled'
 import { CompletedForm } from '@components/CompletedForm'
+
+const Controls = styled.div`
+  display: flex;
+  margin-left: auto;
+`
+
+const CategoryGroup = styled.div`
+  margin-bottom: 16px;
+`
 
 const createDataStructure = (items, categories) => {
   if (!categories || !categories.length || !items || !items.length) return []
@@ -38,7 +50,8 @@ const updatedArray = (selected, options) => {
   const result = options.map((option) => {
     if (selected.label === option.label) {
       return { ...option, active: !option.active }
-    } else return option
+    }
+    return option
   })
   return result
 }
@@ -50,11 +63,21 @@ const resetArray = (items) => {
   return result
 }
 
+const getSelected = (id, items) => {
+  const result = items.map((item) => {
+    if (item.id === id) {
+      return { ...item, status: 'completed' }
+    }
+    return item
+  })
+  return result
+}
+
 const Home = () => {
   const items = useSelector(tasksSelector.items)
   const categories = useSelector(categorySelector.categories)
-  const activeId = useSelector(tasksSelector.activeId)
   const [filteredItems, setFilteredItems] = useState(items)
+  const [celebrate, setCelebrate] = useState(false)
   const [toggleEdit, setToggleEdit] = useState(false)
   const dispatch = useDispatch()
   const data = createDataStructure(filteredItems, categories)
@@ -92,14 +115,12 @@ const Home = () => {
   }
 
   const handleComplete = (id) => {
-    const getSelected = items.map((item) => {
-      if (item.id === id) {
-        return { ...item, status: 'completed' }
-      } else {
-        return item
-      }
-    })
-    dispatch(updateItems(getSelected))
+    setCelebrate(true)
+    dispatch(updateItems(getSelected(id, items)))
+  }
+
+  const handleCelebrate = ({ value }) => {
+    setCelebrate(value)
   }
 
   const renderTasks = (items) => {
@@ -109,32 +130,43 @@ const Home = () => {
       return (
         <List>
           {toggleEdit && (
-            <span
-              onClick={() => handleSelect(item)}
-              className={item.active ? 'circle active' : 'circle'}
-            ></span>
+            <span onClick={() => handleSelect(item)}>
+              <Icon name={item.active ? 'CHECKBOX_FILLED' : 'CHECKBOX'} />
+            </span>
           )}
-          <span>{item.label}</span>
-          <button onClick={() => handleComplete(item.id)}>Completed</button>
-          <IconContainer onClick={() => handleExpand(item)}>
-            <Icon name="EXPAND" />
-          </IconContainer>
+          <span className="label">{item.label}</span>
+          <Controls>
+            <Button onClick={() => handleComplete(item.id)}>Done</Button>
+            <IconContainer onClick={() => handleExpand(item)}>
+              <Icon name="EXPAND" />
+            </IconContainer>
+          </Controls>
         </List>
       )
     })
     return result
   }
 
-  // const filter =
-  //   item.items.filter((k) => k.status === 'incomplete').length !== 0
+  const hasIncomplete = (categoryGroup) => {
+    const hasLengthOnItems = categoryGroup.items.length > 0
+    if (!hasLengthOnItems) {
+      return null
+    }
+    const result =
+      categoryGroup.items.filter((k) => k.status === 'incomplete').length > 0
+    console.log(result)
+    if (!result) return null
+    return <h4 className="category-label">{categoryGroup.label}</h4>
+  }
 
   const renderCategory = (data) => {
+    console.log(data)
     if (!!data) {
       return data.map((item) => (
-        <div>
-          {!!item.items.length && <span>{item.label}</span>}
+        <CategoryGroup>
+          {hasIncomplete(item)}
           {renderTasks(item.items)}
-        </div>
+        </CategoryGroup>
       ))
     }
   }
@@ -142,6 +174,7 @@ const Home = () => {
   return (
     <>
       <HomeWrapper>
+        {celebrate && <Celebrate callback={handleCelebrate} />}
         <HomeContainer>
           <HeadingContainer className="heading-container">
             <span className="my-tasks">My tasks</span>

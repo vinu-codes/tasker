@@ -15,6 +15,14 @@ const HomeContainer = styled.div`
   width: 100%;
   border: 1px solid black;
   padding: 20px;
+  h4.category-label {
+    margin: 0;
+    font-weight: bold;
+    padding-bottom: 8px;
+    &:first-letter {
+      text-transform: uppercase;
+    }
+  }
 `
 
 const HeadingContainer = styled.div`
@@ -50,23 +58,17 @@ const List = styled.li`
   margin-top: 8px;
   display: flex;
   align-items: center;
-  span.circle {
-    display: inline-block;
-    background: grey;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    margin-right: 8px;
+  button {
     cursor: pointer;
-    &.active {
-      background: red;
-      transform: scale(1.2);
-    }
   }
-  &:hover {
-    span.circle {
-      transform: scale(1.2);
-      transition: all 0.3s ease-in-out;
+  span.label {
+    margin-left: 8px;
+  }
+  span {
+    svg.CHECKBOX {
+      rect {
+        stroke: black;
+      }
     }
   }
 `
@@ -75,8 +77,8 @@ const IconContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-left: auto;
   cursor: pointer;
+  padding-left: 8px;
 `
 export {
   HomeWrapper,
