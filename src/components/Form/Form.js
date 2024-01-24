@@ -24,10 +24,6 @@ const FormContainer = styled.form`
     margin: 0;
     padding-bottom: 8px;
   }
-  input {
-    padding: 4px;
-    margin-top: 2px;
-  }
   button {
     margin-top: 8px;
   }

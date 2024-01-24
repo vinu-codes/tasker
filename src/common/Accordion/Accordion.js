@@ -31,6 +31,7 @@ const Accordion = ({ title, name, children }) => {
     const findMatch = checkForNameOnArray(state, name)
     if (findMatch) {
       setState(updateArrayByName(state, name))
+      return
     }
     setState([...state, { name, value: false }])
   }
@@ -42,7 +43,7 @@ const Accordion = ({ title, name, children }) => {
       <AccordionHeader className="header" onClick={() => handleSelect(name)}>
         {title && <span>{title}</span>}
         <IconContainer mr={8}>
-          <Icon name="CHEVRON" rotate={isActive ? 180 : 0} />
+          <Icon name="CHEVRON" rotate={isActive ? 0 : 180} />
         </IconContainer>
       </AccordionHeader>
       <AccordionExpander>

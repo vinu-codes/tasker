@@ -17,7 +17,7 @@ const HomeContainer = styled.div`
   padding: 20px;
   h4.category-label {
     margin: 0;
-    font-weight: bold;
+    font-weight: normal;
     padding-bottom: 8px;
     &:first-letter {
       text-transform: uppercase;
@@ -29,6 +29,10 @@ const HeadingContainer = styled.div`
   display: flex;
   align-items: center;
   padding: 8px 0 8px 0;
+  h3 {
+    margin: 0;
+    font-weight: bold;
+  }
   button {
     cursor: pointer;
     user-select: none;
@@ -58,11 +62,20 @@ const List = styled.li`
   margin-top: 8px;
   display: flex;
   align-items: center;
+  justify-content: center;
+  &:first-of-type {
+    margin-top: 0;
+  }
   button {
     cursor: pointer;
   }
   span.label {
     margin-left: 8px;
+  }
+  span.check-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   span {
     svg.CHECKBOX {

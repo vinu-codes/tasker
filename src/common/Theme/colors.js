@@ -8,6 +8,8 @@ export const black = '#000000'
 export const offWhite = '#fff'
 export const darkGrey = 'rgb(101 97 97)'
 export const yellow = 'rgb(254 207 77)'
+export const rust = '#d1453b'
+export const lightOrange = '#fae8d6'
 
 export const colors = {
   lightPurple,
@@ -20,4 +22,6 @@ export const colors = {
   offWhite,
   darkGrey,
   yellow,
+  rust,
+  lightOrange,
 }

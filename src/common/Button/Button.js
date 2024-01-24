@@ -17,13 +17,16 @@ const ButtonContainer = styled.button`
   background: white;
   line-height: 21px;
   font-size: 14px;
+  color: black;
   &:hover {
     outline: none;
     border: 1px solid black;
+    color: black;
   }
   &:focus {
     outline: none;
     border: 1px solid black;
+    color: black;
   }
 `
 

@@ -12,7 +12,6 @@ const ControllerWrapper = styled.div`
 const ControllerContainer = styled.div`
   display: flex;
   flex-direction: column;
-  max-width: 480px;
   width: 100%;
   border: 1px solid black;
   padding: 20px;

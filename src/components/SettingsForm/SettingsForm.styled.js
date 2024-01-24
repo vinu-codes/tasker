@@ -32,6 +32,9 @@ const List = styled.li`
   margin-bottom: 8px;
   display: flex;
   padding: 8px 16px 8px 16px;
+  span.color {
+    background: ${(props) => props.color};
+  }
   button {
     margin-left: auto;
   }

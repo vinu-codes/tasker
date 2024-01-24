@@ -8,7 +8,9 @@ import {
 } from './SettingsForm.styled'
 import { Button } from '@common/Button'
 import { Input } from '@common/Input'
+import { Icon } from '@common/Icon'
 import { NavigationContext } from '@components/Route'
+import { ColorPicker } from '@components/ColorPicker'
 
 const updatedCategories = (id, categories) => {
   if (!categories || !categories.length) return
@@ -21,6 +23,7 @@ const updatedCategories = (id, categories) => {
 
 const SettingsForm = ({ categories, onAdd, onDelete }) => {
   const [value, setValue] = useState('')
+  const [selectedColor, setSelectedColor] = useState('')
   const [_, navigate] = useContext(NavigationContext)
 
   const handleDelete = (selectedItem) => {
@@ -32,9 +35,12 @@ const SettingsForm = ({ categories, onAdd, onDelete }) => {
     if (!categories || !categories.length) return
     const result = categories.map((item) => {
       return (
-        <List key={item.label}>
+        <List color={item.color} key={item.label}>
           <span>{item.label}</span>
-          <button onClick={() => handleDelete(item.value)}>delete</button>
+          <span className="color">color</span>
+          <Button onClick={() => handleDelete(item.value)}>
+            <Icon name="TRASH" />
+          </Button>
         </List>
       )
     })
@@ -57,8 +63,12 @@ const SettingsForm = ({ categories, onAdd, onDelete }) => {
       return
     }
 
-    onAdd({ label: value, value: value, active: false })
+    onAdd({ label: value, value: value, active: false, color: selectedColor })
     setValue('')
+  }
+
+  const handleColor = ({ value }) => {
+    setSelectedColor(value)
   }
 
   return (
@@ -72,6 +82,11 @@ const SettingsForm = ({ categories, onAdd, onDelete }) => {
           placeholder="add category"
           onChange={handleChange}
           value={value}
+        />
+        <ColorPicker
+          colors={['red', 'blue', 'yellow', 'green']}
+          callback={handleColor}
+          value={selectedColor}
         />
         <Controls>
           <Button>Save</Button>
