@@ -50,6 +50,9 @@ const List = styled.li`
   margin-top: 8px;
   display: flex;
   align-items: center;
+  button {
+    cursor: pointer;
+  }
   span.label {
     margin-left: 8px;
   }
@@ -66,8 +69,8 @@ const IconContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-left: auto;
   cursor: pointer;
+  padding-left: 8px;
 `
 export {
   HomeWrapper,

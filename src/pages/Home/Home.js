@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react'
+import styled from 'styled-components'
 import { Search } from '@components/Search'
 import { Controller } from '@features/Controller'
 import { useSelector, useDispatch } from 'react-redux'
@@ -6,6 +7,7 @@ import { tasksSelector } from '@state/tasks/selectors'
 import { updateItems, setActiveId } from '@state/tasks'
 import { categorySelector } from '@state/category/selectors'
 import { Icon } from '@common/Icon'
+import { Button } from '@common/Button'
 import { NavigationContext } from '@components/Route'
 import {
   HomeWrapper,
@@ -15,6 +17,11 @@ import {
   IconContainer,
 } from './Home.styled'
 import { CompletedForm } from '@components/CompletedForm'
+
+const Controls = styled.div`
+  display: flex;
+  margin-left: auto;
+`
 
 const createDataStructure = (items, categories) => {
   if (!categories || !categories.length || !items || !items.length) return []
@@ -53,7 +60,6 @@ const resetArray = (items) => {
 const Home = () => {
   const items = useSelector(tasksSelector.items)
   const categories = useSelector(categorySelector.categories)
-  const activeId = useSelector(tasksSelector.activeId)
   const [filteredItems, setFilteredItems] = useState(items)
   const [toggleEdit, setToggleEdit] = useState(false)
   const dispatch = useDispatch()
@@ -114,24 +120,27 @@ const Home = () => {
             </span>
           )}
           <span className="label">{item.label}</span>
-          <button onClick={() => handleComplete(item.id)}>Completed</button>
-          <IconContainer onClick={() => handleExpand(item)}>
-            <Icon name="EXPAND" />
-          </IconContainer>
+          <Controls>
+            <Button onClick={() => handleComplete(item.id)}>Done</Button>
+            <IconContainer onClick={() => handleExpand(item)}>
+              <Icon name="EXPAND" />
+            </IconContainer>
+          </Controls>
         </List>
       )
     })
     return result
   }
 
-  // const filter =
-  //   item.items.filter((k) => k.status === 'incomplete').length !== 0
-
   const renderCategory = (data) => {
+    console.log(data)
     if (!!data) {
       return data.map((item) => (
         <div>
-          {!!item.items.length && <span>{item.label}</span>}
+          {!!item.items.length ||
+            (!!item.items.filter((k) => k.status === 'incomplete').length && (
+              <span>{item.label}</span>
+            ))}
           {renderTasks(item.items)}
         </div>
       ))
