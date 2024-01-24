@@ -18,7 +18,7 @@ const tasksSlice = createSlice({
         label: 'Create fake async thunks',
         date: '2024-01-05',
         details: 'include promises',
-        category: 'coding',
+        category: 'personal',
         active: false,
         status: 'incomplete',
         id: 'ghi',

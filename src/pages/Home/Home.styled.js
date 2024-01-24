@@ -15,6 +15,14 @@ const HomeContainer = styled.div`
   width: 100%;
   border: 1px solid black;
   padding: 20px;
+  h4.category-label {
+    margin: 0;
+    font-weight: bold;
+    padding-bottom: 8px;
+    &:first-letter {
+      text-transform: uppercase;
+    }
+  }
 `
 
 const HeadingContainer = styled.div`

@@ -19,6 +19,7 @@ import EXPAND from './Expand'
 import EDIT from './Edit'
 import UNDO from './Undo'
 import TICK from './Tick'
+import SETTINGS from './Settings'
 
 export {
   SAD,
@@ -42,4 +43,5 @@ export {
   EDIT,
   UNDO,
   TICK,
+  SETTINGS,
 }

@@ -31,9 +31,8 @@ const Accordion = ({ title, name, children }) => {
     const findMatch = checkForNameOnArray(state, name)
     if (findMatch) {
       setState(updateArrayByName(state, name))
-    } else {
-      setState([...state, { name, value: false }])
     }
+    setState([...state, { name, value: false }])
   }
 
   const isActive = getActiveItem(state, name)
