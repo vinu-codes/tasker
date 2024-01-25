@@ -5,9 +5,19 @@ const categorySlice = createSlice({
   name: 'category',
   initialState: {
     categories: [
-      { label: 'personal', active: false, value: 'personal', color: 'red' },
-      { label: 'work', active: false, value: 'work', color: 'blue' },
-      { label: 'coding', active: false, value: 'coding', color: 'green' },
+      {
+        label: 'personal',
+        active: false,
+        value: 'personal',
+        color: colors.lightGreen,
+      },
+      { label: 'work', active: false, value: 'work', color: colors.aqua },
+      {
+        label: 'coding',
+        active: false,
+        value: 'coding',
+        color: colors.lightPink,
+      },
     ],
   },
   reducers: {
