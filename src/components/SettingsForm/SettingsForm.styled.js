@@ -32,6 +32,12 @@ const List = styled.li`
   margin-bottom: 8px;
   display: flex;
   padding: 8px 16px 8px 16px;
+  align-items: center;
+  span.label {
+    &:first-letter {
+      text-transform: uppercase;
+    }
+  }
   span.color {
     background: ${(props) => props.color};
   }
@@ -42,7 +48,12 @@ const List = styled.li`
 
 const Controls = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
+  button {
+    &:nth-child(2) {
+      margin-left: 8px;
+    }
+  }
 `
 
 const Form = styled.form``

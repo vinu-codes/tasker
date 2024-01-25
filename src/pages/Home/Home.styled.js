@@ -63,6 +63,14 @@ const List = styled.li`
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 0;
+  border-bottom: 0;
+  &:last-child {
+    border-bottom: 1px solid black;
+  }
+  &:hover {
+    background: #e0e0e0;
+  }
   &:first-of-type {
     margin-top: 0;
   }

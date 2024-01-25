@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { colors } from '@common/Theme'
 
 const categorySlice = createSlice({
   name: 'category',

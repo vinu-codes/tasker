@@ -1,19 +1,29 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 
+const GroupContainer = styled.div`
+  h4 {
+    margin: 0;
+  }
+`
 const Group = styled.ul`
   list-style: none;
   padding: 0;
   margin: 0;
   display: flex;
+  padding: 16px 0 16px 0;
 `
+
 const List = styled.li`
   list-style: none;
   padding: 0;
   margin: 0;
-  border-radius: 50%;
-  width: 32px;
-  height: 32px;
+  width: 38px;
+  height: 38px;
+  margin-right: 8px;
+  border-radius: 8px;
+  border: 1px solid black;
+  box-shadow: inset 0 0 0 4px white;
   ${(props) =>
     props.color &&
     css`
@@ -41,7 +51,12 @@ const ColorPicker = ({ colors, callback, value }) => {
     ))
     return result
   }
-  return <Group>{renderColors()}</Group>
+  return (
+    <GroupContainer>
+      <h4>Select category color:</h4>
+      <Group>{renderColors()}</Group>
+    </GroupContainer>
+  )
 }
 
 export { ColorPicker }
