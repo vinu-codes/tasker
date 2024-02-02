@@ -2,26 +2,11 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 import { Icon } from '@common/Icon'
 
-const InputContainer = styled.input`
-  outline: none;
-  padding: 0;
-  margin: 0;
-  border: 1px solid grey;
-  border-radius: 8px;
-  width: 100%;
-  height: 48px;
-  padding-left: 8px;
-  ${(props) =>
-    props.hasIcon &&
-    css`
-      border-radius: 8px 0 0 8px;
-    `}
-`
-
 const Container = styled.div`
   display: flex;
   margin-bottom: 16px;
-  label {
+  background: red;
+  .label-container {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -40,6 +25,22 @@ const Container = styled.div`
   }
 `
 
+const InputArea = styled.input`
+  outline: none;
+  padding: 0;
+  margin: 0;
+  border: 1px solid grey;
+  border-radius: 8px;
+  width: 100%;
+  height: 48px;
+  padding-left: 8px;
+  ${(props) =>
+    props.hasIcon &&
+    css`
+      border-radius: 8px 0 0 8px;
+    `}
+`
+
 const InputWrapper = styled.div`
   display: flex;
 `
@@ -47,17 +48,17 @@ const InputWrapper = styled.div`
 const Input = ({ label, icon, ...props }) => {
   return (
     <Container>
-      <label>
+      <div className="label-container">
         <span className="label">{label}</span>
         <InputWrapper>
-          <InputContainer hasIcon={!!icon} {...props} />
+          <InputArea hasIcon={!!icon} {...props} />
           {!!icon && (
             <span className="icon">
               <Icon name={icon} size={32} />
             </span>
           )}
         </InputWrapper>
-      </label>
+      </div>
     </Container>
   )
 }
