@@ -146,6 +146,7 @@ const EditForm = () => {
             name="label"
             value={state.label}
             icon="edit"
+            required
           />
           <Input
             onChange={handleChange}
@@ -154,6 +155,7 @@ const EditForm = () => {
             name="date"
             type="date"
             icon="edit"
+            required
           />
 
           <TextArea

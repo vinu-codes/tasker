@@ -27,7 +27,6 @@ const FormContainer = styled.form`
     margin-bottom: 8px;
   }
   input.detail {
-    padding-bottom: 46px;
   }
 `
 export { CreateContainer, CreateWrapper, FormContainer }

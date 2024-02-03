@@ -97,9 +97,10 @@ const SettingsForm = ({ categories, onAdd, onDelete }) => {
       <Form onSubmit={onSubmit}>
         <Input
           name="add-category"
-          placeholder="add category"
           onChange={handleChange}
           value={value}
+          label="add Category"
+          required
         />
         <ColorPicker
           colors={colorPicker}

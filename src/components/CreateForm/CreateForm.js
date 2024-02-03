@@ -84,25 +84,27 @@ const CreateForm = ({ callback, categories }) => {
           <Input
             name="label"
             id="dateInput"
-            placeholder="task name"
             className="name"
             onChange={handleChange}
             value={state.label}
+            required
+            label="Task Name"
           />
           <Input
             name="date"
             type="date"
-            placeholder="due date"
             className="date"
             onChange={handleChange}
             value={state.date}
+            required
           />
           <Input
             name="details"
-            placeholder="details of task"
             className="detail"
             onChange={handleChange}
             value={state.details}
+            required
+            label="Details of task"
           />
           <Dropdown
             name="category"

@@ -61,6 +61,7 @@ const SignIn = () => {
         className="email"
         onChange={handleChange}
         value={state.email}
+        required
       />
       <Input
         name="password"
@@ -69,6 +70,7 @@ const SignIn = () => {
         className="password"
         onChange={handleChange}
         value={state.password}
+        required
       />
       <Button onClick={handleSubmit} className="submit">
         Sign In
@@ -109,6 +111,7 @@ const SignUp = () => {
         className="email"
         onChange={handleChange}
         value={state.email}
+        required
       />
       <Input
         name="password"
@@ -117,6 +120,7 @@ const SignUp = () => {
         className="password"
         onChange={handleChange}
         value={state.password}
+        required
       />
       <Button onClick={handleSubmit} className="submit">
         Sign Up
