@@ -17,7 +17,7 @@ const filterActiveItem = (items) => {
   return !!result ? result.value : ''
 }
 
-const CreateForm = ({ callback, categories }) => {
+const CreateForm = ({ callback, categories, items }) => {
   const [state, setState] = useState({
     label: '',
     date: '',
@@ -56,12 +56,15 @@ const CreateForm = ({ callback, categories }) => {
     e.preventDefault()
     const resultOfCategory = filterActiveItem(state.category)
     const resultOfStatus = filterActiveItem(state.status)
-    callback({
-      ...state,
-      category: resultOfCategory,
-      status: resultOfStatus,
-      id: uuid(),
-    })
+    callback([
+      ...items,
+      {
+        ...state,
+        category: !!resultOfCategory ? resultOfCategory : 'personal',
+        status: !!resultOfStatus ? resultOfStatus : 'incomplete',
+        id: uuid(),
+      },
+    ])
     clearForm()
     navigate('/')
   }

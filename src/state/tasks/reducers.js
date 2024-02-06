@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 const tasksSlice = createSlice({
   name: 'tasks',
   initialState: {
-    activeId: 'abc',
+    activeId: null,
     items: [
       {
         label: 'Animate items when selected',
@@ -54,13 +54,13 @@ const tasksSlice = createSlice({
   },
   reducers: {
     addItem: (state, { payload }) => {
-      state.items.push(payload)
+      state.items = payload
     },
     updateItems: (state, { payload }) => {
       state.items = payload
     },
-    deleteItem: (state, action) => {
-      state.items = action.payload
+    deleteItem: (state, { payload }) => {
+      state.items = payload
     },
     setActiveId: (state, { payload }) => {
       state.activeId = payload

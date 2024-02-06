@@ -5,7 +5,7 @@ import { NavWrapper, ButtonsContainer } from './NavBar.styled'
 import { NavigationContext } from '@components/Route'
 
 const NavBar = () => {
-  const [_, navigate] = useContext(NavigationContext)
+  const [currentPath, navigate] = useContext(NavigationContext)
 
   const handleSettings = () => {
     navigate('/settings')
@@ -14,6 +14,11 @@ const NavBar = () => {
   const handleCreate = () => {
     navigate('/create')
   }
+
+  if (currentPath === '/login') {
+    return null
+  }
+
   return (
     <NavWrapper className="nav-wrapper">
       <div className="tasker-button">

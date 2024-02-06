@@ -35,6 +35,7 @@ const SignIn = () => {
     password: '',
   })
   const [currentPath, navigate] = useContext(NavigationContext)
+
   const handleSubmit = () => {
     if (
       !state.email ||
@@ -84,7 +85,7 @@ const SignUp = () => {
     email: '',
     password: '',
   })
-  const [currentPath, navigate] = useContext(NavigationContext)
+  const [_, navigate] = useContext(NavigationContext)
 
   const handleSubmit = () => {
     if (
