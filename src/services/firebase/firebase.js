@@ -8,6 +8,6 @@ import { config as firebaseConfig } from './config'
 
 const app = initializeApp(firebaseConfig)
 const auth = getAuth(app)
-const firestore = getFirestore(app)
+const fireStore = getFirestore(app)
 
-export { auth, firestore }
+export { auth, fireStore }
