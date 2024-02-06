@@ -8,16 +8,32 @@ export const black = '#000000'
 export const offWhite = '#fff'
 export const darkGrey = 'rgb(101 97 97)'
 export const yellow = 'rgb(254 207 77)'
+export const rust = '#d1453b'
+export const lightOrange = '#fae8d6'
+export const lightGreen = '#748a6c'
+export const aqua = '#ccdbd7'
+export const mustard = '#f8ca5a'
+export const darkRed = '#fb8b83'
+export const lightPink = '#efcec8'
+
+export const colorPicker = [aqua, lightGreen, mustard, lightPink, darkRed]
 
 export const colors = {
-  lightPurple,
-  navyBlue,
-  darkNavyBlue,
-  lightGrey,
-  grey,
-  white,
+  aqua,
   black,
-  offWhite,
   darkGrey,
+  darkNavyBlue,
+  darkRed,
+  grey,
+  lightGreen,
+  lightGrey,
+  lightOrange,
+  lightPink,
+  lightPurple,
+  mustard,
+  navyBlue,
+  offWhite,
+  rust,
+  white,
   yellow,
 }

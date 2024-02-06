@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react'
+import styled from 'styled-components'
 import {
   Group,
   SettingsContainer,
@@ -8,7 +9,24 @@ import {
 } from './SettingsForm.styled'
 import { Button } from '@common/Button'
 import { Input } from '@common/Input'
+import { Icon } from '@common/Icon'
 import { NavigationContext } from '@components/Route'
+import { colorPicker } from '@common/Theme'
+import { ColorPicker } from '@components/ColorPicker'
+
+const CategegoryControls = styled.div`
+  display: flex;
+  margin-left: auto;
+  div.selected-color {
+    width: 38px;
+    height: 38px;
+    background: ${(props) => props.color};
+    margin-right: 8px;
+    border-radius: 8px;
+    border: 1px solid black;
+    box-shadow: inset 0 0 0 4px white;
+  }
+`
 
 const updatedCategories = (id, categories) => {
   if (!categories || !categories.length) return
@@ -21,6 +39,7 @@ const updatedCategories = (id, categories) => {
 
 const SettingsForm = ({ categories, onAdd, onDelete }) => {
   const [value, setValue] = useState('')
+  const [selectedColor, setSelectedColor] = useState('')
   const [_, navigate] = useContext(NavigationContext)
 
   const handleDelete = (selectedItem) => {
@@ -32,9 +51,14 @@ const SettingsForm = ({ categories, onAdd, onDelete }) => {
     if (!categories || !categories.length) return
     const result = categories.map((item) => {
       return (
-        <List key={item.label}>
-          <span>{item.label}</span>
-          <button onClick={() => handleDelete(item.value)}>delete</button>
+        <List color={item.color} key={item.label}>
+          <span className="label">{item.label}</span>
+          <CategegoryControls color={item.color}>
+            <div className="selected-color"></div>
+            <Button onClick={() => handleDelete(item.value)}>
+              <Icon name="TRASH" />
+            </Button>
+          </CategegoryControls>
         </List>
       )
     })
@@ -57,8 +81,12 @@ const SettingsForm = ({ categories, onAdd, onDelete }) => {
       return
     }
 
-    onAdd({ label: value, value: value, active: false })
+    onAdd({ label: value, value: value, active: false, color: selectedColor })
     setValue('')
+  }
+
+  const handleColor = ({ value }) => {
+    setSelectedColor(value)
   }
 
   return (
@@ -69,9 +97,15 @@ const SettingsForm = ({ categories, onAdd, onDelete }) => {
       <Form onSubmit={onSubmit}>
         <Input
           name="add-category"
-          placeholder="add category"
           onChange={handleChange}
           value={value}
+          label="add Category"
+          required
+        />
+        <ColorPicker
+          colors={colorPicker}
+          callback={handleColor}
+          value={selectedColor}
         />
         <Controls>
           <Button>Save</Button>

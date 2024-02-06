@@ -8,10 +8,18 @@ import { DeleteContents, EditContents } from '@components/ModalActions'
 import { Modal } from '@common/Modal'
 import { categorySelector } from '@state/category/selectors'
 import { ControllerContainer, ControllerWrapper } from './Controller.styled'
+import { colors } from '@common/Theme'
 
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: space-between;
+  padding: 20px 20px 0 20px;
+`
+
+const Heading = styled.div`
+  background: ${colors.lightGrey};
+  border-radius: 4px 4px 0 0;
+  padding: 20px;
 `
 
 const totalSelected = (options) => {
@@ -111,9 +119,9 @@ const Controller = ({ callback }) => {
   return (
     <ControllerWrapper>
       <ControllerContainer>
-        <div>
+        <Heading>
           <span>{renderText()}</span>
-        </div>
+        </Heading>
         <ButtonContainer>
           <Button onClick={openDelete}>delete</Button>
           <Button onClick={openEdit}>move to new category</Button>

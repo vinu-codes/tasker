@@ -20,6 +20,8 @@ import EDIT from './Edit'
 import UNDO from './Undo'
 import TICK from './Tick'
 import SETTINGS from './Settings'
+import MORE from './More'
+import TRASH from './Trash'
 
 export {
   SAD,
@@ -44,4 +46,6 @@ export {
   UNDO,
   TICK,
   SETTINGS,
+  MORE,
+  TRASH,
 }

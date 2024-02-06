@@ -1,12 +1,23 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { colors } from '@common/Theme'
 
 const categorySlice = createSlice({
   name: 'category',
   initialState: {
     categories: [
-      { label: 'personal', active: false, value: 'personal' },
-      { label: 'work', active: false, value: 'work' },
-      { label: 'coding', active: false, value: 'coding' },
+      {
+        label: 'personal',
+        active: false,
+        value: 'personal',
+        color: colors.lightGreen,
+      },
+      { label: 'work', active: false, value: 'work', color: colors.aqua },
+      {
+        label: 'coding',
+        active: false,
+        value: 'coding',
+        color: colors.lightPink,
+      },
     ],
   },
   reducers: {

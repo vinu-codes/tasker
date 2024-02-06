@@ -77,13 +77,11 @@ const CompletedForm = ({ items, callback }) => {
   return (
     !!total && (
       <CompletedWrapper>
-        <CompletedContainer>
-          <AccordionWrapper>
-            <Accordion title={renderText} name="completed">
-              <Group>{renderContent()}</Group>
-            </Accordion>
-          </AccordionWrapper>
-        </CompletedContainer>
+        <AccordionWrapper>
+          <Accordion title={renderText} name="completed">
+            <Group>{renderContent()}</Group>
+          </Accordion>
+        </AccordionWrapper>
       </CompletedWrapper>
     )
   )

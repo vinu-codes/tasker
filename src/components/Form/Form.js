@@ -24,10 +24,6 @@ const FormContainer = styled.form`
     margin: 0;
     padding-bottom: 8px;
   }
-  input {
-    padding: 4px;
-    margin-top: 2px;
-  }
   button {
     margin-top: 8px;
   }
@@ -39,6 +35,7 @@ const SignIn = () => {
     password: '',
   })
   const [currentPath, navigate] = useContext(NavigationContext)
+
   const handleSubmit = () => {
     if (
       !state.email ||
@@ -65,6 +62,7 @@ const SignIn = () => {
         className="email"
         onChange={handleChange}
         value={state.email}
+        required
       />
       <Input
         name="password"
@@ -73,6 +71,7 @@ const SignIn = () => {
         className="password"
         onChange={handleChange}
         value={state.password}
+        required
       />
       <Button onClick={handleSubmit} className="submit">
         Sign In
@@ -86,7 +85,7 @@ const SignUp = () => {
     email: '',
     password: '',
   })
-  const [currentPath, navigate] = useContext(NavigationContext)
+  const [_, navigate] = useContext(NavigationContext)
 
   const handleSubmit = () => {
     if (
@@ -113,6 +112,7 @@ const SignUp = () => {
         className="email"
         onChange={handleChange}
         value={state.email}
+        required
       />
       <Input
         name="password"
@@ -121,6 +121,7 @@ const SignUp = () => {
         className="password"
         onChange={handleChange}
         value={state.password}
+        required
       />
       <Button onClick={handleSubmit} className="submit">
         Sign Up

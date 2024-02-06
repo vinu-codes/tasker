@@ -11,6 +11,7 @@ const TextAreaContainer = styled.textarea`
   width: 100%;
   line-height: 21px;
   padding: 8px;
+  font-size: 16px;
   ${(props) =>
     props.hasIcon &&
     css`

@@ -17,7 +17,7 @@ const filterActiveItem = (items) => {
   return !!result ? result.value : ''
 }
 
-const CreateForm = ({ callback, categories }) => {
+const CreateForm = ({ callback, categories, items }) => {
   const [state, setState] = useState({
     label: '',
     date: '',
@@ -56,12 +56,15 @@ const CreateForm = ({ callback, categories }) => {
     e.preventDefault()
     const resultOfCategory = filterActiveItem(state.category)
     const resultOfStatus = filterActiveItem(state.status)
-    callback({
-      ...state,
-      category: resultOfCategory,
-      status: resultOfStatus,
-      id: uuid(),
-    })
+    callback([
+      ...items,
+      {
+        ...state,
+        category: !!resultOfCategory ? resultOfCategory : 'personal',
+        status: !!resultOfStatus ? resultOfStatus : 'incomplete',
+        id: uuid(),
+      },
+    ])
     clearForm()
     navigate('/')
   }
@@ -84,25 +87,27 @@ const CreateForm = ({ callback, categories }) => {
           <Input
             name="label"
             id="dateInput"
-            placeholder="task name"
             className="name"
             onChange={handleChange}
             value={state.label}
+            required
+            label="Task Name"
           />
           <Input
             name="date"
             type="date"
-            placeholder="due date"
             className="date"
             onChange={handleChange}
             value={state.date}
+            required
           />
           <Input
             name="details"
-            placeholder="details of task"
             className="detail"
             onChange={handleChange}
             value={state.details}
+            required
+            label="Details of task"
           />
           <Dropdown
             name="category"

@@ -30,10 +30,11 @@ const Search = ({ items, callback }) => {
     <SearchContainer>
       <Input
         name="search"
-        placeholder="Seach for tasks..."
         type="text"
         value={value}
         onChange={handleChange}
+        label="Search"
+        required
       />
     </SearchContainer>
   )

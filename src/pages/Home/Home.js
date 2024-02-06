@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { Search } from '@components/Search'
 import { Controller } from '@features/Controller'
 import { useSelector, useDispatch } from 'react-redux'
@@ -22,10 +22,39 @@ import { CompletedForm } from '@components/CompletedForm'
 const Controls = styled.div`
   display: flex;
   margin-left: auto;
+  button.detail-button {
+    border-radius: 50%;
+    margin-left: 8px;
+    svg {
+      transform: rotate(90deg);
+      path {
+        fill: black;
+      }
+    }
+  }
+  svg.MORE {
+    path {
+      stroke: black;
+    }
+  }
 `
 
 const CategoryGroup = styled.div`
   margin-bottom: 16px;
+`
+
+const StyledSpan = styled.span`
+  display: inline-block;
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-top: 4px;
+  padding-bottom: 2px;
+  border-radius: 4px 4px 0 0;
+  ${(props) =>
+    props.dynamicColor &&
+    css`
+      background-color: ${props.dynamicColor};
+    `}
 `
 
 const createDataStructure = (items, categories) => {
@@ -35,6 +64,7 @@ const createDataStructure = (items, categories) => {
       ...prev,
       [curr.value]: {
         label: curr.label,
+        color: curr.color,
         items: items.filter((item) => {
           return item.category === curr.value
         }),
@@ -130,16 +160,19 @@ const Home = () => {
       return (
         <List>
           {toggleEdit && (
-            <span onClick={() => handleSelect(item)}>
+            <span className="check-box" onClick={() => handleSelect(item)}>
               <Icon name={item.active ? 'CHECKBOX_FILLED' : 'CHECKBOX'} />
             </span>
           )}
           <span className="label">{item.label}</span>
           <Controls>
             <Button onClick={() => handleComplete(item.id)}>Done</Button>
-            <IconContainer onClick={() => handleExpand(item)}>
-              <Icon name="EXPAND" />
-            </IconContainer>
+            <Button
+              className="detail-button"
+              onClick={() => handleExpand(item)}
+            >
+              <Icon name="CHEVRON" size={20} />
+            </Button>
           </Controls>
         </List>
       )
@@ -156,7 +189,11 @@ const Home = () => {
       categoryGroup.items.filter((k) => k.status === 'incomplete').length > 0
     console.log(result)
     if (!result) return null
-    return <h4 className="category-label">{categoryGroup.label}</h4>
+    return (
+      <StyledSpan dynamicColor={categoryGroup.color}>
+        <h4 className="category-label">{categoryGroup.label}</h4>
+      </StyledSpan>
+    )
   }
 
   const renderCategory = (data) => {
@@ -177,13 +214,13 @@ const Home = () => {
         {celebrate && <Celebrate callback={handleCelebrate} />}
         <HomeContainer>
           <HeadingContainer className="heading-container">
-            <span className="my-tasks">My tasks</span>
-            <button
+            <h3>My tasks</h3>
+            <Button
               onClick={handleToggleEdit}
               className={toggleEdit ? 'toggle cancel' : 'toggle edit'}
             >
               {toggleEdit ? 'Cancel' : 'Edit'}
-            </button>
+            </Button>
           </HeadingContainer>
           <Search name="search" items={items} callback={handleCallback} />
           {renderCategory(data)}

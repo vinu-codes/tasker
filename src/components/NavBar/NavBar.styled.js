@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { colors } from '@common/Theme'
 
 const NavWrapper = styled.div`
   height: 60px;
@@ -16,7 +17,7 @@ const NavWrapper = styled.div`
   z-index: 9999;
   border-bottom: 1px solid black;
   width: 100%;
-  background: black;
+  background: ${colors.rust};
   div.tasker-button {
     button.home {
       border: none;
