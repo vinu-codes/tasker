@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 const tasksSlice = createSlice({
   name: 'tasks',
   initialState: {
-    activeId: null,
+    activeId: '',
     items: [
       // {
       //   label: 'Animate items when selected',

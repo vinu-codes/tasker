@@ -11,21 +11,19 @@ const Wrapper = styled.div`
 
 const Container = styled.div`
   display: flex;
-
+  span.icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: black;
+    border-radius: 0 8px 8px 0;
+  }
   .label-container {
     display: flex;
     flex-direction: column;
     width: 100%;
-
-    span.icon {
-      width: 48px;
-      height: 48px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: black;
-      border-radius: 0 8px 8px 0;
-    }
   }
 `
 
@@ -40,7 +38,7 @@ const InputArea = styled.input`
   padding-left: 8px;
   background: transparent;
   font-size: 16px;
-  color: grey;
+  color: black;
   position: absolute;
   z-index: 1111;
   &:focus {
@@ -99,13 +97,14 @@ const Input = ({ label, icon, ...props }) => {
       <Container>
         <EntryArea>
           <InputArea hasIcon={!!icon} {...props} />
-          {!!icon && (
-            <span className="icon">
-              <Icon name={icon} size={32} />
-            </span>
-          )}
+
           {label && <div className="label">{label}</div>}
         </EntryArea>
+        {!!icon && (
+          <span className="icon">
+            <Icon name={icon} size={24} />
+          </span>
+        )}
       </Container>
     </Wrapper>
   )

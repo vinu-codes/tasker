@@ -52,7 +52,7 @@ const getData = (id, items) => {
   const result = items.find((item) => {
     return item.id === id
   })
-  return !!result ? result : {}
+  return !!result ? result : null
 }
 const updateItem = (id, items, state) => {
   if (!id || !items.length || !Object.keys(state).length) return []
@@ -94,14 +94,14 @@ const EditForm = () => {
 
   const [state, setState] = useState({
     label: '',
-    date: '',
+    date: new Date(),
     details: '',
     category: '',
     ...data,
   })
 
   const [localCategories, setLocalCategories] = useState(
-    getActiveCategory(categories, data.category)
+    getActiveCategory(categories, !!data ? data.category : '')
   )
 
   const clearForm = () => {
