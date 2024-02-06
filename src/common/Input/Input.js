@@ -91,14 +91,14 @@ const EntryArea = styled.div`
   }
 `
 
-const Input = ({ label, icon, ...props }) => {
+const Input = ({ label, icon, type, ...props }) => {
   return (
     <Wrapper>
       <Container>
         <EntryArea>
-          <InputArea hasIcon={!!icon} {...props} />
+          <InputArea type={type} hasIcon={!!icon} {...props} />
 
-          {label && <div className="label">{label}</div>}
+          {type !== 'date' && !!label && <div className="label">{label}</div>}
         </EntryArea>
         {!!icon && (
           <span className="icon">

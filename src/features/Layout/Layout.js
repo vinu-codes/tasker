@@ -48,12 +48,13 @@ const usePrevious = (value) => {
 }
 
 const Layout = ({ children, ...props }) => {
-  const [_, navigate] = useContext(NavigationContext)
+  const [currentPath, navigate] = useContext(NavigationContext)
   const [uid, setState] = useState('')
   const isAuth = true
   const items = useSelector(tasksSelector.items)
   const dispatch = useDispatch()
   const previousItems = usePrevious(items)
+  const containerRef = useRef(null)
   // useEffectWithIncreasedLength(items, () => {
   //   console.log('items length increased')
   // })
@@ -129,6 +130,16 @@ const Layout = ({ children, ...props }) => {
     signInWithEmailAndPasswordExample(email, password)
   }, [])
 
+  useEffect(() => {
+    const body = document.querySelector('body')
+    const top = body.getBoundingClientRect.top + 100
+    if (body) {
+      window.scrollTo({
+        top: top,
+        behavior: 'smooth',
+      })
+    }
+  }, [currentPath])
   // useEffect(() => {
   //   if (!isAuth) {
   //     navigate('/login')
@@ -138,11 +149,9 @@ const Layout = ({ children, ...props }) => {
   return (
     <>
       <NavBar />
-      <Container>
+      <Container ref={containerRef}>
         <LayoutContainer {...props}>{children}</LayoutContainer>
       </Container>
-      <button onClick={() => getUserData(uid)}>get Data</button>
-      <button onClick={() => updateUserData(uid)}>update</button>
     </>
   )
 }
