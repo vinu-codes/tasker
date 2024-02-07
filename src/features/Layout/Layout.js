@@ -2,7 +2,6 @@ import React, { useEffect, useContext, useState, useRef } from 'react'
 import { NavBar } from '@components/NavBar'
 import styled from 'styled-components'
 import { NavigationContext } from '@components/Route'
-import { signInWithEmailAndPassword } from 'firebase/auth'
 import { auth, fireStore } from '@services/firebase'
 import { doc, getDoc, updateDoc, increment, setDoc } from 'firebase/firestore'
 import { tasksSelector } from '@state/tasks/selectors'
@@ -19,21 +18,6 @@ const Container = styled.div`
   padding-left: 16px;
   padding-right: 16px;
 `
-
-// const useEffectWithIncreasedLength = (dependencies, callback) => {
-//   const previousLengthRef = useRef(dependencies.length)
-
-//   useEffect(() => {
-//     // Check if the length of the dependencies has increased
-//     if (dependencies.length > previousLengthRef.current) {
-//       // Execute the callback function
-//       callback()
-//     }
-
-//     // Update the reference with the current length
-//     previousLengthRef.current = dependencies.length
-//   }, [dependencies]) // eslint-disable-line react-hooks/exhaustive-deps
-// }
 
 const usePrevious = (value) => {
   // The ref object is a generic container whose current property is mutable ...
@@ -55,29 +39,6 @@ const Layout = ({ children, ...props }) => {
   const dispatch = useDispatch()
   const previousItems = usePrevious(items)
   const containerRef = useRef(null)
-  // useEffectWithIncreasedLength(items, () => {
-  //   console.log('items length increased')
-  // })
-
-  const signInWithEmailAndPasswordExample = async (email, password) => {
-    try {
-      const userCredential = await signInWithEmailAndPassword(
-        auth,
-        email,
-        password
-      )
-
-      // The user is signed in
-      const user = userCredential.user
-
-      // You can execute any function here after successful sign-in
-      console.log('User signed in:', user.uid)
-      setState(user.uid)
-    } catch (error) {
-      // Handle errors here
-      console.error('Sign-in error:', error.message)
-    }
-  }
 
   const getUserData = async (uid) => {
     try {
@@ -112,23 +73,23 @@ const Layout = ({ children, ...props }) => {
     } catch (error) {}
   }
 
-  useEffect(() => {
-    if (!uid) return
-    getUserData(uid)
-  }, [uid])
+  // useEffect(() => {
+  //   if (!uid) return
+  //   getUserData(uid)
+  // }, [uid])
 
-  useEffect(() => {
-    if (!uid) return
-    console.log('items:', items)
-    if (items === previousItems) return
-    updateUserData(uid, items)
-  }, [items, uid])
+  // useEffect(() => {
+  //   if (!uid) return
+  //   console.log('items:', items)
+  //   if (items === previousItems) return
+  //   updateUserData(uid, items)
+  // }, [items, uid])
 
-  useEffect(() => {
-    const email = 'vinujithmin@gmail.com'
-    const password = 'password123'
-    signInWithEmailAndPasswordExample(email, password)
-  }, [])
+  // useEffect(() => {
+  //   const email = 'vinujithmin@gmail.com'
+  //   const password = 'password123'
+  //   signInWithEmailAndPasswordExample(email, password)
+  // }, [])
 
   useEffect(() => {
     const body = document.querySelector('body')
@@ -140,12 +101,6 @@ const Layout = ({ children, ...props }) => {
       })
     }
   }, [currentPath])
-
-  useEffect(() => {
-    if (!isAuth) {
-      navigate('/login')
-    }
-  }, [isAuth])
 
   return (
     <>

@@ -2,8 +2,8 @@ import { createSelector } from '@reduxjs/toolkit'
 
 const selectAuthState = (state) => state.auth
 
-const items = createSelector(selectAuthState, (slice) => slice.items)
+const uid = createSelector(selectAuthState, (slice) => slice.uid)
 
 export const authSelector = {
-  items,
+  uid,
 }
