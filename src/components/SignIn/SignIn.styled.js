@@ -39,4 +39,15 @@ const InputContainer = styled.div`
     justify-content: center;
   }
 `
-export { FormContainer, InputContainer }
+
+const SignUpContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+  border-top: 1px solid ${colors.lightGrey};
+  span {
+    display: inline-block;
+    padding-top: 12px;
+  }
+`
+export { FormContainer, InputContainer, SignUpContainer }

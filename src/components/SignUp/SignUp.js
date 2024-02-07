@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react'
-import { FormContainer, InputContainer } from './SignUp.styled'
+import { FormContainer, InputContainer, SignInContainer } from './SignUp.styled'
 import { Button } from '@common/Button'
 import { NavigationContext } from '@components/Route'
 import { Input } from '@common/Input'
@@ -65,6 +65,12 @@ const SignUp = ({ callback }) => {
       <Button onClick={handleSubmit} className="submit">
         Sign Up
       </Button>
+      <SignInContainer>
+        <span>Already have an account?</span>
+        <a href="#" onClick={() => navigate('/sign-in')}>
+          Sign In
+        </a>
+      </SignInContainer>
     </FormContainer>
   )
 }

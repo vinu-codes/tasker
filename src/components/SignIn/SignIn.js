@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react'
-import { FormContainer, InputContainer } from './SignIn.styled'
+import { FormContainer, InputContainer, SignUpContainer } from './SignIn.styled'
 import { Button } from '@common/Button'
 import { Input } from '@common/Input'
 import styled from 'styled-components'
@@ -62,6 +62,10 @@ const SignIn = ({ callback }) => {
       <Button onClick={handleSubmit} className="submit">
         Sign In
       </Button>
+      <SignUpContainer>
+        <span>Don't have an account?</span>
+        <a href="/signup">Sign Up</a>
+      </SignUpContainer>
     </FormContainer>
   )
 }

@@ -40,4 +40,15 @@ const InputContainer = styled.div`
   }
 `
 
-export { FormContainer, InputContainer }
+const SignInContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  border-top: 1px solid ${colors.lightGrey};
+  margin-top: 16px;
+  span {
+    display: inline-block;
+    padding-top: 12px;
+  }
+`
+
+export { FormContainer, InputContainer, SignInContainer }
