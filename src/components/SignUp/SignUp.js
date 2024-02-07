@@ -1,47 +1,25 @@
 import React, { useContext, useState, useEffect } from 'react'
-import styled from 'styled-components'
+import { FormContainer, InputContainer } from './SignUp.styled'
 import { Button } from '@common/Button'
 import { NavigationContext } from '@components/Route'
 import { Input } from '@common/Input'
 import { useSelector, useDispatch } from 'react-redux'
 import { signIn } from '@state/auth'
 import { authSelector } from '@state/auth'
-import { colors } from '@common/Theme'
-
-const FormContainer = styled.form`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  max-width: 400px;
-  border: 2px solid black;
-  padding: 20px;
-
-  h3 {
-    padding: 0;
-    margin: 0;
-    padding-bottom: 16px;
-    font-weight: normal;
-  }
-  button {
-    margin-top: 8px;
-    background: ${colors.rust};
-    color: ${colors.white};
-    font-weight: normal;
-    border: 1px solid ${colors.rust};
-    &:hover {
-      background: #c3392c;
-      color: white;
-      border: 1px solid #c3392c;
-    }
-  }
-`
+import { Icon } from '@common/Icon'
 
 const SignUp = ({ callback }) => {
   const [state, setState] = useState({
     email: '',
     password: '',
   })
+
+  const [showPassword, setShowPassword] = useState(false)
   const [_, navigate] = useContext(NavigationContext)
+
+  const handleTogglePassword = () => {
+    setShowPassword(!showPassword)
+  }
 
   const handleSubmit = () => {
     if (
@@ -70,15 +48,20 @@ const SignUp = ({ callback }) => {
         value={state.email}
         required
       />
-      <Input
-        name="password"
-        type="password"
-        placeholder="password"
-        className="password"
-        onChange={handleChange}
-        value={state.password}
-        required
-      />
+      <InputContainer>
+        <Input
+          name="password"
+          type={showPassword ? 'text' : 'password'}
+          placeholder="password"
+          className="password"
+          onChange={handleChange}
+          value={state.password}
+          required
+        />
+        <span className="icon" onClick={handleTogglePassword}>
+          <Icon name={!!showPassword ? 'EYE_OPEN' : 'EYE_CLOSE'} size={24} />
+        </span>
+      </InputContainer>
       <Button onClick={handleSubmit} className="submit">
         Sign Up
       </Button>
