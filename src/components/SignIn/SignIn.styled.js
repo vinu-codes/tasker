@@ -16,6 +16,7 @@ const FormContainer = styled.form`
     font-weight: normal;
   }
   button {
+    user-select: none;
     margin-top: 8px;
     background: ${colors.rust};
     color: ${colors.white};
@@ -46,6 +47,7 @@ const SignUpContainer = styled.div`
   margin-top: 16px;
   border-top: 1px solid ${colors.lightGrey};
   span {
+    user-select: none;
     display: inline-block;
     padding-top: 12px;
   }

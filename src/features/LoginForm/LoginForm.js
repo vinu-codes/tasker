@@ -8,6 +8,7 @@ import { Input } from '@common/Input'
 import { useSelector, useDispatch } from 'react-redux'
 import { signIn } from '@state/auth'
 import { authSelector } from '@state/auth'
+import { Logo } from '@components/Logo'
 
 const LoginForm = () => {
   const dispatch = useDispatch()
@@ -21,12 +22,15 @@ const LoginForm = () => {
   }
 
   return (
-    <FormWrapper>
-      <h1>Welcome to Tasker</h1>
-      <h2>Get started - it's free.</h2>
-      <SignUp callback={handleSignUp} />
-      <SignIn callback={handleSignIn} />
-    </FormWrapper>
+    <>
+      <Logo />
+      <FormWrapper>
+        <h1>Welcome to Tasker</h1>
+        <h2>Get started - it's free.</h2>
+        <SignUp callback={handleSignUp} />
+        <SignIn callback={handleSignIn} />
+      </FormWrapper>
+    </>
   )
 }
 
