@@ -1,13 +1,4 @@
 
-
-
-
-<img width="595" alt="Screenshot 2023-12-12 at 12 36 38 am" src="https://github.com/vinu-codes/tasker/assets/133609222/5519d2ff-3b7e-4244-a6dc-1a0542e111b2">
-
-
-
-
-
 ## Notes
 - `git remote -v` (in order to find if local repository is connected to github)
 
