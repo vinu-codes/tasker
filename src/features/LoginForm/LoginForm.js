@@ -11,6 +11,7 @@ import { authSelector } from '@state/auth'
 import { Logo } from '@components/Logo'
 
 const LoginForm = () => {
+  const [mode, setMode] = useState('sign-in')
   const dispatch = useDispatch()
 
   const handleSignUp = ({ email, password }) => {
@@ -23,7 +24,7 @@ const LoginForm = () => {
 
   return (
     <>
-      <Logo />
+      {/* <Logo /> */}
       <FormWrapper>
         <h1>Welcome to Tasker</h1>
         <h2>Get started - it's free.</h2>
