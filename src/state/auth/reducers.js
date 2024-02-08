@@ -66,6 +66,19 @@ export const signUpUser = createAsyncThunk(
   }
 )
 
+export const signOutUser = createAsyncThunk(
+  'auth/signOutUser',
+  async ({ rejectWithValue, fulfillWithValue, dispatch }) => {
+    try {
+      await signOut(auth)
+      return null
+    } catch (error) {
+      console.error('Sign-out error:', error.message)
+      return rejectWithValue(error.message)
+    }
+  }
+)
+
 const authSlice = createSlice({
   name: 'auth',
   initialState,
@@ -93,6 +106,18 @@ const authSlice = createSlice({
       state.error = null
     })
     builder.addCase(signUpUser.rejected, (state, { payload }) => {
+      state.loading = false
+      state.user = null
+      state.error = payload
+    })
+    builder.addCase(signOutUser.pending, (state) => {
+      state.loading = true
+    })
+    builder.addCase(signOutUser.fulfilled, (state, { payload }) => {
+      state.loading = false
+      state.uid = null
+    })
+    builder.addCase(signOutUser.rejected, (state, { payload }) => {
       state.loading = false
       state.user = null
       state.error = payload

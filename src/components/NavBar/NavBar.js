@@ -33,6 +33,10 @@ const NavBar = () => {
         <Button onClick={handleCreate} className="add-button">
           <Icon name="CLOSE" />
         </Button>
+        <Button className="sign-out">
+          <Icon name="SIGN_OUT" />
+          Sign Out
+        </Button>
       </ButtonsContainer>
     </NavWrapper>
   )

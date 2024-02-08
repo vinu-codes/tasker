@@ -43,9 +43,11 @@ const InputArea = styled.input`
   z-index: 1111;
   &:focus {
     border: 2px solid grey;
+    background: white;
   }
   &:valid {
     border: 2px solid grey;
+    background: white;
   }
   &:valid + .label {
     transform: translate(-20px, -16px) scale(0.88);
