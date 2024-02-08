@@ -1,16 +1,21 @@
 import React, { useContext, useState, useEffect } from 'react'
-import { FormContainer, InputContainer, SignUpContainer } from './SignIn.styled'
+import { FormContainer, InputContainer, SignInContainer } from './SignUp.styled'
 import { Button } from '@common/Button'
+import { NavigationContext } from '@components/Route'
 import { Input } from '@common/Input'
-import styled from 'styled-components'
+import { useSelector, useDispatch } from 'react-redux'
 import { Icon } from '@common/Icon'
+import { signUpUser } from '@state/auth'
 
-const SignIn = ({ callback }) => {
+const SignUp = () => {
+  const dispatch = useDispatch()
   const [state, setState] = useState({
     email: '',
     password: '',
   })
+
   const [showPassword, setShowPassword] = useState(false)
+  const [_, navigate] = useContext(NavigationContext)
 
   const handleTogglePassword = () => {
     setShowPassword(!showPassword)
@@ -26,17 +31,16 @@ const SignIn = ({ callback }) => {
     ) {
       return
     }
-    callback({ email: state.email, password: state.password })
+    dispatch(signUpUser({ email: state.email, password: state.password }))
   }
 
   const handleChange = (e) => {
     const { name, value } = e.target
     setState((state) => ({ ...state, [name]: value }))
   }
-
   return (
-    <FormContainer className="sign-in">
-      <h3>Sign In</h3>
+    <FormContainer className="sign-up">
+      <h3>Sign Up</h3>
       <Input
         name="email"
         placeholder="email"
@@ -60,14 +64,16 @@ const SignIn = ({ callback }) => {
         </span>
       </InputContainer>
       <Button onClick={handleSubmit} className="submit">
-        Sign In
+        Sign Up
       </Button>
-      <SignUpContainer>
-        <span>Don't have an account?</span>
-        <a href="/signup">Sign Up</a>
-      </SignUpContainer>
+      <SignInContainer>
+        <span>Already have an account?</span>
+        <a href="#" onClick={() => navigate('/sign-in')}>
+          Sign In
+        </a>
+      </SignInContainer>
     </FormContainer>
   )
 }
 
-export { SignIn }
+export { SignUp }

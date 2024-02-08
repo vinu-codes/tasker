@@ -85,12 +85,6 @@ const Layout = ({ children, ...props }) => {
   //   updateUserData(uid, items)
   // }, [items, uid])
 
-  // useEffect(() => {
-  //   const email = 'vinujithmin@gmail.com'
-  //   const password = 'password123'
-  //   signInWithEmailAndPasswordExample(email, password)
-  // }, [])
-
   useEffect(() => {
     const body = document.querySelector('body')
     const top = body.getBoundingClientRect.top + 100

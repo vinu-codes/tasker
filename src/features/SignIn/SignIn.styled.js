@@ -28,6 +28,9 @@ const FormContainer = styled.form`
       border: 1px solid #c3392c;
     }
   }
+  .error {
+    color: red;
+  }
 `
 
 const InputContainer = styled.div`
