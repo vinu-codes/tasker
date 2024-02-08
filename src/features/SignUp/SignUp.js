@@ -3,11 +3,11 @@ import { FormContainer, InputContainer, SignInContainer } from './SignUp.styled'
 import { Button } from '@common/Button'
 import { NavigationContext } from '@components/Route'
 import { Input } from '@common/Input'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { Icon } from '@common/Icon'
 import { signUpUser } from '@state/auth'
 
-const SignUp = () => {
+const SignUp = ({ callback }) => {
   const dispatch = useDispatch()
   const [state, setState] = useState({
     email: '',
@@ -68,9 +68,12 @@ const SignUp = () => {
       </Button>
       <SignInContainer>
         <span>Already have an account?</span>
-        <a href="#" onClick={() => navigate('/sign-in')}>
+        <button
+          className="redirect"
+          onClick={() => callback({ value: 'sign-in' })}
+        >
           Sign In
-        </a>
+        </button>
       </SignInContainer>
     </FormContainer>
   )

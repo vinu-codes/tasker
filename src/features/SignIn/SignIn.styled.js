@@ -6,6 +6,7 @@ const FormContainer = styled.form`
   flex-direction: column;
   width: 100%;
   max-width: 400px;
+  min-height: 600px;
   border: 2px solid black;
   padding: 20px;
 
@@ -15,7 +16,7 @@ const FormContainer = styled.form`
     padding-bottom: 16px;
     font-weight: normal;
   }
-  button {
+  button.submit {
     user-select: none;
     margin-top: 8px;
     background: ${colors.rust};
@@ -30,6 +31,14 @@ const FormContainer = styled.form`
   }
   .error {
     color: red;
+  }
+
+  .redirect {
+    cursor: pointer;
+    border: none;
+    background: white;
+    color: ${colors.rust};
+    text-decoration: underline;
   }
 `
 

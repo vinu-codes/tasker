@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { signIn } from '@state/auth'
 import { authSelector } from '@state/auth'
 
-const SignIn = () => {
+const SignIn = ({ callback }) => {
   const dispatch = useDispatch()
   const [state, setState] = useState({
     email: '',
@@ -76,7 +76,12 @@ const SignIn = () => {
       </Button>
       <SignUpContainer>
         <span>Don't have an account?</span>
-        <a href="/signup">Sign Up</a>
+        <button
+          className="redirect"
+          onClick={() => callback({ value: 'sign-up' })}
+        >
+          Sign Up
+        </button>
       </SignUpContainer>
     </FormContainer>
   )
