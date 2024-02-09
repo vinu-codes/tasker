@@ -20,6 +20,7 @@ const initialState = {
 export const setAuthPersistence = createAsyncThunk(
   'auth/setAuthPersistence',
   async ({ rejectWithValue, fulfillWithValue }) => {
+    console.log('hit setAuthPersistence')
     try {
       await setPersistence(auth, browserLocalPersistence)
       console.log('auth persistence set')
@@ -76,6 +77,13 @@ export const signInAndSetUp = createAsyncThunk(
       const userRef = doc(fireStore, 'users', user.uid)
       try {
         await setDoc(userRef, { items: [], categories: [] })
+        try {
+          await setPersistence(auth, browserLocalPersistence)
+          console.log('auth persistence set')
+        } catch (error) {
+          console.error('Error setting auth persistence:', error.message)
+          return rejectWithValue(error.message)
+        }
         return fulfillWithValue(user.uid)
       } catch (error) {
         console.error('Error setting up user:', error.message)

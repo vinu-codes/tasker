@@ -89,12 +89,6 @@ const Layout = ({ children, ...props }) => {
   // }, [items, uid])
 
   useEffect(() => {
-    if (!!auth && !!uid) {
-      dispatch(setAuthPersistence())
-    }
-  }, [uid, auth])
-
-  useEffect(() => {
     if (!uid) {
       navigate('/login')
     }
