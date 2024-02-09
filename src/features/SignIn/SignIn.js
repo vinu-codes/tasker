@@ -6,6 +6,7 @@ import { Icon } from '@common/Icon'
 import { useDispatch, useSelector } from 'react-redux'
 import { signIn } from '@state/auth'
 import { authSelector } from '@state/auth'
+import { NavigationContext } from '@components/Route'
 
 const SignIn = ({ callback }) => {
   const dispatch = useDispatch()
@@ -14,9 +15,16 @@ const SignIn = ({ callback }) => {
     password: '',
   })
   const [showPassword, setShowPassword] = useState(false)
+  const [currentPath, navigate] = useContext(NavigationContext)
 
   const error = useSelector(authSelector.error)
-  console.log(error)
+  const uid = useSelector(authSelector.uid)
+
+  useEffect(() => {
+    if (!!uid) {
+      navigate('/')
+    }
+  }, [uid])
 
   const handleTogglePassword = () => {
     setShowPassword(!showPassword)

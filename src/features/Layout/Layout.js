@@ -5,8 +5,10 @@ import { NavigationContext } from '@components/Route'
 import { auth, fireStore } from '@services/firebase'
 import { doc, getDoc, updateDoc, increment, setDoc } from 'firebase/firestore'
 import { tasksSelector } from '@state/tasks/selectors'
+import { authSelector } from '@state/auth'
 import { useSelector, useDispatch } from 'react-redux'
 import { updateItems } from '@state/tasks'
+import { setAuthPersistence } from '@state/auth'
 
 const LayoutContainer = styled.div`
   width: 100%;
@@ -36,6 +38,7 @@ const Layout = ({ children, ...props }) => {
   const [uid, setState] = useState('')
   const isAuth = true
   const items = useSelector(tasksSelector.items)
+  const auth = useSelector(authSelector.auth)
   const dispatch = useDispatch()
   const previousItems = usePrevious(items)
   const containerRef = useRef(null)
@@ -84,6 +87,18 @@ const Layout = ({ children, ...props }) => {
   //   if (items === previousItems) return
   //   updateUserData(uid, items)
   // }, [items, uid])
+
+  useEffect(() => {
+    if (!!auth && !!uid) {
+      dispatch(setAuthPersistence())
+    }
+  }, [uid, auth])
+
+  useEffect(() => {
+    if (!uid) {
+      navigate('/login')
+    }
+  }, [uid])
 
   useEffect(() => {
     const body = document.querySelector('body')

@@ -3,9 +3,10 @@ import { FormContainer, InputContainer, SignInContainer } from './SignUp.styled'
 import { Button } from '@common/Button'
 import { NavigationContext } from '@components/Route'
 import { Input } from '@common/Input'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Icon } from '@common/Icon'
 import { signUpUser } from '@state/auth'
+import { authSelector } from '@state/auth'
 
 const SignUp = ({ callback }) => {
   const dispatch = useDispatch()
@@ -16,10 +17,17 @@ const SignUp = ({ callback }) => {
 
   const [showPassword, setShowPassword] = useState(false)
   const [_, navigate] = useContext(NavigationContext)
+  const uid = useSelector(authSelector.uid)
 
   const handleTogglePassword = () => {
     setShowPassword(!showPassword)
   }
+
+  useEffect(() => {
+    if (!!uid) {
+      navigate('/')
+    }
+  }, [uid])
 
   const handleSubmit = (e) => {
     e.preventDefault()
