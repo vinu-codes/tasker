@@ -1,13 +1,16 @@
 import React, { useEffect, useContext, useState, useRef } from 'react'
-import { NavBar } from '@components/NavBar'
+import { NavBar } from '@features/NavBar'
 import styled from 'styled-components'
 import { NavigationContext } from '@components/Route'
-import { signInWithEmailAndPassword } from 'firebase/auth'
-import { auth, fireStore } from '@services/firebase'
 import { doc, getDoc, updateDoc, increment, setDoc } from 'firebase/firestore'
 import { tasksSelector } from '@state/tasks/selectors'
+import { authSelector } from '@state/auth'
 import { useSelector, useDispatch } from 'react-redux'
 import { updateItems } from '@state/tasks'
+import { listenForAuthChanges } from '@state/auth'
+import { getPersistence } from '@state/auth'
+import { persistUid } from '@state/auth'
+import { loadState } from '@utils/localStorage'
 
 const LayoutContainer = styled.div`
   width: 100%;
@@ -19,21 +22,6 @@ const Container = styled.div`
   padding-left: 16px;
   padding-right: 16px;
 `
-
-// const useEffectWithIncreasedLength = (dependencies, callback) => {
-//   const previousLengthRef = useRef(dependencies.length)
-
-//   useEffect(() => {
-//     // Check if the length of the dependencies has increased
-//     if (dependencies.length > previousLengthRef.current) {
-//       // Execute the callback function
-//       callback()
-//     }
-
-//     // Update the reference with the current length
-//     previousLengthRef.current = dependencies.length
-//   }, [dependencies]) // eslint-disable-line react-hooks/exhaustive-deps
-// }
 
 const usePrevious = (value) => {
   // The ref object is a generic container whose current property is mutable ...
@@ -49,85 +37,53 @@ const usePrevious = (value) => {
 
 const Layout = ({ children, ...props }) => {
   const [currentPath, navigate] = useContext(NavigationContext)
-  const [uid, setState] = useState('')
-  const isAuth = true
-  const items = useSelector(tasksSelector.items)
+  const uid = useSelector(authSelector.uid)
   const dispatch = useDispatch()
-  const previousItems = usePrevious(items)
+  // const previousItems = usePrevious(items)
   const containerRef = useRef(null)
-  // useEffectWithIncreasedLength(items, () => {
-  //   console.log('items length increased')
-  // })
 
-  const signInWithEmailAndPasswordExample = async (email, password) => {
-    try {
-      const userCredential = await signInWithEmailAndPassword(
-        auth,
-        email,
-        password
-      )
+  // useEffect(() => {
+  //   if (!uid) return
+  //   getUserData(uid)
+  // }, [uid])
 
-      // The user is signed in
-      const user = userCredential.user
-
-      // You can execute any function here after successful sign-in
-      console.log('User signed in:', user.uid)
-      setState(user.uid)
-    } catch (error) {
-      // Handle errors here
-      console.error('Sign-in error:', error.message)
-    }
-  }
-
-  const getUserData = async (uid) => {
-    try {
-      // get the doc reference {userDoc: {hasLiked: false}}
-      const userDocumentRef = doc(fireStore, 'users', uid)
-      const docSnapshot = await getDoc(userDocumentRef)
-
-      if (docSnapshot.exists()) {
-        const data = docSnapshot.data()
-        // return data ? data.hasLiked : null
-        dispatch(updateItems(data.items))
-      }
-    } catch (error) {
-      console.log('error getting user data', error)
-    }
-  }
-
-  const updateUserData = async (uid, items) => {
-    try {
-      const userDocumentRef = doc(fireStore, 'users', uid)
-      const docSnapshot = await getDoc(userDocumentRef)
-
-      if (docSnapshot.exists()) {
-        console.log('doc exists for user')
-        await updateDoc(userDocumentRef, {
-          items,
-        })
-        dispatch(updateItems(items))
-      } else {
-        console.log('error updating user doc')
-      }
-    } catch (error) {}
-  }
+  // useEffect(() => {
+  //   if (!uid) return
+  //   console.log('items:', items)
+  //   if (items === previousItems) return
+  //   updateUserData(uid, items)
+  // }, [items, uid])
 
   useEffect(() => {
-    if (!uid) return
-    getUserData(uid)
+    if (!uid) {
+      navigate('/login')
+    }
   }, [uid])
 
-  useEffect(() => {
-    if (!uid) return
-    console.log('items:', items)
-    if (items === previousItems) return
-    updateUserData(uid, items)
-  }, [items, uid])
+  // useEffect(() => {
+  //   if (!!uid) {
+  //     console.log('useeffect uid:', uid)
+  //     dispatch(getPersistence())
+  //   }
+  // }, [uid])
 
   useEffect(() => {
-    const email = 'vinujithmin@gmail.com'
-    const password = 'password123'
-    signInWithEmailAndPasswordExample(email, password)
+    // try {
+    //   let dataString = sessionStorage.getItem('uid')
+
+    //   const data = JSON.parse(dataString)
+    //   console.log(data)
+    //   if (!!data) {
+    //     dispatch(persistUid(data))
+    //   }
+    // } catch (error) {
+    //   console.log(error)
+    // }
+    const uid = loadState('uid')
+    if (!!uid) {
+      console.log(uid)
+      dispatch(persistUid(uid))
+    }
   }, [])
 
   useEffect(() => {
@@ -140,11 +96,6 @@ const Layout = ({ children, ...props }) => {
       })
     }
   }, [currentPath])
-  // useEffect(() => {
-  //   if (!isAuth) {
-  //     navigate('/login')
-  //   }
-  // }, [isAuth])
 
   return (
     <>

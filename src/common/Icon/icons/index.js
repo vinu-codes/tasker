@@ -22,6 +22,9 @@ import TICK from './Tick'
 import SETTINGS from './Settings'
 import MORE from './More'
 import TRASH from './Trash'
+import EYE_OPEN from './EyeOpen'
+import EYE_CLOSE from './EyeClose'
+import SIGN_OUT from './SignOut'
 
 export {
   SAD,
@@ -48,4 +51,7 @@ export {
   SETTINGS,
   MORE,
   TRASH,
+  EYE_OPEN,
+  EYE_CLOSE,
+  SIGN_OUT,
 }

@@ -40,5 +40,12 @@ const ButtonsContainer = styled.div`
   svg.CLOSE {
     transform: rotate(45deg);
   }
+  button.sign-out {
+    margin-left: 8px;
+    color: rgb(169, 174, 185);
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 21px;
+  }
 `
 export { NavWrapper, ButtonsContainer }

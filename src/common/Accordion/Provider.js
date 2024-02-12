@@ -18,7 +18,7 @@ const Provider = ({ children, config }) => {
   // const enableStateView = config ? config.enableStateView : false
   const [state, setState] = useState([])
   return (
-    <MainWrapper>
+    <MainWrapper className="main-wrapper">
       <Wrapper className="accordion-wrapper">
         <Context.Provider value={[state, setState]}>
           {children}
