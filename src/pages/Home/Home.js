@@ -34,7 +34,6 @@ const Controls = styled.div`
     }
   }
   button.done {
-    margin-right: 8px;
     &:hover {
       background: ${colors.lightOrange};
     }
@@ -182,12 +181,14 @@ const Home = () => {
     // i want to get the date and show how many days left till the date
     const result = calculateDate(date)
     console.log(result)
-    if (result === -1 || 0) {
+    if (result === -1) {
       return <span>Today</span>
     } else if (result > 1) {
       return <span>{result} days left</span>
     } else if (result === 1) {
       return <span>{result} day left</span>
+    } else if (result === 0) {
+      return <span>Today</span>
     }
   }
 

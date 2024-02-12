@@ -11,6 +11,7 @@ import { listenForAuthChanges } from '@state/auth'
 import { getPersistence } from '@state/auth'
 import { persistUid } from '@state/auth'
 import { loadState } from '@utils/localStorage'
+import { getUserData } from '@state/tasks'
 
 const LayoutContainer = styled.div`
   width: 100%;
@@ -42,10 +43,10 @@ const Layout = ({ children, ...props }) => {
   // const previousItems = usePrevious(items)
   const containerRef = useRef(null)
 
-  // useEffect(() => {
-  //   if (!uid) return
-  //   getUserData(uid)
-  // }, [uid])
+  useEffect(() => {
+    if (!uid) return
+    dispatch(getUserData(uid))
+  }, [uid])
 
   // useEffect(() => {
   //   if (!uid) return

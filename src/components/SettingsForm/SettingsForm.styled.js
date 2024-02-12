@@ -56,6 +56,8 @@ const Controls = styled.div`
   }
 `
 
-const Form = styled.form``
+const Form = styled.form`
+  padding-top: 16px;
+`
 
 export { Group, SettingsContainer, List, Form, Controls }
