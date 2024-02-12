@@ -20,31 +20,31 @@ const initialState = {
   info: '',
 }
 
-export const getPersistence = createAsyncThunk(
-  'auth/getPersistence',
-  async ({ email, password }, { rejectWithValue, fulfillWithValue }) => {
-    try {
-      await setPersistence(auth, browserSessionPersistence)
-      // Existing and future Auth states are now persisted in the current
-      // session only. Closing the window would clear any existing state even
-      // if a user forgets to sign out.
-      // ...
-      // New sign-in will be persisted with session persistence.
-      // try {
-      //   await signInWithEmailAndPassword(auth, email, password)
-      //   return fulfillWithValue('Session persistence set and signed in')
-      // } catch (error) {
-      //   console.error('Sign-in error:', error.message)
-      //   return rejectWithValue(error.message)
-      // }
-    } catch (error) {
-      // Handle Errors here.
-      const errorCode = error.code
-      const errorMessage = error.message
-      return rejectWithValue(errorMessage)
-    }
-  }
-)
+// export const getPersistence = createAsyncThunk(
+//   'auth/getPersistence',
+//   async ({ email, password }, { rejectWithValue, fulfillWithValue }) => {
+//     try {
+//       await setPersistence(auth, browserSessionPersistence)
+//       // Existing and future Auth states are now persisted in the current
+//       // session only. Closing the window would clear any existing state even
+//       // if a user forgets to sign out.
+//       // ...
+//       // New sign-in will be persisted with session persistence.
+//       // try {
+//       //   await signInWithEmailAndPassword(auth, email, password)
+//       //   return fulfillWithValue('Session persistence set and signed in')
+//       // } catch (error) {
+//       //   console.error('Sign-in error:', error.message)
+//       //   return rejectWithValue(error.message)
+//       // }
+//     } catch (error) {
+//       // Handle Errors here.
+//       const errorCode = error.code
+//       const errorMessage = error.message
+//       return rejectWithValue(errorMessage)
+//     }
+//   }
+// )
 
 export const signIn = createAsyncThunk(
   'auth/signIn',
@@ -216,18 +216,18 @@ const authSlice = createSlice({
       state.user = null
       state.error = payload
     })
-    builder.addCase(getPersistence.pending, (state) => {
-      state.loading = true
-    })
-    builder.addCase(getPersistence.fulfilled, (state, { payload }) => {
-      state.loading = false
-      state.info = payload
-      state.error = null
-    })
-    builder.addCase(getPersistence.rejected, (state, { payload }) => {
-      state.loading = false
-      state.error = payload
-    })
+    // builder.addCase(getPersistence.pending, (state) => {
+    //   state.loading = true
+    // })
+    // builder.addCase(getPersistence.fulfilled, (state, { payload }) => {
+    //   state.loading = false
+    //   state.info = payload
+    //   state.error = null
+    // })
+    // builder.addCase(getPersistence.rejected, (state, { payload }) => {
+    //   state.loading = false
+    //   state.error = payload
+    // })
     builder.addCase(persistUid.pending, (state) => {
       state.loading = true
     })

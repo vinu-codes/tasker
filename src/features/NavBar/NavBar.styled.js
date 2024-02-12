@@ -47,5 +47,11 @@ const ButtonsContainer = styled.div`
     font-size: 14px;
     line-height: 21px;
   }
+  button {
+    span.sign-out {
+      padding-left: 2px;
+      font-weight: normal;
+    }
+  }
 `
 export { NavWrapper, ButtonsContainer }

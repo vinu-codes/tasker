@@ -13,7 +13,7 @@ const getSelectedItem = (options) => {
   return !!result ? result.label : ''
 }
 
-const Dropdown = ({ options, callback, name, isMulti, ...props }) => {
+const Dropdown = ({ options, callback, name, isMulti, label, ...props }) => {
   const ref = useRef(null)
   const iRuffu = useRef([])
   const elementRef = useRef(null)
@@ -126,6 +126,7 @@ const Dropdown = ({ options, callback, name, isMulti, ...props }) => {
   if (!options || !options.length) return null
   return (
     <Wrapper ref={ref} mt={props.mt} tabIndex={0} onKeyDown={onKeyDown}>
+      <h4>{label}</h4>
       <Header
         ref={elementRef}
         isActive={isOpen}

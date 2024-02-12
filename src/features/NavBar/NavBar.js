@@ -44,7 +44,7 @@ const NavBar = () => {
         </Button>
         <Button onClick={handleSignOut} className="sign-out">
           <Icon name="SIGN_OUT" />
-          Sign Out
+          <span className="sign-out">Sign Out</span>
         </Button>
       </ButtonsContainer>
     </NavWrapper>

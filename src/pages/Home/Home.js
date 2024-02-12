@@ -10,6 +10,7 @@ import { Icon } from '@common/Icon'
 import { Button } from '@common/Button'
 import { Celebrate } from '@components/Celebrate'
 import { NavigationContext } from '@components/Route'
+import { colors } from '@common/Theme'
 import {
   HomeWrapper,
   HomeContainer,
@@ -32,10 +33,26 @@ const Controls = styled.div`
       }
     }
   }
+  button.done {
+    margin-right: 8px;
+    &:hover {
+      background: ${colors.lightOrange};
+    }
+  }
   svg.MORE {
     path {
       stroke: black;
     }
+  }
+  span.date {
+    margin-right: 8px;
+    display: flex;
+    align-items: center;
+    background: #f5f5f5;
+    padding: 8px;
+    color: lightcoral;
+    font-size: 16px;
+    border-radius: 4px;
   }
 `
 
@@ -103,6 +120,14 @@ const getSelected = (id, items) => {
   return result
 }
 
+const calculateDate = (date) => {
+  const currentDate = new Date()
+  const selectedDate = new Date(date)
+  const difference = selectedDate - currentDate
+  const days = Math.floor(difference / (1000 * 60 * 60 * 24))
+  return days
+}
+
 const Home = () => {
   const items = useSelector(tasksSelector.items)
   const categories = useSelector(categorySelector.categories)
@@ -153,6 +178,19 @@ const Home = () => {
     setCelebrate(value)
   }
 
+  const renderDate = (date) => {
+    // i want to get the date and show how many days left till the date
+    const result = calculateDate(date)
+    console.log(result)
+    if (result === -1 || 0) {
+      return <span>Today</span>
+    } else if (result > 1) {
+      return <span>{result} days left</span>
+    } else if (result === 1) {
+      return <span>{result} day left</span>
+    }
+  }
+
   const renderTasks = (items) => {
     if (!items || !items.length) return null
     const result = items.map((item, index) => {
@@ -166,7 +204,10 @@ const Home = () => {
           )}
           <span className="label">{item.label}</span>
           <Controls>
-            <Button onClick={() => handleComplete(item.id)}>Done</Button>
+            {item.date && <span className="date">{renderDate(item.date)}</span>}
+            <Button className="done" onClick={() => handleComplete(item.id)}>
+              Done
+            </Button>
             <Button
               className="detail-button"
               onClick={() => handleExpand(item)}
