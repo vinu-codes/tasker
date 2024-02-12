@@ -88,11 +88,15 @@ const Layout = ({ children, ...props }) => {
   //   updateUserData(uid, items)
   // }, [items, uid])
 
+  // useEffect(() => {
+  //   if (!uid) {
+  //     navigate('/login')
+  //   }
+  // }, [uid])
+
   useEffect(() => {
-    if (!uid) {
-      navigate('/login')
-    }
-  }, [uid])
+    dispatch(setAuthPersistence())
+  }, [])
 
   useEffect(() => {
     const body = document.querySelector('body')
