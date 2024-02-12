@@ -1,8 +1,7 @@
 import React, { useEffect, useContext, useState, useRef } from 'react'
-import { NavBar } from '@components/NavBar'
+import { NavBar } from '@features/NavBar'
 import styled from 'styled-components'
 import { NavigationContext } from '@components/Route'
-import { auth, fireStore } from '@services/firebase'
 import { doc, getDoc, updateDoc, increment, setDoc } from 'firebase/firestore'
 import { tasksSelector } from '@state/tasks/selectors'
 import { authSelector } from '@state/auth'
@@ -10,6 +9,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import { updateItems } from '@state/tasks'
 import { listenForAuthChanges } from '@state/auth'
 import { getPersistence } from '@state/auth'
+import { persistUid } from '@state/auth'
+import { loadState } from '@utils/localStorage'
 
 const LayoutContainer = styled.div`
   width: 100%;
@@ -36,12 +37,9 @@ const usePrevious = (value) => {
 
 const Layout = ({ children, ...props }) => {
   const [currentPath, navigate] = useContext(NavigationContext)
-  const [uid, setState] = useState('')
-  const isAuth = true
-  const items = useSelector(tasksSelector.items)
-  const auth = useSelector(authSelector.auth)
+  const uid = useSelector(authSelector.uid)
   const dispatch = useDispatch()
-  const previousItems = usePrevious(items)
+  // const previousItems = usePrevious(items)
   const containerRef = useRef(null)
 
   // useEffect(() => {
@@ -62,12 +60,31 @@ const Layout = ({ children, ...props }) => {
     }
   }, [uid])
 
+  // useEffect(() => {
+  //   if (!!uid) {
+  //     console.log('useeffect uid:', uid)
+  //     dispatch(getPersistence())
+  //   }
+  // }, [uid])
+
   useEffect(() => {
+    // try {
+    //   let dataString = sessionStorage.getItem('uid')
+
+    //   const data = JSON.parse(dataString)
+    //   console.log(data)
+    //   if (!!data) {
+    //     dispatch(persistUid(data))
+    //   }
+    // } catch (error) {
+    //   console.log(error)
+    // }
+    const uid = loadState('uid')
     if (!!uid) {
-      console.log('useeffect uid:', uid)
-      dispatch(getPersistence())
+      console.log(uid)
+      dispatch(persistUid(uid))
     }
-  }, [uid])
+  }, [])
 
   useEffect(() => {
     const body = document.querySelector('body')

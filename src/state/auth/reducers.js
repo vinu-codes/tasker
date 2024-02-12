@@ -3,12 +3,13 @@ import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   signOut,
-  browserLocalPersistence,
+  browserSessionPersistence,
   setPersistence,
   onAuthStateChanged,
 } from 'firebase/auth'
 import { auth, fireStore } from '@services/firebase'
 import { doc, getDoc, updateDoc, increment, setDoc } from 'firebase/firestore'
+import { saveState } from '@utils/localStorage'
 
 const initialState = {
   uid: null,
@@ -16,21 +17,32 @@ const initialState = {
   error: null,
   loggedOut: false,
   auth: null,
+  info: '',
 }
 
 export const getPersistence = createAsyncThunk(
   'auth/getPersistence',
-  async () => {
-    console.log('hi')
-    // await setPersistence(auth.Auth.Persistence.LOCAL)
-    //   .then(() => {
-    //     // Persistence set successfully
-    //     console.log('Persistence set successfully')
-    //   })
-    //   .catch((error) => {
-    //     // Handle errors
-    //     console.error('Error setting persistence:', error)
-    //   })
+  async ({ email, password }, { rejectWithValue, fulfillWithValue }) => {
+    try {
+      await setPersistence(auth, browserSessionPersistence)
+      // Existing and future Auth states are now persisted in the current
+      // session only. Closing the window would clear any existing state even
+      // if a user forgets to sign out.
+      // ...
+      // New sign-in will be persisted with session persistence.
+      // try {
+      //   await signInWithEmailAndPassword(auth, email, password)
+      //   return fulfillWithValue('Session persistence set and signed in')
+      // } catch (error) {
+      //   console.error('Sign-in error:', error.message)
+      //   return rejectWithValue(error.message)
+      // }
+    } catch (error) {
+      // Handle Errors here.
+      const errorCode = error.code
+      const errorMessage = error.message
+      return rejectWithValue(errorMessage)
+    }
   }
 )
 
@@ -41,24 +53,28 @@ export const signIn = createAsyncThunk(
     { rejectWithValue, fulfillWithValue, dispatch }
   ) => {
     try {
-      const userCredential = await signInWithEmailAndPassword(
-        auth,
-        email,
-        password
-      )
+      await setPersistence(auth, browserSessionPersistence)
+      try {
+        const userCredential = await signInWithEmailAndPassword(
+          auth,
+          email,
+          password
+        )
 
-      // The user is signed in
-      const user = userCredential.user
-      // if (userCredential && user) {
-      //   dispatch(setAuthPersistence())
-      // }
-      // You can execute any function here after successful sign-in
-      console.log('User signed in:', user.uid)
-      return fulfillWithValue(user.uid)
+        // The user is signed in
+        const user = userCredential.user
+        // You can execute any function here after successful sign-in
+        console.log('User signed in:', user.uid)
+        saveState({ uid: user.uid })
+        return fulfillWithValue(user.uid)
+      } catch (error) {
+        // Handle errors here
+        console.error('Sign-in error:', error.message)
+        return rejectWithValue(error.message)
+      }
     } catch (error) {
-      // Handle errors here
-      console.error('Sign-in error:', error.message)
-      return rejectWithValue(error.message)
+      const errorMessage = error.message
+      return rejectWithValue('persist error:', errorMessage)
     }
   }
 )
@@ -124,9 +140,16 @@ export const signUpUser = createAsyncThunk(
   }
 )
 
+export const persistUid = createAsyncThunk(
+  'auth/persistUid',
+  async (uid, { rejectWithValue, fulfillWithValue, dispatch }) => {
+    return fulfillWithValue(uid)
+  }
+)
+
 export const signOutUser = createAsyncThunk(
   'auth/signOutUser',
-  async ({ rejectWithValue, fulfillWithValue, dispatch }) => {
+  async (_, { rejectWithValue, fulfillWithValue, dispatch }) => {
     try {
       await signOut(auth)
       return null
@@ -198,10 +221,22 @@ const authSlice = createSlice({
     })
     builder.addCase(getPersistence.fulfilled, (state, { payload }) => {
       state.loading = false
-      state.auth = payload
+      state.info = payload
       state.error = null
     })
     builder.addCase(getPersistence.rejected, (state, { payload }) => {
+      state.loading = false
+      state.error = payload
+    })
+    builder.addCase(persistUid.pending, (state) => {
+      state.loading = true
+    })
+    builder.addCase(persistUid.fulfilled, (state, { payload }) => {
+      state.loading = false
+      state.uid = payload
+      state.error = null
+    })
+    builder.addCase(persistUid.rejected, (state, { payload }) => {
       state.loading = false
       state.error = payload
     })
