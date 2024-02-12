@@ -10,6 +10,7 @@ import { Icon } from '@common/Icon'
 import { Button } from '@common/Button'
 import { Celebrate } from '@components/Celebrate'
 import { NavigationContext } from '@components/Route'
+import { Banner } from '@components/Banner'
 import { colors } from '@common/Theme'
 import {
   HomeWrapper,
@@ -253,6 +254,7 @@ const Home = () => {
     <>
       <HomeWrapper>
         {celebrate && <Celebrate callback={handleCelebrate} />}
+        <Banner />
         <HomeContainer>
           <HeadingContainer className="heading-container">
             <h3>My tasks</h3>
