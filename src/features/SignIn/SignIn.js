@@ -26,6 +26,14 @@ const SignIn = ({ callback }) => {
     }
   }, [uid])
 
+  useEffect(() => {
+    setState((state) => ({
+      ...state,
+      email: 'newemail@gmail.com',
+      password: 'password',
+    }))
+  }, [])
+
   const handleTogglePassword = () => {
     setShowPassword(!showPassword)
   }
@@ -69,10 +77,15 @@ const SignIn = ({ callback }) => {
           onChange={handleChange}
           value={state.password}
           required
-        />
-        <span className="icon" onClick={handleTogglePassword}>
-          <Icon name={!!showPassword ? 'EYE_OPEN' : 'EYE_CLOSE'} size={24} />
-        </span>
+        >
+          <span className="icon" onClick={handleTogglePassword}>
+            <Icon
+              name={!!showPassword ? 'EYE_OPEN' : 'EYE_CLOSE'}
+              size={24}
+              viewBox="-1 -2 24 24"
+            />
+          </span>
+        </Input>
       </InputContainer>
       {!!error && (
         <span className="error">

@@ -5,6 +5,7 @@ import {
   signOut,
   browserLocalPersistence,
   setPersistence,
+  onAuthStateChanged,
 } from 'firebase/auth'
 import { auth, fireStore } from '@services/firebase'
 import { doc, getDoc, updateDoc, increment, setDoc } from 'firebase/firestore'
@@ -17,18 +18,19 @@ const initialState = {
   auth: null,
 }
 
-export const setAuthPersistence = createAsyncThunk(
-  'auth/setAuthPersistence',
-  async (_, { rejectWithValue, fulfillWithValue }) => {
-    console.log('hit setAuthPersistence')
-    try {
-      await setPersistence(auth, browserLocalPersistence)
-      console.log('auth persistence set')
-      return fulfillWithValue('Auth persistence set')
-    } catch (error) {
-      console.error('Error setting auth persistence:', error.message)
-      return rejectWithValue(error.message)
-    }
+export const getPersistence = createAsyncThunk(
+  'auth/getPersistence',
+  async () => {
+    console.log('hi')
+    // await setPersistence(auth.Auth.Persistence.LOCAL)
+    //   .then(() => {
+    //     // Persistence set successfully
+    //     console.log('Persistence set successfully')
+    //   })
+    //   .catch((error) => {
+    //     // Handle errors
+    //     console.error('Error setting persistence:', error)
+    //   })
   }
 )
 
@@ -47,7 +49,9 @@ export const signIn = createAsyncThunk(
 
       // The user is signed in
       const user = userCredential.user
-
+      // if (userCredential && user) {
+      //   dispatch(setAuthPersistence())
+      // }
       // You can execute any function here after successful sign-in
       console.log('User signed in:', user.uid)
       return fulfillWithValue(user.uid)
@@ -61,7 +65,10 @@ export const signIn = createAsyncThunk(
 
 export const signInAndSetUp = createAsyncThunk(
   'auth/signInAndSetUp',
-  async ({ email, password }, { rejectWithValue, fulfillWithValue }) => {
+  async (
+    { email, password },
+    { rejectWithValue, fulfillWithValue, dispatch }
+  ) => {
     try {
       const userCredential = await signInWithEmailAndPassword(
         auth,
@@ -77,6 +84,8 @@ export const signInAndSetUp = createAsyncThunk(
       const userRef = doc(fireStore, 'users', user.uid)
       try {
         await setDoc(userRef, { items: [], categories: [] })
+        // if (userCredential && userCredential.user)
+        //   dispatch(setAuthPersistence())
         return fulfillWithValue(user.uid)
       } catch (error) {
         console.error('Error setting up user:', error.message)
@@ -184,15 +193,15 @@ const authSlice = createSlice({
       state.user = null
       state.error = payload
     })
-    builder.addCase(setAuthPersistence.pending, (state) => {
+    builder.addCase(getPersistence.pending, (state) => {
       state.loading = true
     })
-    builder.addCase(setAuthPersistence.fulfilled, (state, { payload }) => {
+    builder.addCase(getPersistence.fulfilled, (state, { payload }) => {
       state.loading = false
       state.auth = payload
       state.error = null
     })
-    builder.addCase(setAuthPersistence.rejected, (state, { payload }) => {
+    builder.addCase(getPersistence.rejected, (state, { payload }) => {
       state.loading = false
       state.error = payload
     })

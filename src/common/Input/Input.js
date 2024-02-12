@@ -25,6 +25,16 @@ const Container = styled.div`
     flex-direction: column;
     width: 100%;
   }
+  svg.ICON.EYE_OPEN {
+    path {
+      stroke: white;
+    }
+  }
+  svg.ICON.EYE_CLOSE {
+    path {
+      stroke: white;
+    }
+  }
 `
 
 const InputArea = styled.input`
@@ -70,7 +80,7 @@ const InputArea = styled.input`
     align-items: center;
   }
   ${(props) =>
-    props.hasIcon &&
+    props.$hasIcon &&
     css`
       border-radius: 8px 0 0 8px;
     `}
@@ -93,13 +103,12 @@ const EntryArea = styled.div`
   }
 `
 
-const Input = ({ label, icon, type, ...props }) => {
+const Input = ({ label, icon, type, children, ...props }) => {
   return (
     <Wrapper>
       <Container>
         <EntryArea>
-          <InputArea type={type} hasIcon={!!icon} {...props} />
-
+          <InputArea type={type} $hasIcon={!!icon || !!children} {...props} />
           {type !== 'date' && !!label && <div className="label">{label}</div>}
         </EntryArea>
         {!!icon && (
@@ -107,6 +116,7 @@ const Input = ({ label, icon, type, ...props }) => {
             <Icon name={icon} size={24} />
           </span>
         )}
+        {!!children && children}
       </Container>
     </Wrapper>
   )

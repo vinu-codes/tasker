@@ -8,7 +8,8 @@ import { tasksSelector } from '@state/tasks/selectors'
 import { authSelector } from '@state/auth'
 import { useSelector, useDispatch } from 'react-redux'
 import { updateItems } from '@state/tasks'
-import { setAuthPersistence } from '@state/auth'
+import { listenForAuthChanges } from '@state/auth'
+import { getPersistence } from '@state/auth'
 
 const LayoutContainer = styled.div`
   width: 100%;
@@ -43,39 +44,6 @@ const Layout = ({ children, ...props }) => {
   const previousItems = usePrevious(items)
   const containerRef = useRef(null)
 
-  const getUserData = async (uid) => {
-    try {
-      // get the doc reference {userDoc: {hasLiked: false}}
-      const userDocumentRef = doc(fireStore, 'users', uid)
-      const docSnapshot = await getDoc(userDocumentRef)
-
-      if (docSnapshot.exists()) {
-        const data = docSnapshot.data()
-        // return data ? data.hasLiked : null
-        dispatch(updateItems(data.items))
-      }
-    } catch (error) {
-      console.log('error getting user data', error)
-    }
-  }
-
-  const updateUserData = async (uid, items) => {
-    try {
-      const userDocumentRef = doc(fireStore, 'users', uid)
-      const docSnapshot = await getDoc(userDocumentRef)
-
-      if (docSnapshot.exists()) {
-        console.log('doc exists for user')
-        await updateDoc(userDocumentRef, {
-          items,
-        })
-        dispatch(updateItems(items))
-      } else {
-        console.log('error updating user doc')
-      }
-    } catch (error) {}
-  }
-
   // useEffect(() => {
   //   if (!uid) return
   //   getUserData(uid)
@@ -88,15 +56,18 @@ const Layout = ({ children, ...props }) => {
   //   updateUserData(uid, items)
   // }, [items, uid])
 
-  // useEffect(() => {
-  //   if (!uid) {
-  //     navigate('/login')
-  //   }
-  // }, [uid])
+  useEffect(() => {
+    if (!uid) {
+      navigate('/login')
+    }
+  }, [uid])
 
   useEffect(() => {
-    dispatch(setAuthPersistence())
-  }, [])
+    if (!!uid) {
+      console.log('useeffect uid:', uid)
+      dispatch(getPersistence())
+    }
+  }, [uid])
 
   useEffect(() => {
     const body = document.querySelector('body')

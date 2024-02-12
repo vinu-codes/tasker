@@ -59,6 +59,9 @@ const SignInContainer = styled.div`
     display: inline-block;
     padding-top: 12px;
   }
+  button {
+    padding-top: 12px;
+  }
 `
 
 export { FormContainer, InputContainer, SignInContainer }

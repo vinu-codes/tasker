@@ -155,10 +155,10 @@ const Home = () => {
 
   const renderTasks = (items) => {
     if (!items || !items.length) return null
-    const result = items.map((item) => {
+    const result = items.map((item, index) => {
       if (item.status === 'completed') return null
       return (
-        <List>
+        <List key={index}>
           {toggleEdit && (
             <span className="check-box" onClick={() => handleSelect(item)}>
               <Icon name={item.active ? 'CHECKBOX_FILLED' : 'CHECKBOX'} />
@@ -187,7 +187,6 @@ const Home = () => {
     }
     const result =
       categoryGroup.items.filter((k) => k.status === 'incomplete').length > 0
-    console.log(result)
     if (!result) return null
     return (
       <StyledSpan dynamicColor={categoryGroup.color}>
@@ -199,8 +198,8 @@ const Home = () => {
   const renderCategory = (data) => {
     console.log(data)
     if (!!data) {
-      return data.map((item) => (
-        <CategoryGroup>
+      return data.map((item, index) => (
+        <CategoryGroup key={index}>
           {hasIncomplete(item)}
           {renderTasks(item.items)}
         </CategoryGroup>

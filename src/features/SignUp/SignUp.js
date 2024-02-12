@@ -66,10 +66,11 @@ const SignUp = ({ callback }) => {
           onChange={handleChange}
           value={state.password}
           required
-        />
-        <span className="icon" onClick={handleTogglePassword}>
-          <Icon name={!!showPassword ? 'EYE_OPEN' : 'EYE_CLOSE'} size={24} />
-        </span>
+        >
+          <span className="icon" onClick={handleTogglePassword}>
+            <Icon name={!!showPassword ? 'EYE_OPEN' : 'EYE_CLOSE'} size={24} />
+          </span>
+        </Input>
       </InputContainer>
       <Button onClick={handleSubmit} className="submit">
         Sign Up
