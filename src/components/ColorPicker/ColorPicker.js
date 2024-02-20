@@ -43,8 +43,9 @@ const ColorPicker = ({ colors, callback, value }) => {
   }
 
   const renderColors = () => {
-    const result = colors.map((x) => (
+    const result = colors.map((x, index) => (
       <List
+        key={index}
         isActive={x === value}
         onClick={() => handleSelect(x)}
         color={x}

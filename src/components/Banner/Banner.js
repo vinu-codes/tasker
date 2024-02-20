@@ -18,10 +18,26 @@ const Container = styled.div`
   }
 `
 
+const createGreeting = (userName, customMessage = 'How can we help?') => {
+  const timeAppropriateGreeting = (name) => {
+    const date = new Date()
+    const hours = date.getHours()
+    if (hours < 12) {
+      return `Good morning ${name}.`
+    } else if (hours >= 12 && hours < 17) {
+      return `Good afternoon ${name}.`
+    } else if (hours >= 17 && hours <= 24) {
+      return `Good evening ${name}.`
+    }
+  }
+
+  return `${!!userName && timeAppropriateGreeting(userName)}`
+}
+
 const Banner = () => {
   return (
     <Container>
-      <h1>Good morning [User]!</h1>
+      <h1>{createGreeting('User')}</h1>
       <h2>What's up for today?</h2>
     </Container>
   )

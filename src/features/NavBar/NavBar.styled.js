@@ -34,8 +34,14 @@ const NavWrapper = styled.div`
 const ButtonsContainer = styled.div`
   display: flex;
   margin-left: auto;
+  button.focus {
+    margin-right: 8px;
+    width: 38px;
+    height: 39px;
+    cursor: pointer;
+  }
   button.add-button {
-    margin-left: 8px;
+    margin-right: 8px;
   }
   svg.CLOSE {
     transform: rotate(45deg);

@@ -1,0 +1,1 @@
+## Time management has always been a challenge for me, so I've always enjoyed learning about different techniques stay focused throughout the day. When I discovered the Pomodoro method, I was so intrigued by it that I decided to build a simple web app for myself and others to use in an effort to improve productivity.

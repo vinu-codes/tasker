@@ -20,6 +20,7 @@ import {
   IconContainer,
 } from './Home.styled'
 import { CompletedForm } from '@components/CompletedForm'
+import { Timer } from '@features/Timer'
 
 const Controls = styled.div`
   display: flex;

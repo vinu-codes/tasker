@@ -23,6 +23,9 @@ const NavBar = () => {
   const handleCreate = () => {
     navigate('/create')
   }
+  const handleFocus = () => {
+    navigate('/focus')
+  }
 
   if (currentPath === '/login') {
     return null
@@ -36,11 +39,14 @@ const NavBar = () => {
         </button>
       </div>
       <ButtonsContainer className="button-container">
-        <Button onClick={handleSettings} className="settings-button">
-          <Icon name="SETTINGS" />
+        <Button onClick={handleFocus} className="focus">
+          ⚡
         </Button>
         <Button onClick={handleCreate} className="add-button">
           <Icon name="CLOSE" />
+        </Button>
+        <Button onClick={handleSettings} className="settings-button">
+          <Icon name="SETTINGS" />
         </Button>
         <Button onClick={handleSignOut} className="sign-out">
           <Icon name="SIGN_OUT" />

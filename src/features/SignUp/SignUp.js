@@ -68,7 +68,11 @@ const SignUp = ({ callback }) => {
           required
         >
           <span className="icon" onClick={handleTogglePassword}>
-            <Icon name={!!showPassword ? 'EYE_OPEN' : 'EYE_CLOSE'} size={24} />
+            <Icon
+              name={!!showPassword ? 'EYE_OPEN' : 'EYE_CLOSE'}
+              size={24}
+              viewBox="-1 -2 24 24"
+            />
           </span>
         </Input>
       </InputContainer>

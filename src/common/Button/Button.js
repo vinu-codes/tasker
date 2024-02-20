@@ -1,12 +1,12 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
+import PropTypes from 'prop-types'
 
 const ButtonContainer = styled.button`
   border: none;
   background: none;
   padding: 0;
   margin: 0;
-  border: 1px solid black;
   border-radius: 8px;
   padding: 8px;
   display: flex;
@@ -17,8 +17,10 @@ const ButtonContainer = styled.button`
   background: white;
   line-height: 21px;
   font-size: 14px;
+  user-select: none;
+  border: 1px solid black;
   color: black;
-  &:hover {
+  /* &:hover {
     outline: none;
     border: 1px solid black;
     color: black;
@@ -27,11 +29,39 @@ const ButtonContainer = styled.button`
     outline: none;
     border: 1px solid black;
     color: black;
-  }
+  } */
 `
 
-const Button = ({ children, ...props }) => {
-  return <ButtonContainer {...props}>{children}</ButtonContainer>
+const pickByRequiredKeys = (props) => {
+  const newArray = Object.entries(props)
+  console.log(newArray)
+  const filterOutFalsyValue = newArray.filter(([_, value]) => {
+    return (
+      value !== undefined &&
+      value !== false &&
+      value !== null &&
+      value !== '' &&
+      value !== 0
+    )
+  })
+  console.log({ filterOutFalsyValue })
+}
+
+const Button = ({ children, onClick, className, ...props }) => {
+  const kind = pickByRequiredKeys(props)
+
+  return (
+    <ButtonContainer onClick={onClick} className={className} {...props}>
+      {children}
+    </ButtonContainer>
+  )
+}
+
+Button.propTypes = {
+  primary: PropTypes.bool,
+  secondary: PropTypes.bool,
+  save: PropTypes.bool,
+  cancel: PropTypes.bool,
 }
 
 export { Button }

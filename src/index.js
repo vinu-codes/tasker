@@ -8,6 +8,7 @@ import { Login } from '@pages/Login/'
 import { Settings } from '@pages/Settings/'
 import { Home } from '@pages/Home/'
 import { Edit } from '@pages/Edit'
+import { Timer } from '@features/Timer'
 import { store } from '@state/store'
 import { Provider } from 'react-redux'
 
@@ -32,6 +33,9 @@ root.render(
         </Route>
         <Route path="/edit">
           <Edit />
+        </Route>
+        <Route path="/focus">
+          <Timer />
         </Route>
       </Layout>
     </RouteProvider>
