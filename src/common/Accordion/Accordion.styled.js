@@ -13,19 +13,13 @@ const AccordionContainer = styled.div`
   }
   &:first-of-type {
     .header {
-      border-radius: 4px 4px 0 0;
-    }
-  }
-  &:last-of-type {
-    .header {
-      border-top: none;
-      border-radius: 0 0 4px 4px;
+      border-radius: 4px 4px 4px 4px;
     }
   }
   &:last-of-type {
     &.active {
       .header {
-        border-radius: 0 0 0 0;
+        border-radius: 4px 4px 0 0;
       }
     }
   }
@@ -98,7 +92,7 @@ const IconContainer = styled.div`
   ${mrFn};
   svg.ICON.CHEVRON {
     path {
-      fill: ${colors.navyBlue};
+      fill: ${colors.darkGrey};
     }
   }
 `
