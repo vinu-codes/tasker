@@ -5,48 +5,7 @@ import { updateCategory } from '@state/category'
 
 const initialState = {
   activeId: '',
-  items: [
-    {
-      label: 'Message Mauro on LinkedIn',
-      id: '1',
-      category: 'personal',
-      status: 'incomplete',
-      details: '',
-      date: '',
-    },
-    {
-      label: 'Message Natasha on LinkedIn',
-      id: '1',
-      category: 'personal',
-      status: 'incomplete',
-      details: '',
-      date: '',
-    },
-    {
-      label: 'Update Resume with Aima',
-      id: '1',
-      category: 'personal',
-      status: 'incomplete',
-      details: '',
-      date: '',
-    },
-    {
-      label: 'Apply for jobs for job seeker',
-      id: '1',
-      category: 'personal',
-      status: 'incomplete',
-      details: '',
-      date: '',
-    },
-    {
-      label: 'Cold call recruiters',
-      id: '1',
-      category: 'personal',
-      status: 'incomplete',
-      details: '',
-      date: '',
-    },
-  ],
+  items: [],
 }
 
 // updating firebase with new items

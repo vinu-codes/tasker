@@ -8,7 +8,7 @@ import { Login } from '@pages/Login/'
 import { Settings } from '@pages/Settings/'
 import { Home } from '@pages/Home/'
 import { Edit } from '@pages/Edit'
-import { Workout } from '@features/Workout'
+// import { Workout } from '@features/Workout'
 import { store } from '@state/store'
 import { Provider } from 'react-redux'
 import './styles.css'
@@ -33,9 +33,9 @@ root.render(
         <Route path="/edit">
           <Edit />
         </Route>
-        <Route path="/workout">
+        {/* <Route path="/workout">
           <Workout />
-        </Route>
+        </Route> */}
       </Layout>
     </RouteProvider>
   </Provider>

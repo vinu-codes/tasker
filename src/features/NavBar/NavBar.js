@@ -39,7 +39,6 @@ const NavBar = () => {
         </button>
       </div>
       <ButtonsContainer className="button-container">
-        <Button onClick={handleWorkout}>Workout</Button>
         <Button onClick={handleSettings} className="settings-button">
           <Icon name="SETTINGS" />
         </Button>
