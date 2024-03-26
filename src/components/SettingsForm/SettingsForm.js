@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import styled from 'styled-components'
 import {
   Group,
@@ -13,6 +13,11 @@ import { Icon } from '@common/Icon'
 import { NavigationContext } from '@components/Route'
 import { colorPicker } from '@common/Theme'
 import { ColorPicker } from '@components/ColorPicker'
+import { getCategoryData } from '@state/category'
+import { useDispatch, useSelector } from 'react-redux'
+import { authSelector } from '@state/auth'
+import { categorySelector } from '@state/category'
+import { updateCategoryThunk } from '@state/category'
 
 const CategegoryControls = styled.div`
   display: flex;
@@ -37,10 +42,19 @@ const updatedCategories = (id, categories) => {
   return result
 }
 
-const SettingsForm = ({ categories, onAdd, onDelete }) => {
+const SettingsForm = ({ onAdd, onDelete }) => {
   const [value, setValue] = useState('')
   const [selectedColor, setSelectedColor] = useState('')
   const [_, navigate] = useContext(NavigationContext)
+  const uid = useSelector(authSelector.uid)
+  const categories = useSelector(categorySelector.categories)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getCategoryData(uid))
+  }, [])
+
+  console.log('categories', categories)
 
   const handleDelete = (selectedItem) => {
     const result = updatedCategories(selectedItem, categories)
@@ -81,7 +95,16 @@ const SettingsForm = ({ categories, onAdd, onDelete }) => {
       return
     }
 
-    onAdd({ label: value, value: value, active: false, color: selectedColor })
+    // onAdd({ label: value, value: value, active: false, color: selectedColor })
+    dispatch(
+      updateCategoryThunk({
+        uid,
+        categories: [
+          ...categories,
+          { value, color: selectedColor, active: false, label: value },
+        ],
+      })
+    )
     setValue('')
   }
 

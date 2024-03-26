@@ -26,14 +26,6 @@ const SignIn = ({ callback }) => {
     }
   }, [uid])
 
-  useEffect(() => {
-    setState((state) => ({
-      ...state,
-      email: 'newemail@gmail.com',
-      password: 'password',
-    }))
-  }, [])
-
   const handleTogglePassword = () => {
     setShowPassword(!showPassword)
   }

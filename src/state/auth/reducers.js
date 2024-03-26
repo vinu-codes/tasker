@@ -9,7 +9,7 @@ import {
 } from 'firebase/auth'
 import { auth, fireStore } from '@services/firebase'
 import { doc, getDoc, updateDoc, increment, setDoc } from 'firebase/firestore'
-import { saveState } from '@utils/localStorage'
+import { saveState, clearState } from '@utils/localStorage'
 
 const initialState = {
   uid: null,
@@ -102,6 +102,7 @@ export const signInAndSetUp = createAsyncThunk(
         await setDoc(userRef, { items: [], categories: [] })
         // if (userCredential && userCredential.user)
         //   dispatch(setAuthPersistence())
+        saveState({ uid: user.uid })
         return fulfillWithValue(user.uid)
       } catch (error) {
         console.error('Error setting up user:', error.message)
@@ -152,6 +153,7 @@ export const signOutUser = createAsyncThunk(
   async (_, { rejectWithValue, fulfillWithValue, dispatch }) => {
     try {
       await signOut(auth)
+      clearState('uid')
       return null
     } catch (error) {
       console.error('Sign-out error:', error.message)
