@@ -12,6 +12,7 @@ import { getPersistence } from '@state/auth'
 import { persistUid } from '@state/auth'
 import { loadState } from '@utils/localStorage'
 import { getUserData } from '../../state/tasks'
+import { getCategoryData } from '@state/category'
 
 const LayoutContainer = styled.div`
   width: 100%;
@@ -85,6 +86,7 @@ const Layout = ({ children, ...props }) => {
       console.log(uid)
       dispatch(persistUid(uid))
       dispatch(getUserData(uid))
+      dispatch(getCategoryData(uid))
     }
   }, [])
 
