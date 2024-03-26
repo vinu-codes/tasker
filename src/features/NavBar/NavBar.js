@@ -23,6 +23,9 @@ const NavBar = () => {
   const handleCreate = () => {
     navigate('/create')
   }
+  const handleWorkout = () => {
+    navigate('/workout')
+  }
 
   if (currentPath === '/login') {
     return null
