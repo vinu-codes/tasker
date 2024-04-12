@@ -1,5 +1,11 @@
 # Tasker 
 
-An app where people can manage their tasks.
+This is a task management application built with React.js, Styled-components, HTML, CSS, Javascript. 🖊️
+
+## Features 🚀
+
+- Categorize tasks with customizable colors using a category color picker.
+- Robust search functionality to filter tasks by name.
+- Firebase integration for sign-up, authentication, and data persistence.
 
 
