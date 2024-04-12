@@ -140,8 +140,14 @@ const Home = () => {
     setToggleEdit(arg)
   }
 
-  const handleUndo = ({ value }) => {
-    dispatch(updateItems(value))
+  const handleUndo = ({ action, value }) => {
+    if (action === 'UNDO') {
+      dispatch(updateItems(value))
+    }
+    if (action === 'DELETE') {
+      console.log({ value })
+      dispatch(updateItems(value))
+    }
   }
 
   const handleComplete = (id) => {
@@ -216,7 +222,7 @@ const Home = () => {
             <h3>My tasks</h3>
             <Button
               onClick={handleToggleEdit}
-              className={toggleEdit ? 'toggle cancel' : 'toggle edit'}
+              className={toggleEdit ? 'toggle-cancel' : 'toggle-edit'}
             >
               {toggleEdit ? 'Cancel' : 'Edit'}
             </Button>

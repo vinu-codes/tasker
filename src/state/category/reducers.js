@@ -58,19 +58,12 @@ const categorySlice = createSlice({
   name: 'category',
   initialState: {
     categories: [
-      // {
-      //   label: 'personal',
-      //   active: false,
-      //   value: 'personal',
-      //   color: colors.lightGreen,
-      // },
-      // { label: 'work', active: false, value: 'work', color: colors.aqua },
-      // {
-      //   label: 'coding',
-      //   active: false,
-      //   value: 'coding',
-      //   color: colors.lightPink,
-      // },
+      {
+        label: 'personal',
+        active: false,
+        value: 'personal',
+        color: colors.lightGreen,
+      },
     ],
   },
   reducers: {},
@@ -80,7 +73,7 @@ const categorySlice = createSlice({
     })
     builder.addCase(getCategoryData.fulfilled, (state, { payload }) => {
       state.loading = false
-      state.categories = payload
+      state.categories = [...state.categories, ...payload]
       state.error = null
     })
     builder.addCase(getCategoryData.rejected, (state, { payload }) => {

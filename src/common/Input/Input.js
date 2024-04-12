@@ -49,35 +49,9 @@ const InputArea = styled.input`
   background: transparent;
   font-size: 16px;
   color: black;
-  position: absolute;
-  z-index: 1111;
   &:focus {
     border: 2px solid grey;
     background: white;
-  }
-  &:valid {
-    border: 2px solid grey;
-    background: white;
-  }
-  &:valid + .label {
-    transform: translate(-20px, -16px) scale(0.88);
-    height: 30px;
-    padding: 0 12px;
-    margin: 0 20px;
-    z-index: 1111;
-    color: grey;
-    display: flex;
-    align-items: center;
-  }
-  &:focus + .label {
-    transform: translate(-20px, -16px) scale(0.88);
-    height: 30px;
-    padding: 0 12px;
-    margin: 0 20px;
-    z-index: 1111;
-    color: grey;
-    display: flex;
-    align-items: center;
   }
   ${(props) =>
     props.$hasIcon &&
@@ -88,19 +62,19 @@ const InputArea = styled.input`
 
 const EntryArea = styled.div`
   display: flex;
+  flex-direction: column;
   position: relative;
-  height: 48px;
   width: 100%;
-  line-height: 48px;
   box-sizing: border-box;
-  .label {
-    position: absolute;
-    font-size: 16px;
-    margin: 0 20px;
-    transition: 0.2s ease;
-    color: grey;
-    background: white;
-  }
+`
+
+const Label = styled.span`
+  display: flex;
+  font-size: 16px;
+  font-weight: normal;
+  transition: 0.2s ease;
+  color: grey;
+  margin-bottom: 8px;
 `
 
 const Input = ({ label, icon, type, children, ...props }) => {
@@ -108,8 +82,8 @@ const Input = ({ label, icon, type, children, ...props }) => {
     <Wrapper>
       <Container>
         <EntryArea>
+          {!!label && <Label className="label">{label}</Label>}
           <InputArea type={type} $hasIcon={!!icon || !!children} {...props} />
-          {type !== 'date' && !!label && <div className="label">{label}</div>}
         </EntryArea>
         {!!icon && (
           <span className="icon">

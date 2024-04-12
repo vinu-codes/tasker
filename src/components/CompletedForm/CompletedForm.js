@@ -24,15 +24,20 @@ const List = styled.li`
     text-decoration: line-through;
     padding-left: 8px;
   }
-  button {
-    margin-left: auto;
-  }
 `
 const Group = styled.ul`
   list-style: none;
   padding: 0;
   margin: 0;
   width: 100%;
+`
+
+const ButtonsControls = styled.div`
+  display: flex;
+  margin-left: auto;
+  button.delete {
+    margin-left: 8px;
+  }
 `
 
 const totalSelected = (items) => {
@@ -54,7 +59,12 @@ const CompletedForm = ({ items, callback }) => {
         return item
       }
     })
-    callback({ value: getSelected })
+    callback({ action: 'UNDO', value: getSelected })
+  }
+
+  const handleDelete = (id) => {
+    const filterSelected = items.filter((item) => item.id !== id)
+    callback({ action: 'DELETE', value: filterSelected })
   }
 
   const renderContent = () => {
@@ -65,9 +75,14 @@ const CompletedForm = ({ items, callback }) => {
       <List key={item.id}>
         <Icon name="TICK" size={18} />
         <span>{item.label}</span>
-        <Button className="undo" onClick={() => handleUndo(item.id)}>
-          <Icon name="UNDO" stroke="black" />
-        </Button>
+        <ButtonsControls>
+          <Button className="undo" onClick={() => handleUndo(item.id)}>
+            <Icon name="UNDO" stroke="black" />
+          </Button>
+          <Button className="delete" onClick={() => handleDelete(item.id)}>
+            <Icon name="TRASH" stroke="black" />
+          </Button>
+        </ButtonsControls>
       </List>
     ))
   }

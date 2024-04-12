@@ -28,6 +28,8 @@ const Container = styled.div`
     width: 100%;
     span.label {
       margin-bottom: 8px;
+      color: grey;
+      font-weight: normal;
     }
   }
 `

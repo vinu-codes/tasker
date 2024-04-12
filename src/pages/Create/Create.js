@@ -14,6 +14,7 @@ const Create = () => {
   const uid = useSelector(authSelector.uid)
 
   const handleData = (payload) => {
+    console.log({ payload })
     dispatch(updateItemThunk({ uid, items: payload }))
   }
 

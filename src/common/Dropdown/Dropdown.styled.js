@@ -1,11 +1,20 @@
 import styled, { css } from 'styled-components'
 import { mtFn, mrFn, colors } from '@common/Theme'
 
+const Container = styled.div`
+  ${mtFn};
+  display: flex;
+  flex-direction: column;
+  span.label {
+    margin-bottom: 8px;
+    color: grey;
+    font-weight: normal;
+  }
+`
+
 const Wrapper = styled.div`
   position: relative;
   width: 100%;
-  ${mtFn};
-
   &:focus-visible {
     outline: none;
     &:after {
@@ -34,21 +43,20 @@ const IconContainer = styled.div`
 const Header = styled.div`
   width: 100%;
   cursor: pointer;
-  border: 2px solid transparent;
+  border: 1px solid grey;
   padding: 25px;
   background: ${colors.white};
   display: flex;
   align-items: center;
   user-select: none;
-  box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease-in-out;
-  border-radius: 4px;
+  border-radius: 8px;
   position: relative;
   &:focus {
-    border: 2px solid ${colors.lightPurple};
+    border: 1px solid grey;
   }
   &:hover {
-    border: 2px solid ${colors.lightPurple};
+    border: 1px solid grey;
   }
   .IconContainer {
     right: 12px;
@@ -60,7 +68,7 @@ const Header = styled.div`
     margin-left: auto;
     transition: transform 0.2s;
     path {
-      fill: ${colors.lightPurple};
+      fill: ${colors.rust};
     }
   }
   ${(props) =>
@@ -116,4 +124,4 @@ const List = styled.li`
     }
   }
 `
-export { Wrapper, Group, List, IconContainer, Header }
+export { Wrapper, Group, List, IconContainer, Header, Container }

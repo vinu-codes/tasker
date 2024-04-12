@@ -15,7 +15,7 @@ const NavWrapper = styled.div`
   padding-right: 16px;
   position: fixed;
   z-index: 9999;
-  border-bottom: 1px solid black;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
   width: 100%;
   background: ${colors.rust};
   div.tasker-button {
@@ -48,4 +48,13 @@ const ButtonsContainer = styled.div`
     line-height: 21px;
   }
 `
-export { NavWrapper, ButtonsContainer }
+
+const Controls = styled.div`
+  display: flex;
+  align-items: center;
+  button {
+    margin-right: 8px;
+  }
+`
+
+export { NavWrapper, ButtonsContainer, Controls }

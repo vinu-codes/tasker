@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import {
   Group,
   SettingsContainer,
+  SettingsWrapper,
   List,
   Form,
   Controls,
@@ -95,7 +96,6 @@ const SettingsForm = ({ onAdd, onDelete }) => {
       return
     }
 
-    // onAdd({ label: value, value: value, active: false, color: selectedColor })
     dispatch(
       updateCategoryThunk({
         uid,
@@ -113,29 +113,37 @@ const SettingsForm = ({ onAdd, onDelete }) => {
   }
 
   return (
-    <SettingsContainer>
-      <h3>Settings</h3>
-      <h4>Categories</h4>
-      <Group>{renderCategory()}</Group>
-      <Form onSubmit={onSubmit}>
-        <Input
-          name="add-category"
-          onChange={handleChange}
-          value={value}
-          label="add Category"
-          required
-        />
-        <ColorPicker
-          colors={colorPicker}
-          callback={handleColor}
-          value={selectedColor}
-        />
-        <Controls>
-          <Button>Save</Button>
-          <Button onClick={handleNavigate}>Cancel</Button>
-        </Controls>
-      </Form>
-    </SettingsContainer>
+    <SettingsWrapper>
+      <SettingsContainer>
+        <div className="header">
+          <h3>Settings</h3>
+        </div>
+        <Group>
+          <h4>Categories</h4>
+          {renderCategory()}
+        </Group>
+        <Form onSubmit={onSubmit}>
+          <Input
+            name="add-category"
+            onChange={handleChange}
+            value={value}
+            label="Add new category"
+            required
+          />
+          <ColorPicker
+            colors={colorPicker}
+            callback={handleColor}
+            value={selectedColor}
+          />
+          <Controls>
+            <Button className="save-button">Create</Button>
+            <Button className="cancel-button" onClick={handleNavigate}>
+              Cancel
+            </Button>
+          </Controls>
+        </Form>
+      </SettingsContainer>
+    </SettingsWrapper>
   )
 }
 

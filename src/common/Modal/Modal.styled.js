@@ -71,7 +71,6 @@ const ModalBody = styled.div`
     transform: translate(-50%, -50%);
     top: 50%;
   }
-
   p {
     font-size: 16px;
     font-weight: 300;

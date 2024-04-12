@@ -12,8 +12,8 @@ const ControllerWrapper = styled.div`
 const ControllerContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
-  border: 1px solid black;
+  width: 980px;
+  box-shadow: 0 5px 1.5rem rgba(0, 0, 0, 0.2);
   border-radius: 4px;
   padding: 0 0 20px 0;
   button {

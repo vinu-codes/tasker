@@ -73,7 +73,7 @@ const EditContents = ({ callback, categories }) => {
         cancel
       </Button>
       <Button onClick={handleSaveCategories} className="change">
-        Save
+        Create
       </Button>
     </ButtonContainer>
   )

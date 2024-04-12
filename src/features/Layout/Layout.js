@@ -23,6 +23,7 @@ const LayoutContainer = styled.div`
 const Container = styled.div`
   padding-left: 16px;
   padding-right: 16px;
+  padding-top: 16px;
 `
 
 const usePrevious = (value) => {

@@ -1,9 +1,18 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
+import { colors } from '@common/Theme'
 
 const GroupContainer = styled.div`
+  background: #cdcccc;
+  border-radius: 4px;
+  padding: 20px;
+  margin-bottom: 16px;
   h4 {
     margin: 0;
+    padding: 0;
+    color: black;
+    font-size: 16px;
+    font-weight: normal;
   }
 `
 const Group = styled.ul`
@@ -53,7 +62,7 @@ const ColorPicker = ({ colors, callback, value }) => {
   }
   return (
     <GroupContainer>
-      <h4>Select category color:</h4>
+      <h4>Select color</h4>
       <Group>{renderColors()}</Group>
     </GroupContainer>
   )

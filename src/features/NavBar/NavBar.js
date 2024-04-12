@@ -1,11 +1,12 @@
 import React, { useContext } from 'react'
 import { Icon } from '@common/Icon'
 import { Button } from '@common/Button'
-import { NavWrapper, ButtonsContainer } from './NavBar.styled'
+import { NavWrapper, ButtonsContainer, Controls } from './NavBar.styled'
 import { NavigationContext } from '@components/Route'
 import { useDispatch, useSelector } from 'react-redux'
 import { signOutUser } from '@state/auth'
 import { clearState } from '@utils/localStorage'
+import { Modal } from '@common/Modal'
 
 const NavBar = () => {
   const dispatch = useDispatch()

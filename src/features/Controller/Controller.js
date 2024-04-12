@@ -12,14 +12,19 @@ import { colors } from '@common/Theme'
 
 const ButtonContainer = styled.div`
   display: flex;
-  justify-content: space-between;
   padding: 20px 20px 0 20px;
+  gap: 20px;
 `
 
 const Heading = styled.div`
   background: ${colors.lightGrey};
   border-radius: 4px 4px 0 0;
   padding: 20px;
+  span {
+    color: black;
+    font-size: 16px;
+    font-weight: normal;
+  }
 `
 
 const totalSelected = (options) => {
@@ -123,8 +128,12 @@ const Controller = ({ callback }) => {
           <span>{renderText()}</span>
         </Heading>
         <ButtonContainer>
-          <Button onClick={openDelete}>delete</Button>
-          <Button onClick={openEdit}>move to new category</Button>
+          <Button className="save-button" onClick={openEdit}>
+            Assign new category
+          </Button>
+          <Button className="cancel-button" onClick={openDelete}>
+            Delete
+          </Button>
         </ButtonContainer>
         {!!showDeleteModal && (
           <Modal title="Delete Confirmation" callback={handleDeleteModal}>

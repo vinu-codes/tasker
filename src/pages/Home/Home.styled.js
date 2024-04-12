@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { colors } from '@common/Theme'
 
 const HomeWrapper = styled.div`
   width: 100%;
@@ -11,9 +12,9 @@ const HomeWrapper = styled.div`
 const HomeContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
-  width: 100%;
-  border: 1px solid black;
+  width: 980px;
+  border-radius: 8px;
+  box-shadow: 0 5px 1.5rem rgba(0, 0, 0, 0.2);
   padding: 20px;
   h4.category-label {
     margin: 0;
@@ -23,26 +24,19 @@ const HomeContainer = styled.div`
       text-transform: uppercase;
     }
   }
+  button {
+    margin-left: auto;
+  }
 `
 
 const HeadingContainer = styled.div`
   display: flex;
   align-items: center;
   padding: 8px 0 8px 0;
+  /* background: #faf8f7; */
   h3 {
     margin: 0;
     font-weight: bold;
-  }
-  button {
-    cursor: pointer;
-    user-select: none;
-    border: none;
-    background: none;
-    border: 1px solid black;
-    border-radius: 8px;
-    padding: 8px;
-    margin-left: auto;
-    width: 70px;
   }
 `
 

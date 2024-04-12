@@ -12,8 +12,19 @@ const CreateContainer = styled.div`
   display: flex;
   flex-direction: column;
   max-width: 100%;
-  width: 100%;
-  border: 1px solid black;
+  width: 980px;
+  border-radius: 8px;
+  box-shadow: 0 5px 1.5rem rgba(0, 0, 0, 0.2);
+  div.header {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px 0 20px;
+    background: rgb(174, 174, 174);
+    border-radius: 8px 8px 0 0;
+    h3 {
+      font-weight: normal;
+    }
+  }
 `
 const FormContainer = styled.form`
   display: flex;

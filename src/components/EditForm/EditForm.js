@@ -174,7 +174,7 @@ const EditForm = () => {
             }}
           />
           <Button onClick={handleSave} className="save-button">
-            Save
+            Create
           </Button>
           <Button className="cancel-button" onClick={handleCancel}>
             Cancel

@@ -1,5 +1,12 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react'
-import { Wrapper, Group, List, IconContainer, Header } from './Dropdown.styled'
+import {
+  Wrapper,
+  Group,
+  List,
+  IconContainer,
+  Header,
+  Container,
+} from './Dropdown.styled'
 import { Icon } from '@common/Icon'
 import { updatedArray, updateSingleSelect } from './utils'
 import PropTypes from 'prop-types'
@@ -13,7 +20,7 @@ const getSelectedItem = (options) => {
   return !!result ? result.label : ''
 }
 
-const Dropdown = ({ options, callback, name, isMulti, ...props }) => {
+const Dropdown = ({ options, callback, name, isMulti, label, ...props }) => {
   const ref = useRef(null)
   const iRuffu = useRef([])
   const elementRef = useRef(null)
@@ -125,19 +132,22 @@ const Dropdown = ({ options, callback, name, isMulti, ...props }) => {
 
   if (!options || !options.length) return null
   return (
-    <Wrapper ref={ref} mt={props.mt} tabIndex={0} onKeyDown={onKeyDown}>
-      <Header
-        ref={elementRef}
-        isActive={isOpen}
-        onClick={() => setIsOpen(!isOpen)}
-      >
-        <span>{!!selected ? selected : 'Select an option'}</span>
-        <IconContainer className="IconContainer">
-          <Icon name="CHEVRON" size={24} />
-        </IconContainer>
-      </Header>
-      {renderOptions()}
-    </Wrapper>
+    <Container>
+      {label && <span className="label">{label}</span>}
+      <Wrapper ref={ref} mt={props.mt} tabIndex={0} onKeyDown={onKeyDown}>
+        <Header
+          ref={elementRef}
+          isActive={isOpen}
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          <span>{!!selected ? selected : 'Select an option'}</span>
+          <IconContainer className="IconContainer">
+            <Icon name="CHEVRON" size={24} />
+          </IconContainer>
+        </Header>
+        {renderOptions()}
+      </Wrapper>
+    </Container>
   )
 }
 
