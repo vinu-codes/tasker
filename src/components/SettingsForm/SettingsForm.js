@@ -14,7 +14,7 @@ import { Icon } from '@common/Icon'
 import { NavigationContext } from '@components/Route'
 import { colorPicker } from '@common/Theme'
 import { ColorPicker } from '@components/ColorPicker'
-import { getCategoryData } from '@state/category'
+// import { getCategoryData } from '@state/category'
 import { useDispatch, useSelector } from 'react-redux'
 import { authSelector } from '@state/auth'
 import { categorySelector } from '@state/category'
@@ -51,15 +51,11 @@ const SettingsForm = ({ onAdd, onDelete }) => {
   const categories = useSelector(categorySelector.categories)
   const dispatch = useDispatch()
 
-  useEffect(() => {
-    dispatch(getCategoryData(uid))
-  }, [])
-
   console.log('categories', categories)
 
   const handleDelete = (selectedItem) => {
     const result = updatedCategories(selectedItem, categories)
-    onDelete(result)
+    dispatch(updateCategoryThunk({ uid, categories: result }))
   }
 
   const renderCategory = () => {
