@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { colors } from '@common/Theme'
+import { media } from '@common/Theme/media'
 
 const HomeWrapper = styled.div`
   width: 100%;
@@ -7,15 +8,24 @@ const HomeWrapper = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  ${media.sm`
+  max-width: 480px;
+  margin: 0 auto;`}
+  ${media.md`
+  width: 100%;
+  margin: 0 auto;
+  max-width: 768px;`}
+  ${media.lg`
+  max-width: 1024px;`}
 `
 
 const HomeContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 980px;
   border-radius: 8px;
   box-shadow: 0 5px 1.5rem rgba(0, 0, 0, 0.2);
   padding: 20px;
+  width: 100%;
   h4.category-label {
     margin: 0;
     font-weight: normal;

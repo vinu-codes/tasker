@@ -3,11 +3,12 @@ import { createRoot } from 'react-dom/client'
 import { Layout } from '@features/Layout'
 import { Provider as RouteProvider } from '@components/Route'
 import { Route } from '@components/Route'
-import { Create } from '@pages/Create/'
-import { Login } from '@pages/Login/'
-import { Settings } from '@pages/Settings/'
-import { Home } from '@pages/Home/'
+import { Create } from '@pages/Create'
+import { Login } from '@pages/Login'
+import { Settings } from '@pages/Settings'
+import { Home } from '@pages/Home'
 import { Edit } from '@pages/Edit'
+import { Library } from '@pages/Library/Library'
 // import { Workout } from '@features/Workout'
 import { store } from '@state/store'
 import { Provider } from 'react-redux'
@@ -18,8 +19,11 @@ root.render(
   <Provider store={store}>
     <RouteProvider>
       <Layout className="layout">
-        <Route path="/">
+        <Route exact path="/">
           <Home />
+        </Route>
+        <Route path="/library">
+          <Library />
         </Route>
         <Route path="/login">
           <Login />
@@ -33,6 +37,7 @@ root.render(
         <Route path="/edit">
           <Edit />
         </Route>
+
         {/* <Route path="/workout">
           <Workout />
         </Route> */}

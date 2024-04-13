@@ -58,9 +58,9 @@ const Layout = ({ children, ...props }) => {
   // }, [items, uid])
 
   useEffect(() => {
-    if (!uid) {
-      navigate('/login')
-    }
+    if (!!uid) return
+
+    navigate('/login')
   }, [uid])
 
   // useEffect(() => {

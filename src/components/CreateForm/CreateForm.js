@@ -4,6 +4,7 @@ import { Input } from '@common/Input'
 import { NavigationContext } from '@components/Route'
 import { Dropdown } from '@common/Dropdown'
 import { Toggle } from '@common/Toggle'
+import { MapsInput } from '@components/MapsInput'
 import {
   CreateContainer,
   CreateWrapper,
@@ -27,6 +28,13 @@ const DateContainer = styled.div`
   display: flex;
   margin-bottom: 16px;
   gap: 16px;
+  flex-direction: column;
+  p {
+    font-size: 14px;
+    font-style: italic;
+    color: grey;
+    margin: 0;
+  }
   span.label {
     display: flex;
     font-size: 16px;
@@ -71,6 +79,7 @@ const CreateForm = ({ callback, categories, items }) => {
     label: '',
     date: new Date(),
     details: '',
+    location: '',
     category: categories,
     status: false,
   })
@@ -171,6 +180,7 @@ const CreateForm = ({ callback, categories, items }) => {
                 dateFormat="h:mm aa"
               />
             </TimeWrapper> */}
+            <p>This event will take place on April 12th, 2024 from 2pm.</p>
           </DateContainer>
           <TextArea
             name="details"
@@ -181,14 +191,15 @@ const CreateForm = ({ callback, categories, items }) => {
             label="Details of task"
             rows={5}
           />
-          <Input
+          {/* <Input
             name="location"
             className="location"
             onChange={handleChange}
-            value={state.details}
+            value={state.location}
             required
             label="Location"
-          />
+          /> */}
+          <MapsInput />
           <Dropdown
             name="category"
             isMulti={false}

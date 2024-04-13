@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { media } from '@common/Theme/media'
 
 const CreateWrapper = styled.div`
   width: 100%;
@@ -9,10 +10,9 @@ const CreateWrapper = styled.div`
 `
 
 const CreateContainer = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
-  max-width: 100%;
-  width: 980px;
   border-radius: 8px;
   box-shadow: 0 5px 1.5rem rgba(0, 0, 0, 0.2);
   div.header {
