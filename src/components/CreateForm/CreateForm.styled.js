@@ -15,7 +15,8 @@ const CreateWrapper = styled.div`
   margin: 0 auto;
   max-width: 768px;`}
   ${media.lg`
-  max-width: 1024px;`}
+  max-width: 1024px;
+  margin: 0 auto;`}
 `
 
 const CreateContainer = styled.div`

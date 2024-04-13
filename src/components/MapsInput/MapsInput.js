@@ -56,6 +56,7 @@ const MapsInput = () => {
   return (
     <MapsContainer>
       {' '}
+      <label className="location">Location</label>
       <GooglePlacesAutocomplete
         selectProps={{
           value,

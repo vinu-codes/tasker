@@ -26,19 +26,25 @@ const EditWrapper = styled.div`
   margin: 0 auto;
   max-width: 768px;`}
   ${media.lg`
-  max-width: 1024px;`}
+  max-width: 1024px;
+  margin: 0 auto;`}
 `
 
 const EditContainer = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
-  width: 100%;
-  width: 100%;
   border-radius: 8px;
   box-shadow: 0 5px 1.5rem rgba(0, 0, 0, 0.2);
-  h3 {
-    margin: 0;
-    padding: 20px 20px 0px 20px;
+  div.header {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px 0 20px;
+    background: rgb(174, 174, 174);
+    border-radius: 8px 8px 0 0;
+    h3 {
+      font-weight: normal;
+    }
   }
 `
 
@@ -149,7 +155,9 @@ const EditForm = () => {
   return (
     <EditWrapper className="create-wrapper">
       <EditContainer>
-        <h3>Edit task</h3>
+        <div className="header">
+          <h3>Edit task</h3>
+        </div>
         <FormContainer>
           <Input
             onChange={handleChange}
@@ -175,6 +183,7 @@ const EditForm = () => {
             rows={6}
           />
           <Dropdown
+            label="Category"
             options={localCategories}
             isMulti={false}
             callback={({ value }) => {
