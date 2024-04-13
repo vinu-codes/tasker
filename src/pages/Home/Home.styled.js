@@ -68,7 +68,9 @@ const List = styled.li`
   align-items: center;
   justify-content: center;
   margin-top: 0;
-  border-bottom: 0;
+  margin-bottom: 8px;
+  border-radius: 12px;
+  /* border-bottom: 0; */
   &:last-child {
     border-bottom: 1px solid black;
   }

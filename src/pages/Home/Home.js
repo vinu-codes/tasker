@@ -160,6 +160,7 @@ const Home = () => {
   }
 
   const renderTasks = (items) => {
+    console.log({ items })
     if (!items || !items.length) return null
     const result = items.map((item, index) => {
       if (item.status === 'completed') return null
@@ -171,6 +172,7 @@ const Home = () => {
             </span>
           )}
           <span className="label">{item.label}</span>
+          {/* <span className="label">{item.date}</span> */}
           <Controls>
             <Button onClick={() => handleComplete(item.id)}>Done</Button>
             <Button

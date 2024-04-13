@@ -7,6 +7,15 @@ const CreateWrapper = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  ${media.sm`
+  max-width: 480px;
+  margin: 0 auto;`}
+  ${media.md`
+  width: 100%;
+  margin: 0 auto;
+  max-width: 768px;`}
+  ${media.lg`
+  max-width: 1024px;`}
 `
 
 const CreateContainer = styled.div`

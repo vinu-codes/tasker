@@ -10,6 +10,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { tasksSelector } from '@state/tasks/selectors'
 import { categorySelector } from '@state/category/selectors'
 import { updateItems } from '@state/tasks'
+import { media } from '@common/Theme/media'
 
 const EditWrapper = styled.div`
   width: 100%;
@@ -17,6 +18,15 @@ const EditWrapper = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  ${media.sm`
+  max-width: 480px;
+  margin: 0 auto;`}
+  ${media.md`
+  width: 100%;
+  margin: 0 auto;
+  max-width: 768px;`}
+  ${media.lg`
+  max-width: 1024px;`}
 `
 
 const EditContainer = styled.div`
@@ -24,7 +34,8 @@ const EditContainer = styled.div`
   flex-direction: column;
   width: 100%;
   width: 100%;
-  border: 1px solid black;
+  border-radius: 8px;
+  box-shadow: 0 5px 1.5rem rgba(0, 0, 0, 0.2);
   h3 {
     margin: 0;
     padding: 20px 20px 0px 20px;
@@ -145,7 +156,6 @@ const EditForm = () => {
             label="Name:"
             name="label"
             value={state.label}
-            icon="edit"
             required
           />
           <Input
@@ -154,7 +164,6 @@ const EditForm = () => {
             value={state.date}
             name="date"
             type="date"
-            icon="edit"
             required
           />
 
@@ -164,7 +173,6 @@ const EditForm = () => {
             label="Details:"
             value={state.details}
             rows={6}
-            icon="edit"
           />
           <Dropdown
             options={localCategories}
