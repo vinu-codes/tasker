@@ -126,8 +126,6 @@ const EditForm = () => {
     date: formatedTimeStamp,
   })
 
-  console.log({ date: state.date })
-
   const timeStamp = new Date(state.date).getTime()
 
   const [localCategories, setLocalCategories] = useState(
@@ -150,7 +148,6 @@ const EditForm = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target
-    console.log({ name, value })
     setState((state) => ({ ...state, [name]: value }))
   }
 
@@ -162,16 +159,13 @@ const EditForm = () => {
       category: selectedCategory,
       date: timeStamp,
     })
-    console.log({ result })
     dispatch(updateItems(result))
     clearForm()
     navigate('/')
   }
 
   const handleCalendar = (date) => {
-    console.log({ date })
     const formatedTime = format('MMMM d, yyyy')(date)
-    console.log({ formatedTime }) // "April 12, 2024"
     setState((state) => ({ ...state, date: formatedTime }))
   }
 

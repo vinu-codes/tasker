@@ -12,21 +12,15 @@ import {
   FormContainer,
 } from './CreateForm.styled'
 import { uuid } from 'src/utils'
-
-import { Icon } from '@common/Icon'
 import styled from 'styled-components'
 import { TextArea } from '@common/TextArea'
+import { format } from 'date-fns/fp'
 
 const ButtonContainer = styled.div`
   display: flex;
   gap: 8px;
   width: 25%;
   margin-left: auto;
-`
-
-const TimeWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
 `
 
 const filterActiveItem = (items) => {
@@ -37,17 +31,20 @@ const filterActiveItem = (items) => {
 }
 
 const CreateForm = ({ callback, categories, items }) => {
-  const currentDate = new Date()
-  const timestamp = currentDate.getTime()
+  const currentDate = new Date().getTime()
+  const formattedTimestamp = format('MMMM d, yyyy')(currentDate)
 
   const [state, setState] = useState({
     label: '',
-    date: timestamp,
+    date: formattedTimestamp,
     details: '',
     location: '',
     category: categories,
     status: false,
   })
+
+  const timestamp = new Date(state.date).getTime()
+
   const [isActive, setIsActive] = useState(false)
 
   const [_, navigate] = useContext(NavigationContext)
@@ -74,6 +71,7 @@ const CreateForm = ({ callback, categories, items }) => {
       ...items,
       {
         ...state,
+        date: timestamp,
         category: !!resultOfCategory ? resultOfCategory : 'personal',
         id: uuid(),
       },
@@ -98,8 +96,9 @@ const CreateForm = ({ callback, categories, items }) => {
     setIsActive(!isActive)
   }
 
-  const handleDateChange = (date) => {
-    setState((state) => ({ ...state, date: date }))
+  const handleCalendar = (date) => {
+    const formatDate = format('MMMM d, yyyy')(date)
+    setState((state) => ({ ...state, date: formatDate }))
   }
 
   return (
@@ -135,6 +134,13 @@ const CreateForm = ({ callback, categories, items }) => {
             required
             label="Location"
           /> */}
+          <DateInput
+            dateLabel="Date"
+            timeLabel="Time"
+            eventDescription
+            value={state.date}
+            onChange={handleCalendar}
+          />
           <MapsInput />
           <Dropdown
             name="category"
