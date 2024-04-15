@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { colors } from '@common/Theme'
 import { media } from '@common/Theme/media'
 
@@ -86,6 +86,12 @@ const List = styled.li`
   span.label {
     margin-left: 8px;
   }
+  span.date-label {
+    font-size: 12px;
+    line-height: 1.5;
+    color: grey;
+    padding: 0px 0 0 8px;
+  }
   span.check-box {
     display: flex;
     align-items: center;
@@ -100,12 +106,56 @@ const List = styled.li`
   }
 `
 
+const LabelArea = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding-left:;
+`
+
 const IconContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   padding-left: 8px;
+`
+
+const Controls = styled.div`
+  display: flex;
+  margin-left: auto;
+  button.detail-button {
+    border-radius: 50%;
+    margin-left: 8px;
+    svg {
+      transform: rotate(90deg);
+      path {
+        fill: black;
+      }
+    }
+  }
+  svg.MORE {
+    path {
+      stroke: black;
+    }
+  }
+`
+
+const CategoryGroup = styled.div`
+  margin-bottom: 16px;
+`
+
+const StyledSpan = styled.span`
+  display: inline-block;
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-top: 4px;
+  padding-bottom: 2px;
+  border-radius: 4px 4px 0 0;
+  ${(props) =>
+    props.dynamicColor &&
+    css`
+      background-color: ${props.dynamicColor};
+    `}
 `
 export {
   HomeWrapper,
@@ -114,4 +164,8 @@ export {
   Group,
   List,
   IconContainer,
+  Controls,
+  CategoryGroup,
+  StyledSpan,
+  LabelArea,
 }

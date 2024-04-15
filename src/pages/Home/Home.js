@@ -1,5 +1,4 @@
 import React, { useContext, useState } from 'react'
-import styled, { css } from 'styled-components'
 import { Search } from '@components/Search'
 import { Controller } from '@features/Controller'
 import { useSelector, useDispatch } from 'react-redux'
@@ -16,46 +15,13 @@ import {
   HeadingContainer,
   List,
   IconContainer,
+  Controls,
+  CategoryGroup,
+  StyledSpan,
+  LabelArea,
 } from './Home.styled'
 import { CompletedForm } from '@components/CompletedForm'
-
-const Controls = styled.div`
-  display: flex;
-  margin-left: auto;
-  button.detail-button {
-    border-radius: 50%;
-    margin-left: 8px;
-    svg {
-      transform: rotate(90deg);
-      path {
-        fill: black;
-      }
-    }
-  }
-  svg.MORE {
-    path {
-      stroke: black;
-    }
-  }
-`
-
-const CategoryGroup = styled.div`
-  margin-bottom: 16px;
-`
-
-const StyledSpan = styled.span`
-  display: inline-block;
-  padding-left: 8px;
-  padding-right: 8px;
-  padding-top: 4px;
-  padding-bottom: 2px;
-  border-radius: 4px 4px 0 0;
-  ${(props) =>
-    props.dynamicColor &&
-    css`
-      background-color: ${props.dynamicColor};
-    `}
-`
+import { format } from 'date-fns/fp'
 
 const createDataStructure = (items, categories) => {
   if (!categories || !categories.length || !items || !items.length) return []
@@ -113,8 +79,6 @@ const Home = () => {
   const data = createDataStructure(filteredItems, categories)
   const [_, navigate] = useContext(NavigationContext)
 
-  console.log({ newDate: new Date() })
-
   const handleExpand = (item) => {
     navigate('/edit')
     dispatch(setActiveId(item.id))
@@ -161,6 +125,12 @@ const Home = () => {
     setCelebrate(value)
   }
 
+  const renderDate = (timestamp) => {
+    const formattedDate = format('MMM dd, yyyy', timestamp)
+    console.log({ formattedDate })
+    return formattedDate
+  }
+
   const renderTasks = (items) => {
     console.log({ items })
     if (!items || !items.length) return null
@@ -173,10 +143,17 @@ const Home = () => {
               <Icon name={item.active ? 'CHECKBOX_FILLED' : 'CHECKBOX'} />
             </span>
           )}
-          <span className="label">{item.label}</span>
-          {/* <span className="label">{item.date}</span> */}
+          <LabelArea>
+            <span className="label">{item.label}</span>
+            <span className="date-label">{renderDate(item.date)}</span>
+          </LabelArea>
           <Controls>
-            <Button onClick={() => handleComplete(item.id)}>Done</Button>
+            <Button
+              className="completed-button"
+              onClick={() => handleComplete(item.id)}
+            >
+              Done
+            </Button>
             <Button
               className="detail-button"
               onClick={() => handleExpand(item)}

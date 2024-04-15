@@ -15,6 +15,7 @@ export const aqua = '#ccdbd7'
 export const mustard = '#f8ca5a'
 export const darkRed = '#fb8b83'
 export const lightPink = '#efcec8'
+export const orange = 'rgb(254 123 80)'
 
 export const colorPicker = [aqua, lightGreen, mustard, lightPink, darkRed]
 
@@ -36,4 +37,5 @@ export const colors = {
   rust,
   white,
   yellow,
+  orange,
 }

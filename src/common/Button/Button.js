@@ -61,6 +61,12 @@ const ButtonContainer = styled.button`
     border: 1px solid ${colors.darkGrey};
     width: 100px;
   }
+  &.completed-button {
+    background: ${colors.lightGrey};
+    color: white;
+    border: 1px solid ${colors.lightGrey};
+    flex: 1;
+  }
 `
 
 const Button = ({ children, ...props }) => {
