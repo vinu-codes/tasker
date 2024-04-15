@@ -37,9 +37,12 @@ const filterActiveItem = (items) => {
 }
 
 const CreateForm = ({ callback, categories, items }) => {
+  const currentDate = new Date()
+  const timestamp = currentDate.getTime()
+
   const [state, setState] = useState({
     label: '',
-    date: new Date(),
+    date: timestamp,
     details: '',
     location: '',
     category: categories,
@@ -115,14 +118,6 @@ const CreateForm = ({ callback, categories, items }) => {
             required
             label="Task Name"
           />
-          {/* <Input
-            name="date"
-            type="date"
-            className="date"
-            onChange={handleChange}
-            value={state.date}
-            required
-          /> */}
           <TextArea
             name="details"
             className="detail"

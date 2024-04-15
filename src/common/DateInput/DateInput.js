@@ -3,11 +3,11 @@ import styled from 'styled-components'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 
-const DateContainer = styled.div`
+const CalendarContainer = styled.div`
   display: flex;
+  flex-direction: column;
   margin-bottom: 16px;
   gap: 16px;
-  flex-direction: column;
   p {
     font-size: 14px;
     font-style: italic;
@@ -37,34 +37,67 @@ const DateContainer = styled.div`
     }
   }
 `
-const DateWrapper = styled.div`
+const CalendarWrapper = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  gap: 16px;
 `
 
-const DateInput = () => {
+const DatePickerContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  span.label {
+    display: flex;
+    font-size: 16px;
+  }
+`
+
+const DateInput = ({
+  value,
+  onChange,
+  name,
+  eventDescription,
+  dateLabel,
+  timeLabel,
+}) => {
+  const renderDescription = (value, dateFormat) => {
+    if (!!eventDescription) {
+      return (
+        <p className="event-description">
+          This event will take place on {value}.
+        </p>
+      )
+    }
+  }
+
   return (
-    <DateContainer>
-      <DateWrapper>
-        <span className="label">Date</span>
-        <DatePicker
-          //   selected={state.date}
-          //   onChange={handleDateChange}
-          dateFormat="MMMM d, yyyy"
-        />
-      </DateWrapper>
-      {/* <TimeWrapper>
-          <span className="label">Time</span>
-          <DatePicker
-            selected={state.time}
-            showTimeSelect
-            showTimeSelectOnly
-            timeIntervals={30}
-            dateFormat="h:mm aa"
-          />
-        </TimeWrapper> */}
-      <p>This event will take place on April 12th, 2024 from 2pm.</p>
-    </DateContainer>
+    <CalendarContainer>
+      <CalendarWrapper className="calendar-wrapper">
+        {!!dateLabel && (
+          <DatePickerContainer>
+            <span className="label">{dateLabel}</span>
+            <DatePicker
+              selected={value}
+              onChange={onChange}
+              dateFormat="MMMM d, yyyy"
+              name={name}
+            />
+          </DatePickerContainer>
+        )}
+        {/* {!!timeLabel && (
+          <DatePickerContainer>
+            <span className="label">{timeLabel}</span>
+            <DatePicker
+              selected={value}
+              onChange={onChange}
+              dateFormat="MMMM d, yyyy"
+              name={name}
+            />
+          </DatePickerContainer>
+        )} */}
+      </CalendarWrapper>
+      {eventDescription && renderDescription(value, 'MMMM d, yyyy')}
+    </CalendarContainer>
   )
 }
 

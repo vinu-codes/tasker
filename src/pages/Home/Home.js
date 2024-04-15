@@ -113,6 +113,8 @@ const Home = () => {
   const data = createDataStructure(filteredItems, categories)
   const [_, navigate] = useContext(NavigationContext)
 
+  console.log({ newDate: new Date() })
+
   const handleExpand = (item) => {
     navigate('/edit')
     dispatch(setActiveId(item.id))

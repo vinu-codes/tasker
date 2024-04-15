@@ -5,12 +5,14 @@ import { Input } from '@common/Input'
 import { Icon } from '@common/Icon'
 import { Dropdown } from '@common/Dropdown'
 import { TextArea } from '@common/TextArea'
+import { DateInput } from '@common/DateInput'
 import { NavigationContext } from '@components/Route'
 import { useSelector, useDispatch } from 'react-redux'
 import { tasksSelector } from '@state/tasks/selectors'
 import { categorySelector } from '@state/category/selectors'
 import { updateItems } from '@state/tasks'
 import { media } from '@common/Theme/media'
+import { format } from 'date-fns/fp'
 
 const EditWrapper = styled.div`
   width: 100%;
@@ -71,7 +73,9 @@ const getData = (id, items) => {
   })
   return !!result ? result : null
 }
+
 const updateItem = (id, items, state) => {
+  console.log({ id, items, state })
   if (!id || !items.length || !Object.keys(state).length) return []
   const result = items.map((item) => {
     if (item.id === id) {
@@ -107,15 +111,24 @@ const EditForm = () => {
   const items = useSelector(tasksSelector.items)
   const categories = useSelector(categorySelector.categories)
   const dispatch = useDispatch()
-  const data = getData(activeId, items)
+  const data = getData(activeId, items) // is the selected item to edit
+
+  const formatedTimeStamp =
+    !!data && !!data.date
+      ? format('MMMM d, yyyy')(data.date)
+      : format('MMMM d, yyyy')(new Date().getTime())
 
   const [state, setState] = useState({
     label: '',
-    date: new Date(),
     details: '',
     category: '',
     ...data,
+    date: formatedTimeStamp,
   })
+
+  console.log({ date: state.date })
+
+  const timeStamp = new Date(state.date).getTime()
 
   const [localCategories, setLocalCategories] = useState(
     getActiveCategory(categories, !!data ? data.category : '')
@@ -137,6 +150,7 @@ const EditForm = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target
+    console.log({ name, value })
     setState((state) => ({ ...state, [name]: value }))
   }
 
@@ -146,10 +160,19 @@ const EditForm = () => {
     const result = updateItem(activeId, items, {
       ...state,
       category: selectedCategory,
+      date: timeStamp,
     })
+    console.log({ result })
     dispatch(updateItems(result))
     clearForm()
     navigate('/')
+  }
+
+  const handleCalendar = (date) => {
+    console.log({ date })
+    const formatedTime = format('MMMM d, yyyy')(date)
+    console.log({ formatedTime }) // "April 12, 2024"
+    setState((state) => ({ ...state, date: formatedTime }))
   }
 
   return (
@@ -166,15 +189,14 @@ const EditForm = () => {
             value={state.label}
             required
           />
-          <Input
-            onChange={handleChange}
-            label=" Date:"
+          <DateInput
             value={state.date}
+            onChange={handleCalendar}
             name="date"
-            type="date"
-            required
+            dateLabel="Date"
+            timeLabel="Time"
+            eventDescription
           />
-
           <TextArea
             name="details"
             onChange={handleChange}
