@@ -67,6 +67,9 @@ const ButtonContainer = styled.button`
     border: 1px solid ${colors.lightGrey};
     flex: 1;
   }
+  &.pomodoro-button {
+    background: red;
+  }
 `
 
 const Button = ({ children, ...props }) => {

@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components'
-import { colors } from '@common/Theme'
 import { media } from '@common/Theme/media'
 
 const HomeWrapper = styled.div`
@@ -37,16 +36,29 @@ const HomeContainer = styled.div`
   button {
     margin-left: auto;
   }
+  h3.heading {
+    margin: 0;
+    font-weight: normal;
+    font-size: 20px;
+  }
 `
 
 const HeadingContainer = styled.div`
   display: flex;
   align-items: center;
   padding: 8px 0 8px 0;
-  /* background: #faf8f7; */
-  h3 {
-    margin: 0;
-    font-weight: bold;
+`
+
+const Heading = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  svg {
+    transform: rotate(180deg) scale(1.5);
+    cursor: pointer;
+    path {
+      fill: black;
+    }
   }
 `
 
@@ -90,7 +102,7 @@ const List = styled.li`
     font-size: 12px;
     line-height: 1.5;
     color: grey;
-    padding: 0px 0 0 8px;
+    padding: 1px 0 0 8px;
   }
   span.check-box {
     display: flex;
@@ -109,7 +121,7 @@ const List = styled.li`
 const LabelArea = styled.div`
   display: flex;
   flex-direction: column;
-  padding-left:;
+  padding-left: 8px;
 `
 
 const IconContainer = styled.div`
@@ -168,4 +180,5 @@ export {
   CategoryGroup,
   StyledSpan,
   LabelArea,
+  Heading,
 }

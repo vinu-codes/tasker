@@ -26,6 +26,7 @@ import EYE_OPEN from './EyeOpen'
 import EYE_CLOSE from './EyeClose'
 import SIGN_OUT from './SignOut'
 import CALENDAR from './Calendar'
+import TOMATO from './Tomato'
 
 export {
   SAD,
@@ -56,4 +57,5 @@ export {
   EYE_CLOSE,
   SIGN_OUT,
   CALENDAR,
+  TOMATO,
 }

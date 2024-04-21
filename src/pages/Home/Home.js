@@ -19,6 +19,7 @@ import {
   CategoryGroup,
   StyledSpan,
   LabelArea,
+  Heading,
 } from './Home.styled'
 import { CompletedForm } from '@components/CompletedForm'
 import { format } from 'date-fns/fp'
@@ -126,7 +127,7 @@ const Home = () => {
   }
 
   const renderDate = (timestamp) => {
-    const formattedDate = format('MMM dd, yyyy', timestamp)
+    const formattedDate = format('MMM dd', timestamp)
     console.log({ formattedDate })
     return formattedDate
   }
@@ -148,6 +149,9 @@ const Home = () => {
             <span className="date-label">{renderDate(item.date)}</span>
           </LabelArea>
           <Controls>
+            <Button className="pomodoro-button">
+              <Icon name="TOMATO" />
+            </Button>
             <Button
               className="completed-button"
               onClick={() => handleComplete(item.id)}
@@ -199,8 +203,11 @@ const Home = () => {
       <HomeWrapper>
         {celebrate && <Celebrate callback={handleCelebrate} />}
         <HomeContainer>
+          <Heading>
+            <h3 className="heading">My tasks</h3>
+            <Icon name="CHEVRON" />
+          </Heading>
           <HeadingContainer className="heading-container">
-            <h3>My tasks</h3>
             <Button
               onClick={handleToggleEdit}
               className={toggleEdit ? 'toggle-cancel' : 'toggle-edit'}

@@ -84,7 +84,7 @@ const DateInput = ({
             />
           </DatePickerContainer>
         )}
-        {/* {!!timeLabel && (
+        {!!timeLabel && (
           <DatePickerContainer>
             <span className="label">{timeLabel}</span>
             <DatePicker
@@ -94,7 +94,7 @@ const DateInput = ({
               name={name}
             />
           </DatePickerContainer>
-        )} */}
+        )}
       </CalendarWrapper>
       {eventDescription && renderDescription(value, 'MMMM d, yyyy')}
     </CalendarContainer>
