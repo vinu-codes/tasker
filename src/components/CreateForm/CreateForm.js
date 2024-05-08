@@ -136,12 +136,11 @@ const CreateForm = ({ callback, categories, items }) => {
           /> */}
           <DateInput
             dateLabel="Date"
-            timeLabel="Time"
             eventDescription
             value={state.date}
             onChange={handleCalendar}
           />
-          <MapsInput />
+          {/* <MapsInput /> */}
           <Dropdown
             name="category"
             isMulti={false}

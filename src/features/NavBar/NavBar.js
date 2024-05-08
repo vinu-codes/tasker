@@ -40,15 +40,14 @@ const NavBar = () => {
         </button>
       </div>
       <ButtonsContainer className="button-container">
-        <Button onClick={handleSettings} className="settings-button">
-          <Icon name="SETTINGS" />
+        <Button onClick={handleSettings} className="default-button">
+          <Icon stroke="white" name="SETTINGS" />
         </Button>
-        <Button onClick={handleCreate} className="add-button">
-          <Icon name="CLOSE" />
+        <Button onClick={handleCreate} className="default-button">
+          <Icon stroke="white" name="CLOSE" />
         </Button>
-        <Button onClick={handleSignOut} className="sign-out">
-          <Icon name="SIGN_OUT" />
-          Sign Out
+        <Button onClick={handleSignOut} className="default-button">
+          <Icon stroke="white" name="SIGN_OUT" />
         </Button>
       </ButtonsContainer>
     </NavWrapper>

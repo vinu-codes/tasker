@@ -58,12 +58,12 @@ const categorySlice = createSlice({
   name: 'category',
   initialState: {
     categories: [
-      {
-        label: 'personal',
-        active: false,
-        value: 'personal',
-        color: colors.lightGreen,
-      },
+      // {
+      //   label: 'personal',
+      //   active: false,
+      //   value: 'personal',
+      //   color: colors.lightGreen,
+      // },
     ],
   },
   reducers: {},

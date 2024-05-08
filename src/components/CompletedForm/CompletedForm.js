@@ -76,11 +76,17 @@ const CompletedForm = ({ items, callback }) => {
         <Icon name="TICK" size={18} />
         <span>{item.label}</span>
         <ButtonsControls>
-          <Button className="undo" onClick={() => handleUndo(item.id)}>
-            <Icon name="UNDO" stroke="black" />
+          <Button
+            className="default-button"
+            onClick={() => handleUndo(item.id)}
+          >
+            <Icon name="UNDO" stroke="white" />
           </Button>
-          <Button className="delete" onClick={() => handleDelete(item.id)}>
-            <Icon name="TRASH" stroke="black" />
+          <Button
+            className="default-button"
+            onClick={() => handleDelete(item.id)}
+          >
+            <Icon name="TRASH" stroke="white" />
           </Button>
         </ButtonsControls>
       </List>

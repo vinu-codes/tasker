@@ -149,11 +149,8 @@ const Home = () => {
             <span className="date-label">{renderDate(item.date)}</span>
           </LabelArea>
           <Controls>
-            <Button className="pomodoro-button">
-              <Icon name="TOMATO" />
-            </Button>
             <Button
-              className="completed-button"
+              className="default-button"
               onClick={() => handleComplete(item.id)}
             >
               Done
@@ -205,7 +202,6 @@ const Home = () => {
         <HomeContainer>
           <Heading>
             <h3 className="heading">My tasks</h3>
-            <Icon name="CHEVRON" />
           </Heading>
           <HeadingContainer className="heading-container">
             <Button

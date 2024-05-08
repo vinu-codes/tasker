@@ -34,6 +34,7 @@ const NavWrapper = styled.div`
 const ButtonsContainer = styled.div`
   display: flex;
   margin-left: auto;
+  gap: 8px;
   button.add-button {
     margin-left: 8px;
   }

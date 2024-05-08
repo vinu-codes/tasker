@@ -29,10 +29,11 @@ const CreateContainer = styled.div`
     display: flex;
     justify-content: space-between;
     padding: 0 20px 0 20px;
-    background: rgb(174, 174, 174);
+    background: black;
     border-radius: 8px 8px 0 0;
     h3 {
       font-weight: normal;
+      color: white;
     }
   }
 `

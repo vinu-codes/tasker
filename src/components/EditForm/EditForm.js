@@ -42,10 +42,11 @@ const EditContainer = styled.div`
     display: flex;
     justify-content: space-between;
     padding: 0 20px 0 20px;
-    background: rgb(174, 174, 174);
+    background: black;
     border-radius: 8px 8px 0 0;
     h3 {
       font-weight: normal;
+      color: white;
     }
   }
 `
@@ -63,6 +64,12 @@ const FormContainer = styled.form`
   }
   input.detail {
     padding-bottom: 46px;
+  }
+  .controls {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 16px;
+    gap: 16px;
   }
 `
 
@@ -183,14 +190,14 @@ const EditForm = () => {
             value={state.label}
             required
           />
-          <DateInput
+          {/* <DateInput
             value={state.date}
             onChange={handleCalendar}
             name="date"
             dateLabel="Date"
             timeLabel="Time"
             eventDescription
-          />
+          /> */}
           <TextArea
             name="details"
             onChange={handleChange}
@@ -206,12 +213,14 @@ const EditForm = () => {
               setLocalCategories(value)
             }}
           />
-          <Button onClick={handleSave} className="save-button">
-            Create
-          </Button>
-          <Button className="cancel-button" onClick={handleCancel}>
-            Cancel
-          </Button>
+          <div className="controls">
+            <Button onClick={handleSave} className="save-button">
+              Create
+            </Button>
+            <Button className="cancel-button" onClick={handleCancel}>
+              Cancel
+            </Button>
+          </div>
         </FormContainer>
       </EditContainer>
     </EditWrapper>

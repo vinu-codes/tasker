@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components'
 import { colors } from '@common/Theme'
 
 const GroupContainer = styled.div`
-  background: #cdcccc;
+  background: transparent;
   border-radius: 4px;
   padding: 20px;
   margin-bottom: 16px;

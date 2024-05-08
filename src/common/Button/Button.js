@@ -40,10 +40,20 @@ const ButtonContainer = styled.button`
       color: white;
     }
   }
-  &.cancel-button {
-    background: ${colors.lightGrey};
+  &.default-button {
+    background: black;
     color: white;
-    border: 1px solid ${colors.lightGrey};
+    border: 2px solid white;
+    flex: 1;
+    &:hover {
+      background: #c3392c;
+      color: white;
+    }
+  }
+  &.cancel-button {
+    background: black;
+    color: white;
+    border: 1px solid black;
     flex: 1;
     &:hover {
       background: rgb(167 166 166);
